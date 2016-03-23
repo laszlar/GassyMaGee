@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 		if (col.gameObject.tag == "Enemy") {
 			UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
 			txt.enabled = true;
-            animator.SetTrigger("Death");
+            animator.SetBool("isDead", true);
             dead = true;
 		}
 	}

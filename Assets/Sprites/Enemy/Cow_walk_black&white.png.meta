@@ -1,0 +1,311 @@
+fileFormatVersion: 2
+guid: 38651cd88881e4a498d668c29734dd76
+timeCreated: 1455213242
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Cow_walk_black&white_0
+    21300002: Cow_walk_black&white_1
+    21300004: Cow_walk_black&white_2
+    21300006: Cow_walk_black&white_3
+    21300008: Cow_walk_black&white_4
+    21300010: Cow_walk_black&white_5
+    21300012: Cow_walk_black&white_6
+    21300014: Cow_walk_black&white_7
+    21300016: Cow_walk_black&white_8
+    21300018: Cow_walk_black&white_9
+    21300020: Cow_walk_black&white_10
+    21300022: Cow_walk_black&white_11
+    21300024: Cow_walk_black&white_12
+    21300026: Cow_walk_black&white_13
+    21300028: Cow_walk_black&white_14
+    21300030: Cow_walk_black&white_15
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Cow_walk_black&white_0
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 400
+        width: 27
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_1
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 402
+        width: 27
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_2
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 400
+        width: 27
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_3
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 402
+        width: 27
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 295
+        width: 71
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 24.5, y: 22}
+        - {x: -31.5, y: 22}
+        - {x: -35.5, y: 15}
+        - {x: -35.5, y: -6}
+        - {x: -20.5, y: -22}
+        - {x: 35.5, y: -22}
+        - {x: 35.5, y: 15}
+        - {x: 32.5, y: 21}
+    - name: Cow_walk_black&white_5
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 296
+        width: 71
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32.5, y: 21}
+        - {x: 25.5, y: 22}
+        - {x: -31.5, y: 22}
+        - {x: -35.5, y: 15}
+        - {x: -35.5, y: -5}
+        - {x: -19.5, y: -22}
+        - {x: 29.5, y: -22}
+        - {x: 35.5, y: -21}
+        - {x: 35.5, y: 18}
+    - name: Cow_walk_black&white_6
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 295
+        width: 71
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30.5, y: 22}
+        - {x: -35.5, y: 18}
+        - {x: -35.5, y: 0}
+        - {x: -18.5, y: -22}
+        - {x: 29.5, y: -22}
+        - {x: 35.5, y: -13}
+        - {x: 35.5, y: 17}
+        - {x: 25.5, y: 22}
+    - name: Cow_walk_black&white_7
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 297
+        width: 71
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23.5, y: 21.5}
+        - {x: -30.5, y: 21.5}
+        - {x: -35.5, y: 18.5}
+        - {x: -35.5, y: -2.5}
+        - {x: -21.5, y: -21.5}
+        - {x: 35.5, y: -21.5}
+        - {x: 35.5, y: 18.5}
+        - {x: 32.5, y: 20.5}
+    - name: Cow_walk_black&white_8
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 152
+        width: 27
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_9
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 154
+        width: 27
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_10
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 152
+        width: 27
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_11
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 154
+        width: 27
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Cow_walk_black&white_12
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 39
+        width: 71
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32.5, y: 22}
+        - {x: -35.5, y: 17}
+        - {x: -35.5, y: -19}
+        - {x: -34.5, y: -20}
+        - {x: -33.5, y: -22}
+        - {x: 33.5, y: -22}
+        - {x: 35.5, y: -14}
+        - {x: 35.5, y: 22}
+    - name: Cow_walk_black&white_13
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 40
+        width: 71
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35.5, y: 22}
+        - {x: -35.5, y: -22}
+        - {x: 23.5, y: -22}
+        - {x: 35.5, y: -3}
+        - {x: 35.5, y: 15}
+        - {x: 32.5, y: 22}
+    - name: Cow_walk_black&white_14
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 39
+        width: 71
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32.5, y: 22}
+        - {x: -35.5, y: 15}
+        - {x: -35.5, y: -17}
+        - {x: -33.5, y: -22}
+        - {x: 21.5, y: -22}
+        - {x: 35.5, y: -9}
+        - {x: 35.5, y: 22}
+    - name: Cow_walk_black&white_15
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 41
+        width: 71
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31.5, y: 21.5}
+        - {x: -25.5, y: 21.5}
+        - {x: -35.5, y: 15.5}
+        - {x: -35.5, y: -14.5}
+        - {x: -33.5, y: -21.5}
+        - {x: 21.5, y: -21.5}
+        - {x: 35.5, y: -7.5}
+        - {x: 35.5, y: 16.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

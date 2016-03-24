@@ -3,7 +3,6 @@ using System.Collections;
 
 public class DuckLauncher : MonoBehaviour
 {
-    //Just updating this to force GitHub to update for the Camera effects
     public float delay = 0.1f;
     public GameObject duck;
     public float duckSpawnLocation;

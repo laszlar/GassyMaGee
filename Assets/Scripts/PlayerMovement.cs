@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dead)
         {
-            GetComponent<Rigidbody2D>().gravityScale = 0.01f;
+            GetComponent<Rigidbody2D>().gravityScale = 0.6f;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
         }
@@ -48,11 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col) {
 		if (col.gameObject.tag == "Enemy") {
-			UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
+            UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
 			txt.enabled = true;
-            animator.SetTrigger("Death");
             dead = true;
-		}
+            animator.SetTrigger("Death");
+        }
 	}
 
 	void OnTriggerExit2D(Collider2D coll) {

@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dead)
         {
-            GetComponent<Rigidbody2D>().gravityScale = 0.6f;
+            GetComponent<Rigidbody2D>().gravityScale = 0.1f;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
         }

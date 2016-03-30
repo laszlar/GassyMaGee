@@ -3,14 +3,15 @@ using System.Collections;
 
 public class DuckLauncher : MonoBehaviour
 {
-    public float delay = 0.1f;
+    public float delay;
+    public float rate;
     public GameObject duck;
     public float duckSpawnLocation;
 
 
 	void Start ()
     {
-        InvokeRepeating("Spawn", delay, delay);  //InvokeRepeating(string methodName, float time, float repeatRate);
+        InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
     }
 	
 	void Spawn () //Time to spawn the ducks!

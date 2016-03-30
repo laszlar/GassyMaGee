@@ -3,14 +3,15 @@ using System.Collections;
 
 public class KettleLauncher : MonoBehaviour
 {
-     public float delay = 0.1f;
+    public float delay;
+    public float rate;
     public GameObject kettle;
     public float kettleSpawnLocation;
 
 
     void Start()
     {
-        InvokeRepeating("Spawn", delay, delay);  //InvokeRepeating(string methodName, float time, float repeatRate);
+        InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
     }
 
     void Spawn() //Time to spawn the ducks!

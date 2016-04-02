@@ -34,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (godMode)
+        {
+            
+        }
+
         //makes player run
         transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
 
@@ -45,22 +50,20 @@ public class PlayerMovement : MonoBehaviour
     }
 	
         //Kills player
-	void OnCollisionEnter2D(Collision2D col) { 
-		if (col.gameObject.tag == "Enemy")
+	void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
         {
             UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
-			txt.enabled = true;
+            txt.enabled = true;
             dead = true;
             animator.SetTrigger("Death");
-      /*  else if (col.gameObject.tag == "PowerUp")
-            {
-                godMode = true;
-                
-            }
-            */
         }
-        
-
+        else if (col.gameObject.tag == "PowerUp")
+        {
+            dead = false;
+            godMode = true;
+        }
 	}
     //Gives player a score
 	void OnTriggerExit2D(Collider2D coll) {

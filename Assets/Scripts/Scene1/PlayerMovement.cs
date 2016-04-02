@@ -4,14 +4,17 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float playerSpeed;  //allows us to be able to change speed in Unity
+    public float playerSpeed;  
     public Vector2 jumpHeight;
 	public int points = 0;
     Animator animator;
     bool dead = false;
     public float windSpeed;
+    public bool godMode;
 
-	void Start () {
+	void Start ()
+    {
+        godMode = false;
         animator = transform.GetComponentInChildren<Animator>();
 
         if (animator == null)
@@ -21,40 +24,45 @@ public class PlayerMovement : MonoBehaviour
 	
 	}
 
-    // Update is called once per frame
     void Update ()
     {
+        //Moves Player as he gets hit/dies
         if (dead)
         {
             GetComponent<Rigidbody2D>().gravityScale = 0.1f;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
         }
-            
 
-        transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);  //makes player run
+        //makes player run
+        transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  //makes player jump
+        //makes player jump
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  
         {
             GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
         }
     }
-
-	// Fixed update is called 50X a second? 
-	void FixedUpdate ()
-    {
-
-    }
-
-	void OnCollisionEnter2D(Collision2D col) {
-		if (col.gameObject.tag == "Enemy") {
+	
+        //Kills player
+	void OnCollisionEnter2D(Collision2D col) { 
+		if (col.gameObject.tag == "Enemy")
+        {
             UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
 			txt.enabled = true;
             dead = true;
             animator.SetTrigger("Death");
+      /*  else if (col.gameObject.tag == "PowerUp")
+            {
+                godMode = true;
+                
+            }
+            */
         }
-	}
+        
 
+	}
+    //Gives player a score
 	void OnTriggerExit2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Enemy") {
 			points = points + 1;

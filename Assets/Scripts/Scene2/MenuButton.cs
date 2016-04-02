@@ -10,11 +10,8 @@ public class MenuButton : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	public void Update ()
+	public void LoadScene()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            SceneManager.LoadScene("Scene0");
-        }
+        SceneManager.LoadScene("Scene0");
 	}
 }

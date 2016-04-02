@@ -10,11 +10,9 @@ public class RestartButton : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	public void LoadScene ()
+	public void LoadScene()
     {
-	    if (Input.GetKeyDown (KeyCode.Mouse0))
-        {
-            SceneManager.LoadScene("Scene1");
-        }
-	}
+        SceneManager.LoadScene("Scene1");
+    }
+        
 }

@@ -10,11 +10,11 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     bool dead = false;
     public float windSpeed;
-    public bool godMode;
+    public bool godMode = false;
+    public float invTime = 7f;
 
 	void Start ()
     {
-        godMode = false;
         animator = transform.GetComponentInChildren<Animator>();
 
         if (animator == null)
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	}
 
-    void Update ()
+    void FixedUpdate ()
     {
         //Moves Player as he gets hit/dies
         if (dead)
@@ -32,11 +32,6 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().gravityScale = 0.1f;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
-        }
-
-        if (godMode)
-        {
-            
         }
 
         //makes player run
@@ -48,9 +43,9 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
         }
     }
-	
-        //Kills player
-	void OnCollisionEnter2D(Collision2D col)
+
+    //Kills player
+    void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Enemy")
         {
@@ -59,14 +54,24 @@ public class PlayerMovement : MonoBehaviour
             dead = true;
             animator.SetTrigger("Death");
         }
-        else if (col.gameObject.tag == "PowerUp")
-        {
-            dead = false;
-            godMode = true;
-        }
-	}
+    }
+
+    //the following below creates a coroutine that makes him invincible for x amount of time
+    public void SetInvincible()
+    {
+        godMode = true;
+
+        CancelInvoke("SetDamageable");
+        Invoke("SetDamageable", invTime);
+    }
+
+    public void SetDamageable ()
+    {
+        godMode = false;
+    }
+
     //Gives player a score
-	void OnTriggerExit2D(Collider2D coll) {
+    void OnTriggerExit2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Enemy") {
 			points = points + 1;
 		}

@@ -15,10 +15,12 @@ public class PlayerMovement : MonoBehaviour
     public float invTime = 7f;
     public int timeAfterDeath = 2;
     public CameraFilterPack_TV_Old_Movie_2 camEffect;
+    public int camEffectTime = 7;
 
 	void Start ()
     {
-        camEffect = GetComponent<CameraFilterPack_TV_Old_Movie_2>();
+        camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
+        camEffect.enabled = true;
         animator = transform.GetComponentInChildren<Animator>();
 
         if (animator == null)
@@ -36,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().gravityScale = 0.1f;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
+        }
+
+        if (godMode)
+        {
+            StartCoroutine(CamEffectOff(camEffectTime));
         }
 
         //makes player run
@@ -62,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
         else if (col.gameObject.tag == "PowerUp")
         {
             SetInvincible();
-            camEffect.enabled = false;
         }
     }
 
@@ -97,5 +103,11 @@ public class PlayerMovement : MonoBehaviour
         SceneManager.LoadScene("Scene2");
     }
 
-    
+    //This will turn the camera off for X amount of time
+    IEnumerator CamEffectOff (int camEffectTime)
+    {
+        camEffect.enabled = false;
+        yield return new WaitForSeconds(camEffectTime);
+        camEffect.enabled = true;
+    }
 }

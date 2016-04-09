@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,9 +13,12 @@ public class PlayerMovement : MonoBehaviour
     public float windSpeed;
     public bool godMode = false;
     public float invTime = 7f;
+    public int timeAfterDeath = 2;
+    public CameraFilterPack_TV_Old_Movie_2 camEffect;
 
 	void Start ()
     {
+        camEffect = GetComponent<CameraFilterPack_TV_Old_Movie_2>();
         animator = transform.GetComponentInChildren<Animator>();
 
         if (animator == null)
@@ -24,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	}
 
-    void FixedUpdate ()
+    void Update ()
     {
         //Moves Player as he gets hit/dies
         if (dead)
@@ -47,18 +51,25 @@ public class PlayerMovement : MonoBehaviour
     //Kills player
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (!godMode && col.gameObject.tag == "Enemy")
         {
             UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
             txt.enabled = true;
             dead = true;
             animator.SetTrigger("Death");
+            StartCoroutine(PlayerDied(timeAfterDeath));
+        }
+        else if (col.gameObject.tag == "PowerUp")
+        {
+            SetInvincible();
+            camEffect.enabled = false;
         }
     }
 
-    //the following below creates a coroutine that makes him invincible for x amount of time
+    //the following below invokes that makes him invincible for x amount of time
     public void SetInvincible()
     {
+        Debug.Log("I'm INVINCIBLE!");
         godMode = true;
 
         CancelInvoke("SetDamageable");
@@ -71,9 +82,20 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Gives player a score
-    void OnTriggerExit2D(Collider2D coll) {
-		if (coll.gameObject.tag == "Enemy") {
+    void OnTriggerExit2D(Collider2D coll)
+    {
+		if (coll.gameObject.tag == "Enemy")
+        {
 			points = points + 1;
 		}
 	}
+
+    //Wait to change scene after death
+    IEnumerator PlayerDied (int timeAfterDeath)
+    {
+        yield return new WaitForSeconds(timeAfterDeath);
+        SceneManager.LoadScene("Scene2");
+    }
+
+    
 }

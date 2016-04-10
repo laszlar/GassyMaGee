@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (godMode)
+        if (godMode) //turn cam effect off for set amount of time in godmode
         {
             StartCoroutine(CamEffectOff(camEffectTime));
         }
@@ -69,6 +69,10 @@ public class PlayerMovement : MonoBehaviour
         else if (col.gameObject.tag == "PowerUp")
         {
             SetInvincible();
+        }
+        else if (godMode && col.gameObject.tag == "Enemy")
+        {
+
         }
     }
 

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
 
+
 	void Start ()
     {
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
@@ -72,7 +73,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (godMode && col.gameObject.tag == "Enemy")
         {
+            Vector2 target = col.gameObject.transform.position;
+            Vector2 bomb = gameObject.transform.position;
+            Vector2 direction = 7f * (target - bomb);
 
+            col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
     }
 

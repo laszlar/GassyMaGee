@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public int timeAfterDeath = 2;
     public CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
-
+    public bool isDead = false;
 
 	void Start ()
     {
@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         //Moves Player as he gets hit/dies
         if (dead)
         {
+            animator.SetTrigger("death");
             GetComponent<Rigidbody2D>().gravityScale = 0.1f;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
@@ -64,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
             UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
             txt.enabled = true;
             dead = true;
-            animator.SetTrigger("Death");
             StartCoroutine(PlayerDied(timeAfterDeath));
         }
         else if (col.gameObject.tag == "PowerUp")

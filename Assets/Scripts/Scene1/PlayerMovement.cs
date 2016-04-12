@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         //Moves Player as he gets hit/dies
         if (dead)
         {
-            animator.SetTrigger("death");
+            DeathAnimation();
             GetComponent<Rigidbody2D>().gravityScale = 0.1f;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
@@ -118,5 +118,11 @@ public class PlayerMovement : MonoBehaviour
         camEffect.enabled = false;
         yield return new WaitForSeconds(camEffectTime);
         camEffect.enabled = true;
+    }
+
+    //Death animation
+    public void DeathAnimation()
+    {
+        animator.SetTrigger("death");
     }
 }

@@ -8,23 +8,22 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed;  
     public Vector2 jumpHeight;
 	public int points = 0;
-    Animator animator;
+    Animator anim;
     bool dead = false;
     public float windSpeed;
     public bool godMode = false;
     public float invTime = 7f;
     public int timeAfterDeath = 2;
-    public CameraFilterPack_TV_Old_Movie_2 camEffect;
+    CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
-    public bool isDead = false;
 
 	void Start ()
     {
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
         camEffect.enabled = true;
-        animator = transform.GetComponentInChildren<Animator>();
+        anim = transform.GetComponentInChildren<Animator>();
 
-        if (animator == null)
+        if (anim == null)
         {
             Debug.LogError("No animator, dude!");
         }
@@ -37,7 +36,8 @@ public class PlayerMovement : MonoBehaviour
         if (dead)
         {
             DeathAnimation();
-            GetComponent<Rigidbody2D>().gravityScale = 0.1f;
+            StartCoroutine(PlayerDied(timeAfterDeath));
+            GetComponent<Rigidbody2D>().isKinematic = true;
             transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
             return;
         }
@@ -61,11 +61,8 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         if (!godMode && col.gameObject.tag == "Enemy")
-        {
-            UnityEngine.UI.Text txt = GameObject.Find("You died").GetComponent<UnityEngine.UI.Text>();
-            txt.enabled = true;
-            dead = true;
-            StartCoroutine(PlayerDied(timeAfterDeath));
+        { 
+            dead = true;  
         }
         else if (col.gameObject.tag == "PowerUp")
         {
@@ -123,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     //Death animation
     public void DeathAnimation()
     {
-        animator.SetTrigger("death");
+        anim.SetTrigger("IsDead");
+        Debug.Log("It worked?");
     }
 }

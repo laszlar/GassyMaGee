@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public int timeAfterDeath = 2;
     CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
+    bool isGrounded = false;
 
 	void Start ()
     {
@@ -54,7 +55,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  
         {
             GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
+            if(isGrounded)
+            {
+                //anim.SetTrigger("CompleteJump");
+            }
+            if(!isGrounded)
+            {
+                //anim.SetTrigger("MidJump");
+            }
         }
+        
     }
 
     //Kills player
@@ -75,6 +85,10 @@ public class PlayerMovement : MonoBehaviour
             Vector2 direction = 7f * (target - bomb);
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
+        }
+        else if (col.gameObject.tag == "Floor")
+        {
+            isGrounded = true;
         }
     }
 

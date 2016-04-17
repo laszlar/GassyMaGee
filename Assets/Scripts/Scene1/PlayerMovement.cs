@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
             if(isGrounded)
             {
-                //anim.SetTrigger("CompleteJump");
+                anim.SetTrigger("IsGroundedJump");
             }
             if(!isGrounded)
             {

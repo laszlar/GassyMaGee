@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PaintLauncher : MonoBehaviour
+public class ParachuteLauncher : MonoBehaviour
 {
     public float delay;
     public float rate;
-    public GameObject Paint;
-    public float paintSpawnLocation;
-
+    public GameObject Parachute;
+    public float parachuteSpawnLocation;
 
     void Start()
     {
@@ -16,6 +15,6 @@ public class PaintLauncher : MonoBehaviour
 
     void Spawn() //Time to spawn the paint PowerUP
     {
-        Instantiate(Paint, new Vector2(paintSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Instantiate(Parachute, new Vector2(parachuteSpawnLocation, Random.Range(-0.3f, 1.15f)), Quaternion.identity);
     }
 }

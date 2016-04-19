@@ -16,13 +16,15 @@ public class PlayerMovement : MonoBehaviour
     public int timeAfterDeath = 2;
     CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
-    bool isGrounded = false;
+    public bool parachuteEnabled;
+    public int parachuteTime;
 
 	void Start ()
     {
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
         camEffect.enabled = true;
         anim = transform.GetComponentInChildren<Animator>();
+        parachuteEnabled = false;
 
         if (anim == null)
         {
@@ -48,21 +50,16 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(CamEffectOff(camEffectTime));
         }
 
-        //makes player run
-        transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
+        if (parachuteEnabled)
+        {
+            StartCoroutine(ParachutePowerupEnabled(parachuteTime));
+        }
 
-        //makes player jump
+        //makes player jump & play jump animation
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  
         {
             GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
-            if(isGrounded)
-            {
-                anim.SetTrigger("IsGroundedJump");
-            }
-            if(!isGrounded)
-            {
-                //anim.SetTrigger("MidJump");
-            }
+            anim.SetTrigger("IsGroundedJump");
         }
         
     }
@@ -74,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         { 
             dead = true;  
         }
-        else if (col.gameObject.tag == "PowerUp")
+        else if (col.gameObject.tag == "Paint")
         {
             SetInvincible();
         }
@@ -86,9 +83,9 @@ public class PlayerMovement : MonoBehaviour
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
-        else if (col.gameObject.tag == "Floor")
+        else if(col.gameObject.tag == "Parachute")
         {
-            isGrounded = true;
+            parachuteEnabled = true;
         }
     }
 
@@ -136,5 +133,18 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetTrigger("IsDead");
         Debug.Log("It worked?");
+    }
+
+    //Parachute powerup
+    IEnumerator ParachutePowerupEnabled (int parachuteTime)
+    {
+        Time.timeScale = 0.5f;
+        yield return new WaitForSeconds(parachuteTime);
+        Time.timeScale = 1.0f;
+    }
+
+    public void ParachuteMethod()
+    {
+        
     }
 }

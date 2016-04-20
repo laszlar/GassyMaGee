@@ -18,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
     public int camEffectTime = 7;
     public bool parachuteEnabled;
     public int parachuteTime;
+    public bool duckThing;
+    public bool sinkThing;
+    public bool kettleThing;
+    public bool scrollerThing;
 
 	void Start ()
     {
@@ -25,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
         camEffect.enabled = true;
         anim = transform.GetComponentInChildren<Animator>();
         parachuteEnabled = false;
+        duckThing = false;
+        sinkThing = false;
+        kettleThing = false;
+        scrollerThing = false;
 
         if (anim == null)
         {
@@ -52,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (parachuteEnabled)
         {
-            StartCoroutine(ParachutePowerupEnabled(parachuteTime));
+            ParachuteMethod();
         }
 
         //makes player jump & play jump animation
@@ -92,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
     //the following below invokes that makes him invincible for x amount of time
     public void SetInvincible()
     {
-        Debug.Log("I'm INVINCIBLE!");
         godMode = true;
 
         CancelInvoke("SetDamageable");
@@ -132,19 +139,34 @@ public class PlayerMovement : MonoBehaviour
     public void DeathAnimation()
     {
         anim.SetTrigger("IsDead");
-        Debug.Log("It worked?");
     }
 
     //Parachute powerup
     IEnumerator ParachutePowerupEnabled (int parachuteTime)
     {
-        Time.timeScale = 0.5f;
+        SlowmoController();
         yield return new WaitForSeconds(parachuteTime);
-        Time.timeScale = 1.0f;
+        SpeedupController();
     }
 
     public void ParachuteMethod()
     {
-        
+        StartCoroutine(ParachutePowerupEnabled(parachuteTime));
+    }
+
+    public void SlowmoController()
+    {
+        duckThing = true;
+        sinkThing = true;
+        kettleThing = true;
+        scrollerThing = true;
+    }
+
+    public void SpeedupController ()
+    {
+        duckThing = false;
+        sinkThing = false;
+        kettleThing = false;
+        scrollerThing = false;
     }
 }

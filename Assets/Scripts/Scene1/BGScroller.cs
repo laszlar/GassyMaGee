@@ -5,9 +5,9 @@ public class BGScroller : MonoBehaviour
 {
 
     public float scrollSpeed;
-    public float halfScrollSpeed;
     public float tileSize;
-    
+    float halfScrollSpeed;
+
     PlayerMovement script;
 
     Vector2 startPosition;

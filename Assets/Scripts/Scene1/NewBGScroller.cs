@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BGScroller : MonoBehaviour
+public class NewBGScroller : MonoBehaviour
 {
 
     public float scrollSpeed;
     public float halfScrollSpeed;
     public float tileSize;
-    
     PlayerMovement script;
 
     Vector2 startPosition;
@@ -21,21 +20,19 @@ public class BGScroller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (!script.scrollerThing) //If power up NOT activated scroll at regular speed.
+        if (!script.scrollerThing)
         {
             float floatNewPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSize);
             newPosition = new Vector2(-floatNewPosition, 0f);
             transform.position = startPosition + newPosition;
+            //transform.position = Vector2.Lerp(transform.position, newPosition, 0.5f);
         }
-        else //Power up activated resulting in half speed of scrolling.
+        else
         {
-            halfScrollSpeed = scrollSpeed / 2;
-            float floatNewPosition = Mathf.Repeat(Time.time * halfScrollSpeed, tileSize);
-            newPosition = new Vector2(-floatNewPosition, 0f);
-            transform.position = startPosition + newPosition;
+            float newPosition = Mathf.Repeat(Time.time * halfScrollSpeed, tileSize);
+            transform.position = startPosition + Vector2.left * newPosition;
         }
     }
 }
-

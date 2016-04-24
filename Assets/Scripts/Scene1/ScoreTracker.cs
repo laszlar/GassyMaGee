@@ -11,7 +11,6 @@ public class ScoreTracker : MonoBehaviour {
 
 	void Start()
     {
-        DontDestroyOnLoad(transform.root.gameObject);
         playerMove = GameObject.Find("Player").GetComponent<PlayerMovement>();
         text = gameObject.GetComponent<Text>();
     }
@@ -24,7 +23,7 @@ public class ScoreTracker : MonoBehaviour {
        if (points > highScore)
         { 
             highScore = points;
-            PlayerPrefs.SetInt("highScore", highScore);
+            PlayerPrefs.SetInt("High Score", highScore);
         }
 	}
 }

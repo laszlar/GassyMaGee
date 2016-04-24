@@ -4,21 +4,18 @@ using System.Collections;
 
 public class HighScoreTracker : MonoBehaviour
 {
-    ScoreTracker scoreTracker;
-    public int highScore;
     Text text;
+    public int currentScore;
 
 	void Start ()
     {
-        DontDestroyOnLoad(gameObject);
-        scoreTracker = GetComponent<ScoreTracker>();
         text = GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        highScore = scoreTracker.highScore;
-        text.text = "" + highScore;
-	}
+        currentScore = PlayerPrefs.GetInt("High Score");
+        text.text = "" + currentScore;
+    }
 }

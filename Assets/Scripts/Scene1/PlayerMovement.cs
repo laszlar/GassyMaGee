@@ -116,6 +116,10 @@ public class PlayerMovement : MonoBehaviour
     {
 		if (coll.gameObject.tag == "Enemy")
         {
+            if (dead)
+            {
+                return;
+            }
 			points = points + 1;
 		}
 	}

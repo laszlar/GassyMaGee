@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 return;
             }
-			points = points + 1;
+            ++points;
 		}
 	}
 

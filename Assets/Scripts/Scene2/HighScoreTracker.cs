@@ -5,9 +5,10 @@ using System.Collections;
 public class HighScoreTracker : MonoBehaviour
 {
     Text text;
-    public int currentScore;
+    public int highScore;
 
-	void Start ()
+
+    void Start ()
     {
         text = GetComponent<Text>();
 	}
@@ -15,7 +16,7 @@ public class HighScoreTracker : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        currentScore = PlayerPrefs.GetInt("High Score");
-        text.text = "" + currentScore;
+        highScore = PlayerPrefs.GetInt("High Score");
+        text.text = "" + highScore;
     }
 }

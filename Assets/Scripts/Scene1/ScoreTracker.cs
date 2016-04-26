@@ -2,28 +2,37 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ScoreTracker : MonoBehaviour {
+public class ScoreTracker : MonoBehaviour
+{
 
-    PlayerMovement playerMove;
+    PlayerMovement player;
     Text text;
-    public int points = 0;
+    public int score;
     public int highScore;
 
-	void Start()
+    void Awake ()
     {
-        playerMove = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        highScore = PlayerPrefs.GetInt("High Score");
+    }
+
+
+    void Start()
+    {
+        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         text = gameObject.GetComponent<Text>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-       points = playerMove.points;
-       text.text = "" + points;
-       if (points > highScore)
-        { 
-            highScore = points;
+       score = player.points;
+       text.text = "" + score;
+       if (score > highScore)
+        {
+            highScore = score;
             PlayerPrefs.SetInt("High Score", highScore);
+            Debug.Log("just saved this score: " + PlayerPrefs.GetInt("High Score"));
+            PlayerPrefs.Save();
         }
 	}
 }

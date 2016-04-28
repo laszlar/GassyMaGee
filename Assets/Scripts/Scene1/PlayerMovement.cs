@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         if (godMode) //turn cam effect off for set amount of time in godmode
         {
             StartCoroutine(CamEffectOff(camEffectTime));
+
         }
 
         if (parachuteEnabled)
@@ -123,6 +124,14 @@ public class PlayerMovement : MonoBehaviour
             ++points;
 		}
 	}
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (godMode && coll.gameObject.tag == "Enemy")
+        {
+            anim.SetTrigger("IsPunch");
+        }
+    }
 
     //Wait to change scene after death
     IEnumerator PlayerDied (int timeAfterDeath)

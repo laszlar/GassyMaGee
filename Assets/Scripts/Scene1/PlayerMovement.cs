@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public bool sinkThing;
     public bool kettleThing;
     public bool scrollerThing;
+    bool punch = false;
 
 	void Start ()
     {
@@ -127,9 +128,12 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (godMode && coll.gameObject.tag == "Enemy")
+        if (godMode && coll.gameObject.tag == "AnimTrigger")
         {
-            anim.SetTrigger("IsPunch");
+            if (!punch)
+            {
+                PunchAnimation();
+            }
         }
     }
 
@@ -146,6 +150,13 @@ public class PlayerMovement : MonoBehaviour
         camEffect.enabled = false;
         yield return new WaitForSeconds(camEffectTime);
         camEffect.enabled = true;
+    }
+
+    //Punch Animation
+    void PunchAnimation ()
+    {
+        punch = true;
+        anim.SetTrigger("IsPunch");
     }
 
     //Death animation

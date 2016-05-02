@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Destroyer : MonoBehaviour
 {
+    int deathTime = 1;
 
-	void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            StartCoroutine(DeathAfterSec(deathTime));
+        }
         Destroy(collision.gameObject);
     }
-    
-    // Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    IEnumerator DeathAfterSec (int deathTime)
+    {
+        yield return new WaitForSeconds(deathTime);
+        SceneManager.LoadScene("Scene2");
+    }
 }

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 jumpHeight;
 	public int points = 0;
     Animator anim;
-    bool dead = false;
+    public bool dead = false;
     public float windSpeed;
     public bool godMode = false;
     public float invTime = 7f;

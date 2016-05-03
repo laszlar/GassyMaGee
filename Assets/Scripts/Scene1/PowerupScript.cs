@@ -8,6 +8,7 @@ public class PowerupScript : MonoBehaviour {
         if (other.tag == "Player")
         {
             PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
+            Destroy(gameObject);
 
             if (player)
             {

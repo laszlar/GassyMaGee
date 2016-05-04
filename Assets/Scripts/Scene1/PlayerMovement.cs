@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public bool kettleThing;
     public bool scrollerThing;
     bool punch = false;
+    //FartEffect isFarting;
 
 	void Start ()
     {
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         sinkThing = false;
         kettleThing = false;
         scrollerThing = false;
+       // isFarting = GameObject.Find("FartingEffect").GetComponent<FartEffect>();
 
         if (anim == null)
         {
@@ -70,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
             anim.SetTrigger("IsGroundedJump");
+            //isFarting.fart.gameObject.SetActive(true);
+
         }
         
     }

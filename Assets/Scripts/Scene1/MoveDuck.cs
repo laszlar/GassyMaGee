@@ -19,12 +19,10 @@ public class MoveDuck : MonoBehaviour
     {
         if (!script.duckThing)
         {
-            Debug.Log("i'm  coming");
             transform.Translate(duckSpeed * Time.deltaTime, 0f, 0f);
         }
         else 
         {
-            Debug.Log("I'm moving half speed");
             transform.Translate(halfDuckSpeed * Time.deltaTime, 0f, 0f);
         }
     }

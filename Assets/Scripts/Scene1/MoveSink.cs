@@ -18,12 +18,10 @@ public class MoveSink : MonoBehaviour
     {
         if (!script.sinkThing)
         {
-            Debug.Log("Sink is coming");
             transform.Translate(sinkSpeed * Time.deltaTime, 0f, 0f);
         }
         else
         {
-            Debug.Log("Sink half speed");
             transform.Translate(halfSinkSpeed * Time.deltaTime, 0f, 0f);
         }
 	}

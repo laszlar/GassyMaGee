@@ -3,13 +3,9 @@ using System.Collections;
 
 public class FartEffect : MonoBehaviour
 {
+    public ParticleSystem constantlyFarting;
     public ParticleSystem.EmissionModule fart;
     public float timer;
-
-    void Start()
-    {
-        fart.enabled = false;
-    }
 
 	void Update ()
     {
@@ -23,13 +19,15 @@ public class FartEffect : MonoBehaviour
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             //we shall see if this works.
-            timer += 0.25f;
+            timer += 0.10f;
         }
     }
 
     void Farted()
     {
         //activate that fart if more than 0 seconds.
+        constantlyFarting = GetComponent<ParticleSystem>();
+        fart = constantlyFarting.emission;      
         fart.enabled = (timer > 0) ? true : false;
     }
 

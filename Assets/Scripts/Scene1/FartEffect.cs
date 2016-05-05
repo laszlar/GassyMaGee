@@ -19,7 +19,7 @@ public class FartEffect : MonoBehaviour
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             //we shall see if this works.
-            timer += 0.10f;
+            timer += 0.3f;
         }
     }
 

@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public bool sinkThing;
     public bool kettleThing;
     public bool scrollerThing;
-    bool punch = false;
+    public bool punch;
     //FartEffect isFarting;
 
 	void Start ()
@@ -35,13 +35,11 @@ public class PlayerMovement : MonoBehaviour
         sinkThing = false;
         kettleThing = false;
         scrollerThing = false;
-       // isFarting = GameObject.Find("FartingEffect").GetComponent<FartEffect>();
 
         if (anim == null)
         {
             Debug.LogError("No animator, dude!");
         }
-	
 	}
 
     void Update ()
@@ -59,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
         if (godMode) //turn cam effect off for set amount of time in godmode
         {
             StartCoroutine(CamEffectOff(camEffectTime));
-
         }
 
         if (parachuteEnabled)
@@ -127,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
             ++points;
+            punch = false;
 		}
 	}
 
@@ -137,8 +135,17 @@ public class PlayerMovement : MonoBehaviour
             if (!punch)
             {
                 PunchAnimation();
+                Debug.Log("punching away");
+                
             }
         }
+    }
+
+    //Punch Animation
+    void PunchAnimation()
+    {
+        punch = true;
+        anim.SetTrigger("IsPunch");
     }
 
     //Wait to change scene after death
@@ -154,13 +161,6 @@ public class PlayerMovement : MonoBehaviour
         camEffect.enabled = false;
         yield return new WaitForSeconds(camEffectTime);
         camEffect.enabled = true;
-    }
-
-    //Punch Animation
-    void PunchAnimation ()
-    {
-        punch = true;
-        anim.SetTrigger("IsPunch");
     }
 
     //Death animation

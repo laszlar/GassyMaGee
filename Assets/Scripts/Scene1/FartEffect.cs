@@ -7,7 +7,12 @@ public class FartEffect : MonoBehaviour
     public ParticleSystem.EmissionModule fart;
     public float timer;
 
-	void Update ()
+    void Awake()
+    {
+        NotFarting();
+    }
+
+    void Update ()
     {
         CheckInput();
         Farted();
@@ -36,5 +41,13 @@ public class FartEffect : MonoBehaviour
         //Subtract one second from the timer, and set it to zero if less than one second
         timer -= Time.deltaTime;
         timer = (timer <= 0) ? 0 : timer;
+    }
+
+    //turns farting off completely
+    void NotFarting ()
+    {
+        constantlyFarting = GetComponent<ParticleSystem>();
+        fart = constantlyFarting.emission;
+        fart.enabled = false;
     }
 }

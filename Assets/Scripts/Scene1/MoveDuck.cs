@@ -15,7 +15,7 @@ public class MoveDuck : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!script.duckThing)
         {
@@ -24,6 +24,18 @@ public class MoveDuck : MonoBehaviour
         else 
         {
             transform.Translate(halfDuckSpeed * Time.deltaTime, 0f, 0f);
+        }
+    }
+
+    void OnCollisionEnter2D (Collision2D coll)
+    {
+        if (script.godMode && coll.gameObject.tag == "Enemy")
+        {
+                Vector2 target = coll.gameObject.transform.position;
+                Vector2 bomb = gameObject.transform.position;
+                Vector2 direction = 7f * (target - bomb);
+
+                coll.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);  
         }
     }
 }

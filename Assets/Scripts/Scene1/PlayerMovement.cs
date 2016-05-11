@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update ()
     {
+        punch = false;
+
         //Moves Player as he gets hit/dies
         if (dead)
         {
@@ -75,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    //Kills player
+    //Kills player, 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (!godMode && col.gameObject.tag == "Enemy")
@@ -90,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 target = col.gameObject.transform.position;
             Vector2 bomb = gameObject.transform.position;
-            Vector2 direction = 7f * (target - bomb);
+            Vector2 direction = 14 * (target - bomb);
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
@@ -99,6 +101,13 @@ public class PlayerMovement : MonoBehaviour
             parachuteEnabled = true;
         }
     }
+
+    //bomb effect upon paint powerup
+    public void BooYah ()
+    {
+        
+    }
+
 
     //the following below invokes that makes him invincible for x amount of time
     public void SetInvincible()
@@ -124,20 +133,23 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
             ++points;
-            punch = false;
 		}
 	}
 
+    //Punch the shit out of enemies upon trigger
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (godMode && coll.gameObject.tag == "AnimTrigger")
         {
-            if (!punch)
-            {
-                PunchAnimation();
-                Debug.Log("punching away");
-                
-            }
+                if (!punch)
+                {
+                    PunchAnimation();
+                    Debug.Log("punching away");
+                }
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -182,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(ParachutePowerupEnabled(parachuteTime));
     }
 
+    //parachute enabled
     public void SlowmoController()
     {
         duckThing = true;
@@ -190,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
         scrollerThing = true;
     }
 
+    //parachute disabled
     public void SpeedupController ()
     {
         duckThing = false;

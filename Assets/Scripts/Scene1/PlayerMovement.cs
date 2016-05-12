@@ -102,13 +102,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //bomb effect upon paint powerup
-    public void BooYah ()
-    {
-        
-    }
-
-
     //the following below invokes that makes him invincible for x amount of time
     public void SetInvincible()
     {
@@ -123,40 +116,38 @@ public class PlayerMovement : MonoBehaviour
         godMode = false;
     }
 
-    //Gives player a score
+    //Gives player a score && Resets punch upon exit
     void OnTriggerExit2D(Collider2D coll)
     {
 		if (coll.gameObject.tag == "Enemy")
         {
-            if (dead)
-            {
-                return;
-            }
+            punch = true;
+              if (dead)
+              {
+                   return;
+              }
             ++points;
 		}
 	}
 
-    //Punch the shit out of enemies upon trigger
+    //Punch enemies upon entering collider
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (godMode && coll.gameObject.tag == "AnimTrigger")
         {
-                if (!punch)
+            punch = true;
+                if (punch)
                 {
                     PunchAnimation();
                     Debug.Log("punching away");
                 }
-        }
-        else
-        {
-            return;
+            punch = false;
         }
     }
 
     //Punch Animation
     void PunchAnimation()
     {
-        punch = true;
         anim.SetTrigger("IsPunch");
     }
 

@@ -6,12 +6,10 @@ public class PowEffect : MonoBehaviour
     PlayerMovement playerScript;
     ParticleSystem hit;
     ParticleSystem.EmissionModule isHitting;
-    bool crap;
 
 	void Awake ()
     {
-        crap = GetComponent<ParticleEmitter>().enabled = false;
-        
+        GetComponent<ParticleEmitter>().enabled = false;
     }
     
     // Use this for initialization

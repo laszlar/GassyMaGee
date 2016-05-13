@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     public bool kettleThing;
     public bool scrollerThing;
     public bool punch;
-    //FartEffect isFarting;
 
 	void Start ()
     {
@@ -44,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update ()
     {
-        punch = false;
 
         //Moves Player as he gets hit/dies
         if (dead)
@@ -121,12 +119,12 @@ public class PlayerMovement : MonoBehaviour
     {
 		if (coll.gameObject.tag == "Enemy")
         {
-            punch = true;
               if (dead)
               {
                    return;
               }
             ++points;
+            punch = false;
 		}
 	}
 
@@ -135,19 +133,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (godMode && coll.gameObject.tag == "AnimTrigger")
         {
-            punch = true;
-                if (punch)
-                {
-                    PunchAnimation();
-                    Debug.Log("punching away");
-                }
-            punch = false;
+            if (!punch)
+            {
+                PunchAnimation();
+            }
         }
     }
 
     //Punch Animation
     void PunchAnimation()
     {
+        punch = true;
         anim.SetTrigger("IsPunch");
     }
 

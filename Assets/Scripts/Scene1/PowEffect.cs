@@ -6,7 +6,6 @@ public class PowEffect : MonoBehaviour
     PlayerMovement playerScript;
     ParticleSystem hit;
     ParticleSystem.EmissionModule isHitting;
-    float delayPowTime = 0.3f;
 
     void Awake ()
     {
@@ -24,15 +23,14 @@ public class PowEffect : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-       /* if (playerScript.punch)
+        if (playerScript.isPunching)
         {
             PowEffectOn();
         }
-
-        if(playerScript.punch == false)
+        else
         {
-            isHitting.enabled = false;
-        }*/
+            PowEffectOff();
+        }
 	}
 
     void PowEffectOn ()
@@ -40,11 +38,8 @@ public class PowEffect : MonoBehaviour
         isHitting.enabled = true;
     }
 
-    void OnCollisionEnter2D (Collider2D coll)
+    void PowEffectOff()
     {
-        if (playerScript.godMode && coll.gameObject.tag == "Enemy")
-        {
-            PowEffectOn();
-        }
+        isHitting.enabled = false;
     }
 }

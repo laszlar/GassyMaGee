@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public bool kettleThing;
     public bool scrollerThing;
     public bool punch;
+    public bool isPunching;
 
 	void Start ()
     {
@@ -43,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update ()
     {
-
         //Moves Player as he gets hit/dies
         if (dead)
         {
@@ -125,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
               }
             ++points;
             punch = false;
+            isPunching = false;
 		}
 	}
 
@@ -136,14 +137,16 @@ public class PlayerMovement : MonoBehaviour
             if (!punch)
             {
                 PunchAnimation();
+                isPunching = true;
             }
         }
     }
 
     //Punch Animation
-    void PunchAnimation()
+    public void PunchAnimation()
     {
         punch = true;
+        isPunching = true;
         anim.SetTrigger("IsPunch");
     }
 

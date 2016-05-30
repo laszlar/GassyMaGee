@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
     {
         punch = true;
         isPunching = true;
-        anim.SetTrigger("IsPunch");
+        //anim.SetTrigger("IsPunch");
     }
 
     //Wait to change scene after death

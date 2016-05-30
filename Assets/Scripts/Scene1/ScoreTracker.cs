@@ -9,6 +9,7 @@ public class ScoreTracker : MonoBehaviour
     Text text;
     public int score;
     public int highScore;
+    public bool levelOne;
 
     void Awake ()
     {
@@ -34,5 +35,11 @@ public class ScoreTracker : MonoBehaviour
             Debug.Log("just saved this score: " + PlayerPrefs.GetInt("High Score"));
             PlayerPrefs.Save();
         }
+
+       if(score > 10)
+        {
+            levelOne = true;
+        }
+
 	}
 }

@@ -13,6 +13,7 @@ public class PlankSpawner : MonoBehaviour {
 	void Start ()
     {
         InvokeRepeating("Spawn", iniRespawnTime, respawnRate);
+
 	}
 	
 	void Spawn ()

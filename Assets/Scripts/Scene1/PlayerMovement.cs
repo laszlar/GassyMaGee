@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float playerSpeed;  
+    public float playerSpeed = 2f;  
     public Vector2 jumpHeight;
 	public int points = 0;
     Animator anim;
@@ -44,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update ()
     {
-        //Moves Player as he gets hit/dies
+        //Moves the player
+        transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
+
+        //Moves Player to the left as he gets hit/dies
         if (dead)
         {
             DeathAnimation();
@@ -179,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
         SpeedupController();
     }
 
+    //Parachute coroutine
     public void ParachuteMethod()
     {
         StartCoroutine(ParachutePowerupEnabled(parachuteTime));

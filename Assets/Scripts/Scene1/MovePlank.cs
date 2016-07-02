@@ -7,10 +7,14 @@ public class MovePlank : MonoBehaviour
     public float slowMover;
     ScoreTracker checkScore;
 
+    GameObject player;
+    Vector2 playerPos;
+
     public float amplitudeX = 10.0f;
     public float amplitudeY = 5.0f;
     public float omegaX = 1.0f;
     public float omegaY = 5.0f;
+    public float offset;
     float index;
     float checkScoreTime = 1.0f;
     bool checkLevelOne = false;
@@ -20,17 +24,23 @@ public class MovePlank : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        player = GameObject.Find("Player");
         checkScore = GameObject.Find("Score").GetComponent<ScoreTracker>();
 	}
 
 	void Update ()
     {
+        playerPos.x = player.transform.position.x;
+        amplitudeX = playerPos.x + offset;
+
+        transform.Translate(plankMover * Time.deltaTime, 0f, 0f);
+
+
         if (!running)
         {
             StartCoroutine(WaitToCheckScore(checkScoreTime));
         }
-
-        transform.Translate(plankMover * Time.deltaTime, 0f, 0f);
+  
 
         if(checkLevelOne)
         {
@@ -41,12 +51,6 @@ public class MovePlank : MonoBehaviour
             float y = amplitudeY * Mathf.Sin(omegaY * index); // amplitude Y is the Y value as where it'll generate and omegaY is how many times it goes up and down.
             transform.localPosition = new Vector3(x, y, 0);
         }
-
-        
-         
-              
-
-    
     }
 
     IEnumerator WaitToCheckScore (float checkScoreTime)

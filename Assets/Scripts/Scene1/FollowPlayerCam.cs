@@ -22,7 +22,7 @@ public class FollowPlayerCam : MonoBehaviour
     {
         //transform.position = player.transform.position + offset;
         Vector3 posZ = transform.position; //camera's position
-        posZ.z = player.transform.position.z; //make sure camaera's z position and player's is the same
+        posZ.z = player.transform.position.z; //player position
 
         Vector3 targetDirection = (player.transform.position - posZ); //this tells the camera in which direction the player is moving/which direction to move
 

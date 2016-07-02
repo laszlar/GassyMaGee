@@ -3,20 +3,30 @@ using System.Collections;
 
 public class DuckLauncher : MonoBehaviour
 {
+
     public float delay;
     public float rate;
+    public float offset;
+    float duckSpawnLocation;
     public GameObject duck;
-    public float duckSpawnLocation;
+    public GameObject player;
+    Vector2 playerPos;
 
 
 	void Start ()
     {
         InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
     }
+
+    void Update ()
+    {
+        playerPos.x = player.transform.position.x;
+
+        duckSpawnLocation = playerPos.x + offset;
+    }
 	
 	void Spawn () //Time to spawn the ducks!
     {
-        GameObject duckInst = Instantiate(duck, new Vector2(duckSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity) as GameObject;
-        duckInst.gameObject.tag = "Enemy";
+        Instantiate(duck, new Vector2(duckSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
 	} 
 }

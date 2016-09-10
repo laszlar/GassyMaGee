@@ -33,7 +33,7 @@ public class MovePlank : MonoBehaviour
         playerPos.x = player.transform.position.x;
         amplitudeX = playerPos.x + offset;
 
-        transform.Translate(plankMover * Time.deltaTime, 0f, 0f);
+        //transform.Translate(plankMover * Time.deltaTime, 0f, 0f);
 
 
         if (!running)

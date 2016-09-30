@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Unique follow cam.
+!Attached to Main camera!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class FollowPlayerCam : MonoBehaviour

@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Spawns the parachute powerup
+!attached to the parachute launcher!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class ParachuteLauncher : MonoBehaviour

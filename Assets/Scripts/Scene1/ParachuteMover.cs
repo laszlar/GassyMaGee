@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Moves the parachute
+!attached to the parachute prefab!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class ParachuteMover : MonoBehaviour {

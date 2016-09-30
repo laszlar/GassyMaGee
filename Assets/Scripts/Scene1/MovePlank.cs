@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/*
+May need to retire.
+Original idea, but not the best.
+!attached to plank prefab!
+Original idea was to move the planks
+in a "wave" format after a certain score
+but this doesn't look that good.
+I think I have better idea.
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class MovePlank : MonoBehaviour
@@ -37,13 +47,13 @@ public class MovePlank : MonoBehaviour
         //transform.Translate(plankMover * Time.deltaTime, 0f, 0f);
 
 
-        if (!running)
+        if (!running)                                               //continuously check score
         {
-            StartCoroutine(WaitToCheckScore(checkScoreTime));
+            StartCoroutine(WaitToCheckScore(checkScoreTime));               
         }
   
 
-        if(checkLevelOne)
+        if(checkLevelOne)                                           //Start the sin wave after score is greater than 10. (temp)
         {
             //transform.Translate((plankMover/2) * Time.deltaTime, 0f, 0f);
             index += Time.deltaTime / slowMover; //this changes the X speed as it technically slows down time. Increase paintSpeed to slow it down further.
@@ -56,7 +66,7 @@ public class MovePlank : MonoBehaviour
         }
     }
 
-    IEnumerator WaitToCheckScore (float checkScoreTime)
+    IEnumerator WaitToCheckScore (float checkScoreTime)                     //Enumerator for coroutine.
     {
         running = true;
         yield return new WaitForSeconds(checkScoreTime);

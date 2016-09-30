@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Destroys the planks
+!attached to plank destroyer!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class PlankDestroyingTime : MonoBehaviour

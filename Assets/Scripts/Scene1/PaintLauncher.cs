@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Spawns the paint powerup
+!attached to paint launcher!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class PaintLauncher : MonoBehaviour

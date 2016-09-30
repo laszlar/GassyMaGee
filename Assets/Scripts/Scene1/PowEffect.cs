@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Tried to implement
+but is not working.
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class PowEffect : MonoBehaviour

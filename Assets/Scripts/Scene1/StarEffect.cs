@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+When god mode is enabled
+play star effect
+!attached to star particle sys.!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class StarEffect : MonoBehaviour {

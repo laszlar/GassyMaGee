@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+Not in use! Decommissioned.
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class FloorDestroyer : MonoBehaviour {

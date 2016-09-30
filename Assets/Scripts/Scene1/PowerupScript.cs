@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Enables God Mode.
+!Attached to PaintLauncher!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class PowerupScript : MonoBehaviour {

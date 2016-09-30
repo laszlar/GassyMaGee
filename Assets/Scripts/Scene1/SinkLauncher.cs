@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Spawns the sinks.
+!attached to sink launcher!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class SinkLauncher : MonoBehaviour

@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+See pow effect.
+Same thing here. 
+Tried to implement...
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class PowEffectChildren : MonoBehaviour

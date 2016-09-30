@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Score tracker...
+!attached to canvas/score!
+*/
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 

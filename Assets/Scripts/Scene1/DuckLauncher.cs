@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Spawns the ducks
+!Attached to duck launcher prefab!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class DuckLauncher : MonoBehaviour

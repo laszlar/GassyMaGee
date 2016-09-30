@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/*
+The Grunt of all scripts.
+-Basic player movement
+-Enabling god mode.
+-Coroutines for different things
+!Attached to Player!
+*/
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 

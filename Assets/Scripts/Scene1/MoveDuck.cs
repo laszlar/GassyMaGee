@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Moves ducks at player
+!Attached to duck prefab!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class MoveDuck : MonoBehaviour

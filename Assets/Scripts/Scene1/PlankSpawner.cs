@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Spawns the planks
+!attached to plank prefab!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class PlankSpawner : MonoBehaviour {

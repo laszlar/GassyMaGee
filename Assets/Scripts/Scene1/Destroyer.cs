@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/* Destroys flying objects 
+beyond view of the player, 
+and also kills the player.
+Gives a one second 
+buffer to play
+the animation/future audio
+if the player hits the 
+destroyer (game over)
+!Attached to Destroying Barriers!
+*/
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 

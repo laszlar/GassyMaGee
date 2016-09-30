@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+Not in use! 
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class NewBGScroller : MonoBehaviour

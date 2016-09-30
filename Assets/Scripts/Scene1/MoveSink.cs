@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Moves sink after spawn
+!attached to Sink prefab!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class MoveSink : MonoBehaviour

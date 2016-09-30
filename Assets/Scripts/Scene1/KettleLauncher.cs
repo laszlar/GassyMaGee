@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+Spawns the Kettles
+!Attached to Kettle launcher prefab!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class KettleLauncher : MonoBehaviour

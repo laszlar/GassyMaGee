@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*This Script is not in use! 
+Decommissioned for right now.
+May use it for another game,
+or later time. */
+
+using UnityEngine;
 using System.Collections;
 
 public class CowFalling : MonoBehaviour {

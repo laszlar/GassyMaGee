@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+Particle Effect system 
+for Gassy's farts.
+!Attached to particle effect!
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class FartEffect : MonoBehaviour

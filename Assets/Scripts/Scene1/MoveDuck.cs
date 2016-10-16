@@ -22,11 +22,11 @@ public class MoveDuck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!script.duckThing)
+        if (!script.duckThing)                                              //in regards to the parachute powerup, if no powerup
         {
             transform.Translate(duckSpeed * Time.deltaTime, 0f, 0f);
         }
-        else 
+        else                                                                //if parachute powerup is activated
         {
             transform.Translate(halfDuckSpeed * Time.deltaTime, 0f, 0f);
         }

@@ -23,9 +23,9 @@ public class KettleLauncher : MonoBehaviour
 
     void Update()
     {
-        playerPos.x = player.transform.position.x;
+        playerPos.x = player.transform.position.x;      //get the player's position
 
-        kettleSpawnLocation = playerPos.x + offset;
+        kettleSpawnLocation = playerPos.x + offset;     //add an offset to Player's position
     }
 
     void Spawn() //Time to spawn the ducks!

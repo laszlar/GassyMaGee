@@ -21,6 +21,8 @@ public class DuckLauncher : MonoBehaviour
 	void Start ()
     {
         InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
+
+        player = GameObject.Find("Player");
     }
 
     void Update ()

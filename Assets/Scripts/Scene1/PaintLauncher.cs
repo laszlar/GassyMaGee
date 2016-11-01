@@ -20,6 +20,8 @@ public class PaintLauncher : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
+
+        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -30,6 +32,8 @@ public class PaintLauncher : MonoBehaviour
     }
     void Spawn() //Time to spawn the paint PowerUP
     {
+      
+
         Instantiate(Paint, new Vector2(paintSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
     }
 }

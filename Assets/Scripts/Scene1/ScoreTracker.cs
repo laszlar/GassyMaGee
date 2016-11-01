@@ -37,7 +37,6 @@ public class ScoreTracker : MonoBehaviour
         {
             highScore = score;
             PlayerPrefs.SetInt("High Score", highScore);
-            Debug.Log("just saved this score: " + PlayerPrefs.GetInt("High Score"));
             PlayerPrefs.Save();
         }
 

@@ -47,26 +47,26 @@ public class MovePlank : MonoBehaviour
         //transform.Translate(plankMover * Time.deltaTime, 0f, 0f);
 
 
-        if (!running)                                               //continuously check score
+      /*(  if (!running)                                               //continuously check score
         {
             StartCoroutine(WaitToCheckScore(checkScoreTime));               
-        }
+        }*/
   
 
-        if(checkLevelOne)                                           //Start the sin wave after score is greater than 10. (temp)
+        /*if(checkLevelOne)                                           //Start the sin wave after score is greater than 10. (temp)
         {
             //transform.Translate((plankMover/2) * Time.deltaTime, 0f, 0f);
             index += Time.deltaTime / slowMover; //this changes the X speed as it technically slows down time. Increase paintSpeed to slow it down further.
             float x = playerPos.x; //amplitudeX * Mathf.Cos(omegaX * index); //amplitude X is the X value as where it'll generate while omegaX shouldn't really be touched. 
             float y = amplitudeY * Mathf.Sin(omegaY * index); // amplitude Y is the Y value as where it'll generate and omegaY is how many times it goes up and down.
             transform.localPosition = new Vector3(x, y, 0);
-            //transform.Translate(x, -Mathf.Pow(x, 2), 0); 
+            //transform.Translate(x, -Mathf.Pow(x, 2), 0); */
 
 
         }
     }
 
-    IEnumerator WaitToCheckScore (float checkScoreTime)                     //Enumerator for coroutine.
+    /*IEnumerator WaitToCheckScore (float checkScoreTime)                     //Enumerator for coroutine.
     {
         running = true;
         yield return new WaitForSeconds(checkScoreTime);
@@ -76,4 +76,4 @@ public class MovePlank : MonoBehaviour
             checkLevelOne = true;
         }
     }
-}
+}*/

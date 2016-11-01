@@ -15,6 +15,7 @@ public class PaintLauncher : MonoBehaviour
     public GameObject player;
     float paintSpawnLocation;
     Vector2 playerPos;
+    Vector3 launch;
 
 
     void Start()
@@ -29,11 +30,13 @@ public class PaintLauncher : MonoBehaviour
         playerPos.x = player.transform.position.x;
 
         paintSpawnLocation = playerPos.x + offset;
+
+
+        
     }
     void Spawn() //Time to spawn the paint PowerUP
     {
-      
-
-        Instantiate(Paint, new Vector2(paintSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Instantiate(Paint, new Vector3(paintSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Debug.Log(paintSpawnLocation);
     }
 }

@@ -24,7 +24,6 @@ public class Destroyer : MonoBehaviour
             StartCoroutine(DeathAfterSec(deathTime));
         }
         Destroy(collision.gameObject);
-        Debug.Log("destroyed");
     }
 
     IEnumerator DeathAfterSec (int deathTime)

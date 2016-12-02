@@ -5,12 +5,12 @@ licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: parachute-closed_0
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -22,10 +22,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -36,9 +34,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -46,12 +42,28 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: parachute-closed_0
+    - serializedVersion: 2
+      name: parachute-closed_0
       rect:
         serializedVersion: 2
         x: 16
@@ -61,91 +73,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 13, y: -259}
-        - {x: 62, y: -238}
-        - {x: 91, y: -228}
-        - {x: 136, y: -211}
-        - {x: 157, y: -206}
-        - {x: 169, y: -202}
-        - {x: 181, y: -196}
-        - {x: 213, y: -179}
-        - {x: 225, y: -171}
-        - {x: 231, y: -166}
-        - {x: 244, y: -152}
-        - {x: 251, y: -143}
-        - {x: 256, y: -131}
-        - {x: 256, y: -87}
-        - {x: 253, y: -79}
-        - {x: 243, y: -54}
-        - {x: 230, y: -16}
-        - {x: 226, y: 3}
-        - {x: 217, y: 27}
-        - {x: 208, y: 52}
-        - {x: 202, y: 61}
-        - {x: 209, y: 76}
-        - {x: 210, y: 88}
-        - {x: 209, y: 96}
-        - {x: 205, y: 115}
-        - {x: 198, y: 125}
-        - {x: 191, y: 132}
-        - {x: 195, y: 143}
-        - {x: 195, y: 161}
-        - {x: 192, y: 171}
-        - {x: 184, y: 187}
-        - {x: 164, y: 222}
-        - {x: 168, y: 233}
-        - {x: 167, y: 245}
-        - {x: 148, y: 263}
-        - {x: 140, y: 270}
-        - {x: 121, y: 281}
-        - {x: 110, y: 286}
-        - {x: 70, y: 286}
-        - {x: 57, y: 281}
-        - {x: 43, y: 273}
-        - {x: 26, y: 273}
-        - {x: 17, y: 272}
-        - {x: -8, y: 260}
-        - {x: -49, y: 248}
-        - {x: -101, y: 231}
-        - {x: -116, y: 225}
-        - {x: -136, y: 216}
-        - {x: -152, y: 210}
-        - {x: -165, y: 213}
-        - {x: -176, y: 207}
-        - {x: -209, y: 196}
-        - {x: -218, y: 191}
-        - {x: -238, y: 174}
-        - {x: -244, y: 165}
-        - {x: -253, y: 149}
-        - {x: -256, y: 136}
-        - {x: -256, y: 92}
-        - {x: -248, y: 82}
-        - {x: -242, y: 79}
-        - {x: -246, y: 49}
-        - {x: -247, y: 23}
-        - {x: -246, y: 12}
-        - {x: -233, y: -5}
-        - {x: -227, y: -9}
-        - {x: -229, y: -19}
-        - {x: -228, y: -51}
-        - {x: -227, y: -56}
-        - {x: -221, y: -71}
-        - {x: -211, y: -80}
-        - {x: -205, y: -89}
-        - {x: -199, y: -124}
-        - {x: -192, y: -163}
-        - {x: -185, y: -194}
-        - {x: -179, y: -215}
-        - {x: -165, y: -248}
-        - {x: -157, y: -259}
-        - {x: -145, y: -272}
-        - {x: -135, y: -281}
-        - {x: -125, y: -286}
-        - {x: -64, y: -286}
-        - {x: -45, y: -282}
-        - {x: -31, y: -277}
-        - {x: -12, y: -270}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

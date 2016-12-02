@@ -8,12 +8,12 @@ TextureImporter:
     21300002: Punch_1
     21300004: Punch_2
     21300006: Punch_3
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -25,10 +25,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
@@ -39,9 +37,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -49,12 +45,28 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Punch_0
+    - serializedVersion: 2
+      name: Punch_0
       rect:
         serializedVersion: 2
         x: 189
@@ -64,34 +76,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 3.0138702, y: -143.587}
-        - {x: 4.0138702, y: -114.587006}
-        - {x: 77.01387, y: -221.587}
-        - {x: 139.01387, y: -187.587}
-        - {x: 141.01387, y: -179.587}
-        - {x: 141.01387, y: -106.587006}
-        - {x: 113.01387, y: -42.587006}
-        - {x: 95.01387, y: 90.412994}
-        - {x: 54.01387, y: 107.412994}
-        - {x: 56.01387, y: 154.413}
-        - {x: 44.01387, y: 223.413}
-        - {x: 15.01387, y: 228.413}
-        - {x: -20.98613, y: 228.413}
-        - {x: -26.98613, y: 219.413}
-        - {x: -129.98613, y: 138.413}
-        - {x: -126.98613, y: 78.412994}
-        - {x: -140.98613, y: 39.412994}
-        - {x: -140.98613, y: -37.587006}
-        - {x: -74.98613, y: -70.587006}
-        - {x: -76.98613, y: -207.587}
-        - {x: -56.98613, y: -225.587}
-        - {x: -8.98613, y: -225.587}
-        - {x: 36.01387, y: -202.587}
-        - {x: 36.01387, y: -167.587}
-        - {x: 17.01387, y: -140.587}
-        - {x: 9.01387, y: -141.587}
-    - name: Punch_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Punch_1
       rect:
         serializedVersion: 2
         x: 1831
@@ -101,35 +89,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 67.09204, y: -218.6425}
-        - {x: 128.09204, y: -198.6425}
-        - {x: 114.09204, y: -145.6425}
-        - {x: 99.09204, y: -78.6425}
-        - {x: 80.09204, y: -35.6425}
-        - {x: 111.09204, y: 33.3575}
-        - {x: 118.09204, y: 99.3575}
-        - {x: 143.09204, y: 133.3575}
-        - {x: 143.09204, y: 175.3575}
-        - {x: 124.09204, y: 213.3575}
-        - {x: 109.09204, y: 221.3575}
-        - {x: 62.09204, y: 221.3575}
-        - {x: 44.09204, y: 209.3575}
-        - {x: -38.90796, y: 155.3575}
-        - {x: -75.90796, y: 85.3575}
-        - {x: -101.90796, y: 38.3575}
-        - {x: -91.90796, y: -96.6425}
-        - {x: -81.90796, y: -105.6425}
-        - {x: -129.90796, y: -164.6425}
-        - {x: -142.90796, y: -187.6425}
-        - {x: -142.90796, y: -207.6425}
-        - {x: -137.90796, y: -217.6425}
-        - {x: -121.90796, y: -218.6425}
-        - {x: -25.907959, y: -218.6425}
-        - {x: -5.907959, y: -171.6425}
-        - {x: -23.907959, y: -131.6425}
-        - {x: 57.09204, y: -218.6425}
-    - name: Punch_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Punch_2
       rect:
         serializedVersion: 2
         x: 3423
@@ -139,39 +102,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -130.97095, y: -148.95334}
-        - {x: -89.97095, y: -108.95334}
-        - {x: -77.97095, y: -153.95334}
-        - {x: -61.970947, y: -173.95334}
-        - {x: -8.970947, y: -179.95334}
-        - {x: 75.02905, y: 20.046661}
-        - {x: 190.02905, y: 11.046661}
-        - {x: 213.02905, y: 35.04666}
-        - {x: 213.02905, y: 82.04666}
-        - {x: 184.02905, y: 105.04666}
-        - {x: 149.02905, y: 98.04666}
-        - {x: 97.02905, y: 123.04666}
-        - {x: 118.02905, y: 219.04666}
-        - {x: 36.029053, y: 219.04666}
-        - {x: -44.970947, y: 164.04666}
-        - {x: -171.97095, y: 56.04666}
-        - {x: -180.97095, y: -5.9533386}
-        - {x: -122.97095, y: -35.95334}
-        - {x: -196.97095, y: -131.95334}
-        - {x: -212.97095, y: -171.95334}
-        - {x: -212.97095, y: -218.95334}
-        - {x: -96.97095, y: -218.95334}
-        - {x: -79.97095, y: -188.95334}
-        - {x: -100.97095, y: -139.95334}
-        - {x: -124.97095, y: -146.95334}
-      - - {x: 71.02905, y: -0.9533386}
-        - {x: 74.02905, y: -3.9533386}
-        - {x: 77.02905, y: -1.9533386}
-        - {x: 76.02905, y: 2.0466614}
-        - {x: 74.02905, y: 4.0466614}
-        - {x: 71.02905, y: 3.0466614}
-    - name: Punch_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Punch_3
       rect:
         serializedVersion: 2
         x: 4990
@@ -181,33 +115,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 79.395386, y: -222.57944}
-        - {x: 138.39539, y: -203.57944}
-        - {x: 138.39539, y: -141.57944}
-        - {x: 111.395386, y: -112.57944}
-        - {x: 116.395386, y: -47.579437}
-        - {x: 138.39539, y: -32.579437}
-        - {x: 138.39539, y: -16.579437}
-        - {x: 114.395386, y: 55.420563}
-        - {x: 138.39539, y: 103.42056}
-        - {x: 138.39539, y: 212.42056}
-        - {x: 133.39539, y: 228.42056}
-        - {x: 58.395386, y: 228.42056}
-        - {x: 37.395386, y: 221.42056}
-        - {x: -16.604614, y: 126.42056}
-        - {x: -16.604614, y: 122.42056}
-        - {x: -15.604614, y: 110.42056}
-        - {x: -72.604614, y: 8.420563}
-        - {x: -74.604614, y: -4.5794373}
-        - {x: -85.604614, y: -84.57944}
-        - {x: -136.60461, y: -188.57944}
-        - {x: -136.60461, y: -214.57944}
-        - {x: -98.604614, y: -225.57944}
-        - {x: 2.3953857, y: -225.57944}
-        - {x: 2.3953857, y: -140.57944}
-        - {x: 5.3953857, y: -169.57944}
-        - {x: 10.395386, y: -189.57944}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

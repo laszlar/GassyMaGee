@@ -14,12 +14,12 @@ TextureImporter:
     21300014: Death_7
     21300016: Death_8
     21300018: Death_9
-  serializedVersion: 2
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -31,10 +31,8 @@ TextureImporter:
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 4096
@@ -45,9 +43,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -55,12 +51,28 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Death_0
+    - serializedVersion: 2
+      name: Death_0
       rect:
         serializedVersion: 2
         x: 865
@@ -70,37 +82,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 44.261993, y: 43.250977}
-        - {x: 53.261993, y: 112.25098}
-        - {x: 50.261993, y: 126.25098}
-        - {x: 38.261993, y: 130.25098}
-        - {x: 13.261993, y: 118.25098}
-        - {x: 11.261993, y: 115.25098}
-        - {x: 6.2619934, y: 114.25098}
-        - {x: 8.261993, y: 114.25098}
-        - {x: 11.261993, y: 118.25098}
-        - {x: 12.261993, y: 118.25098}
-        - {x: 27.261993, y: 133.25098}
-        - {x: 36.261993, y: 156.25098}
-        - {x: 28.261993, y: 165.25098}
-        - {x: -18.738007, y: 165.25098}
-        - {x: -88.73801, y: 120.25098}
-        - {x: -88.73801, y: -32.749023}
-        - {x: -30.738007, y: -163.74902}
-        - {x: 88.26199, y: -163.74902}
-        - {x: 88.26199, y: 49.250977}
-        - {x: 54.261993, y: 48.250977}
-      - - {x: 29.261993, y: 101.25098}
-        - {x: 18.261993, y: 75.25098}
-        - {x: 18.261993, y: 69.25098}
-        - {x: 26.261993, y: 59.250977}
-        - {x: 51.261993, y: 43.250977}
-        - {x: 64.26199, y: 43.250977}
-        - {x: 71.26199, y: 47.250977}
-        - {x: 71.26199, y: 80.25098}
-        - {x: 54.261993, y: 101.25098}
-    - name: Death_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_1
       rect:
         serializedVersion: 2
         x: 2210
@@ -110,20 +95,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 18.41504, y: 55.42801}
-        - {x: 16.41504, y: 143.42801}
-        - {x: -5.584961, y: 160.42801}
-        - {x: -58.58496, y: 160.42801}
-        - {x: -111.58496, y: 103.42801}
-        - {x: -111.58496, y: 8.428009}
-        - {x: -104.58496, y: -29.571991}
-        - {x: 8.415039, y: -159.57199}
-        - {x: 60.41504, y: -159.57199}
-        - {x: 112.41504, y: -100.57199}
-        - {x: 112.41504, y: -23.571991}
-        - {x: 62.41504, y: 41.42801}
-    - name: Death_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_2
       rect:
         serializedVersion: 2
         x: 3634
@@ -133,26 +108,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 122.458496, y: 4.1536865}
-        - {x: -5.541504, y: 115.15369}
-        - {x: 0.4584961, y: 127.15369}
-        - {x: -21.541504, y: 151.15369}
-        - {x: -77.541504, y: 151.15369}
-        - {x: -116.541504, y: 71.15369}
-        - {x: -112.541504, y: 58.153687}
-        - {x: -112.541504, y: 55.153687}
-        - {x: -112.541504, y: 57.153687}
-        - {x: -116.541504, y: 63.153687}
-        - {x: -125.541504, y: 64.15369}
-        - {x: -125.541504, y: -3.8463135}
-        - {x: -9.541504, y: -119.84631}
-        - {x: 54.458496, y: -149.84631}
-        - {x: 83.458496, y: -149.84631}
-        - {x: 110.458496, y: -120.84631}
-        - {x: 127.458496, y: -73.84631}
-        - {x: 127.458496, y: -17.846313}
-    - name: Death_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_3
       rect:
         serializedVersion: 2
         x: 5083
@@ -162,21 +121,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 55.45459, y: 31.653687}
-        - {x: 25.45459, y: 76.65369}
-        - {x: -27.54541, y: 130.65369}
-        - {x: -88.54541, y: 130.65369}
-        - {x: -132.54541, y: 65.65369}
-        - {x: -132.54541, y: 15.653687}
-        - {x: -63.54541, y: -86.34631}
-        - {x: 54.45459, y: -129.34631}
-        - {x: 111.45459, y: -129.34631}
-        - {x: 130.45459, y: -114.34631}
-        - {x: 135.45459, y: -86.34631}
-        - {x: 135.45459, y: -32.346313}
-        - {x: 100.45459, y: -17.346313}
-    - name: Death_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_4
       rect:
         serializedVersion: 2
         x: 6568
@@ -186,23 +134,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -59.257446, y: 107.62127}
-        - {x: -69.25745, y: 90.62127}
-        - {x: -76.25745, y: 85.62127}
-        - {x: -75.25745, y: 84.62127}
-        - {x: -77.25745, y: 95.62127}
-        - {x: -74.25745, y: 104.62127}
-        - {x: -79.25745, y: 107.62127}
-        - {x: -121.25745, y: 107.62127}
-        - {x: -141.25745, y: 60.62127}
-        - {x: -141.25745, y: -42.37873}
-        - {x: -44.257446, y: -94.37873}
-        - {x: 27.742554, y: -106.37873}
-        - {x: 142.74255, y: -106.37873}
-        - {x: 142.74255, y: 6.621269}
-        - {x: -10.257446, y: 107.62127}
-    - name: Death_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_5
       rect:
         serializedVersion: 2
         x: 8124
@@ -212,44 +147,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 99.35596, y: 37.330734}
-        - {x: 91.35596, y: 25.330734}
-        - {x: 82.35596, y: 9.330734}
-        - {x: 81.35596, y: -7.6692657}
-        - {x: 11.355957, y: 39.330734}
-        - {x: -19.644043, y: 39.330734}
-        - {x: -47.644043, y: 27.330734}
-        - {x: -51.644043, y: 21.330734}
-        - {x: -50.644043, y: 14.330734}
-        - {x: -48.644043, y: 9.330734}
-        - {x: -43.644043, y: 5.3307343}
-        - {x: -47.644043, y: 8.330734}
-        - {x: -52.644043, y: 16.330734}
-        - {x: -51.644043, y: 17.330734}
-        - {x: -51.644043, y: 39.330734}
-        - {x: -54.644043, y: 72.330734}
-        - {x: -63.644043, y: 83.330734}
-        - {x: -91.64404, y: 83.330734}
-        - {x: -99.64404, y: 74.330734}
-        - {x: -103.64404, y: 68.330734}
-        - {x: -99.64404, y: 83.330734}
-        - {x: -150.64404, y: 83.330734}
-        - {x: -150.64404, y: -69.669266}
-        - {x: -47.644043, y: -82.669266}
-        - {x: 100.35596, y: -82.669266}
-        - {x: 152.35596, y: -60.669266}
-        - {x: 152.35596, y: -9.669266}
-        - {x: 134.35596, y: 38.330734}
-      - - {x: 148.35596, y: -44.669266}
-        - {x: 144.35596, y: -56.669266}
-        - {x: 144.35596, y: -59.669266}
-        - {x: 145.35596, y: -60.669266}
-        - {x: 148.35596, y: -60.669266}
-        - {x: 152.35596, y: -59.669266}
-        - {x: 152.35596, y: -44.669266}
-        - {x: 151.35596, y: -43.669266}
-    - name: Death_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_6
       rect:
         serializedVersion: 2
         x: 9529
@@ -259,19 +160,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 149.99536, y: 70.282104}
-        - {x: -100.00464, y: 70.282104}
-        - {x: -109.00464, y: 55.282104}
-        - {x: -166.00464, y: 7.2821045}
-        - {x: -168.00464, y: 1.2821045}
-        - {x: -168.00464, y: -62.717896}
-        - {x: -146.00464, y: -68.717896}
-        - {x: 133.99536, y: -68.717896}
-        - {x: 156.99536, y: -63.717896}
-        - {x: 170.99536, y: -53.717896}
-        - {x: 170.99536, y: 34.282104}
-    - name: Death_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_7
       rect:
         serializedVersion: 2
         x: 11119
@@ -281,30 +173,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 68.38452, y: 78.99157}
-        - {x: 19.384521, y: 54.99157}
-        - {x: 9.3845215, y: 47.99157}
-        - {x: -10.6154785, y: 78.99157}
-        - {x: -98.61548, y: 78.99157}
-        - {x: -167.61548, y: 26.99157}
-        - {x: -167.61548, y: -18.00843}
-        - {x: -160.61548, y: -23.00843}
-        - {x: -149.61548, y: -27.00843}
-        - {x: -142.61548, y: -29.00843}
-        - {x: -138.61548, y: -30.00843}
-        - {x: -151.61548, y: -30.00843}
-        - {x: -161.61548, y: -48.00843}
-        - {x: -140.61548, y: -56.00843}
-        - {x: -94.61548, y: -65.00843}
-        - {x: -92.61548, y: -66.00843}
-        - {x: -92.61548, y: -65.00843}
-        - {x: -94.61548, y: -66.00843}
-        - {x: -114.61548, y: -78.00843}
-        - {x: 170.38452, y: -78.00843}
-        - {x: 170.38452, y: 37.99157}
-        - {x: 122.38452, y: 78.99157}
-    - name: Death_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_8
       rect:
         serializedVersion: 2
         x: 12699
@@ -314,18 +186,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 13.692627, y: 78.265884}
-        - {x: -105.30737, y: 78.265884}
-        - {x: -166.30737, y: 23.265884}
-        - {x: -166.30737, y: -55.734116}
-        - {x: -165.30737, y: -64.734116}
-        - {x: -129.30737, y: -77.734116}
-        - {x: 153.69263, y: -77.734116}
-        - {x: 170.69263, y: -65.734116}
-        - {x: 170.69263, y: 16.265884}
-        - {x: 106.69263, y: 53.265884}
-    - name: Death_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Death_9
       rect:
         serializedVersion: 2
         x: 14294
@@ -335,18 +199,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -75.12793, y: 77.55642}
-        - {x: -84.12793, y: 68.55642}
-        - {x: -94.12793, y: 35.55642}
-        - {x: -92.12793, y: 28.55642}
-        - {x: -129.12793, y: 21.55642}
-        - {x: -165.12793, y: -0.44358063}
-        - {x: -168.12793, y: -6.4435806}
-        - {x: -168.12793, y: -76.44358}
-        - {x: 168.87207, y: -76.44358}
-        - {x: 168.87207, y: 19.55642}
-        - {x: 125.87207, y: 77.55642}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

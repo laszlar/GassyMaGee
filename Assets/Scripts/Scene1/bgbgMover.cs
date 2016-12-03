@@ -12,7 +12,7 @@ public class bgbgMover : MonoBehaviour {
     {
         if (collider.tag == "Looper")
         {
-            newPos = (widthOfThisObject * numOfBGObjects)/2;
+            newPos = (widthOfThisObject * numOfBGObjects)/4;
             transform.Translate(Vector2.right * newPos, 0);
         }
     }

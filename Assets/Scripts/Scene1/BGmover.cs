@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BGmover : MonoBehaviour
+public class bgMover : MonoBehaviour
 {
 
     public float widthOfThisObject;

@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public bool punch;
     public bool isPunching;
 
+    private bool _isEffectRunning;
+
 	void Start ()
     {
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
@@ -67,7 +69,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (godMode) //turn cam effect off for set amount of time in godmode
         {
-            StartCoroutine(CamEffectOff(camEffectTime));
+            if (!_isEffectRunning)
+            {
+                StartCoroutine(CamEffectOff(camEffectTime));
+            }
         }
 
         if (parachuteEnabled)
@@ -172,8 +177,10 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator CamEffectOff (int camEffectTime)
     {
         camEffect.enabled = false;
+        _isEffectRunning = true;
         yield return new WaitForSeconds(camEffectTime);
         camEffect.enabled = true;
+        _isEffectRunning = false;
     }
 
     //Death animation

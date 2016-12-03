@@ -34,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
     public bool isPunching;
 
     private bool _isEffectRunning;
+    public static bool IsJumping;
+    private bool _canJump;
+    private float _jumpTime = 4.0f;
+    private float _elapsedTime;
 
 	void Start ()
     {
@@ -83,10 +87,29 @@ public class PlayerMovement : MonoBehaviour
         //makes player jump & play jump animation
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  
         {
-            GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
-            anim.SetTrigger("IsGroundedJump");
-            //isFarting.fart.gameObject.SetActive(true);
+            if (_canJump)
+            {
+                GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
+                anim.SetTrigger("IsGroundedJump");
+                //isFarting.fart.gameObject.SetActive(true);
+            }
+        }
 
+        if (transform.position.y > 0)
+        {
+            IsJumping = true;
+            _elapsedTime += Time.deltaTime;
+            if (_elapsedTime >= _jumpTime)
+            {
+                _canJump = false;
+
+            }
+        }
+        else
+        {
+            IsJumping = false;
+            _canJump = true;
+            _elapsedTime = 0;
         }
         
     }

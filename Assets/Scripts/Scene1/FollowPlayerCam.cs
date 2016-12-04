@@ -12,6 +12,7 @@ public class FollowPlayerCam : MonoBehaviour
     public float interVelocity;
     public float minDistance;
     public float followDistance;
+    public int cameraFollowSpeed = 1;
     public GameObject player;
     public Vector3 offset;
     Vector3 targetPos;
@@ -31,7 +32,7 @@ public class FollowPlayerCam : MonoBehaviour
 
         Vector3 targetDirection = (player.transform.position - posZ); //this tells the camera in which direction the player is moving/which direction to move
 
-        interVelocity = targetDirection.magnitude * 5f; //The actual value on how quick to move the camera? 
+        interVelocity = targetDirection.magnitude * cameraFollowSpeed; //Adjust the camera follow speed in the editor to increase/decrease it's spead.. i.e. the lower the value the slower it follows
 
         targetPos = transform.position + (targetDirection.normalized * interVelocity * Time.deltaTime); //the actual moving of the camera
 

@@ -13,9 +13,11 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float playerSpeed = 2f;  
+    #region Global Variables
+
+    public float playerSpeed = 2f;
     public Vector2 jumpHeight;
-	public int points = 0;
+    public int points = 0;
     Animator anim;
     public bool dead = false;
     public float windSpeed;
@@ -38,21 +40,30 @@ public class PlayerMovement : MonoBehaviour
     private bool _canJump;
     private float _jumpTime = 4.0f;
     private float _elapsedTime;
+    private float _maxJumpVelocity = 3f;
 
-	void Start ()
+    private Rigidbody2D _rb2D;
+
+    #endregion
+
+    #region MonoBehaviors
+
+    void Start()
     {
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
         camEffect.enabled = true;
         anim = transform.GetComponentInChildren<Animator>();
         parachuteEnabled = false;
 
+        _rb2D = GetComponent<Rigidbody2D>();
+
         if (anim == null)
         {
             Debug.LogError("No animator, dude!");
         }
-	}
+    }
 
-    void Update ()
+    void Update()
     {
         //Moves the player
         if (!parachuteEnabled)
@@ -65,8 +76,8 @@ public class PlayerMovement : MonoBehaviour
         {
             DeathAnimation();
             StartCoroutine(PlayerDied(timeAfterDeath));
-            GetComponent<Rigidbody2D>().isKinematic = true;
-            transform.Translate (windSpeed * Time.deltaTime, 0f, 0f);
+            _rb2D.isKinematic = true;
+            transform.Translate(windSpeed * Time.deltaTime, 0f, 0f);
             return;
         }
 
@@ -85,11 +96,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //makes player jump & play jump animation
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))  
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             if (_canJump)
             {
-                GetComponent<Rigidbody2D>().AddForce(jumpHeight, ForceMode2D.Impulse);
+                _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
                 anim.SetTrigger("IsGroundedJump");
                 //isFarting.fart.gameObject.SetActive(true);
             }
@@ -111,15 +122,15 @@ public class PlayerMovement : MonoBehaviour
             _canJump = true;
             _elapsedTime = 0;
         }
-        
+        LimitJumpVelocity();
     }
 
     //Kills player, 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (!godMode && col.gameObject.tag == "Enemy")
-        { 
-            dead = true;  
+        {
+            dead = true;
         }
         else if (col.gameObject.tag == "Paint")
         {
@@ -149,35 +160,21 @@ public class PlayerMovement : MonoBehaviour
             ParachuteMethod();
         }
     }
-    
-    //the following below invokes that makes him invincible for x amount of time
-    public void SetInvincible()
-    {
-        godMode = true;
-
-        CancelInvoke("SetDamageable");
-        Invoke("SetDamageable", invTime);
-    }
-
-    public void SetDamageable ()
-    {
-        godMode = false;
-    }
 
     //Gives player a score && Resets punch upon exit
     void OnTriggerExit2D(Collider2D coll)
     {
-		if (coll.gameObject.tag == "Enemy")
+        if (coll.gameObject.tag == "Enemy")
         {
-              if (dead)
-              {
-                   return;
-              }
+            if (dead)
+            {
+                return;
+            }
             ++points;
             punch = false;
             isPunching = false;
-		}
-	}
+        }
+    }
 
     //Punch enemies upon entering collider
     void OnTriggerEnter2D(Collider2D coll)
@@ -192,6 +189,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Methods
+
+    //the following below invokes that makes him invincible for x amount of time
+    public void SetInvincible()
+    {
+        godMode = true;
+
+        CancelInvoke("SetDamageable");
+        Invoke("SetDamageable", invTime);
+    }
+
+    public void SetDamageable()
+    {
+        godMode = false;
+    }
+
     //Punch Animation
     public void PunchAnimation()
     {
@@ -201,14 +216,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Wait to change scene after death
-    IEnumerator PlayerDied (int timeAfterDeath)
+    IEnumerator PlayerDied(int timeAfterDeath)
     {
         yield return new WaitForSeconds(timeAfterDeath);
         SceneManager.LoadScene("Scene2");
     }
 
     //This will turn the camera off for X amount of time
-    IEnumerator CamEffectOff (int camEffectTime)
+    IEnumerator CamEffectOff(int camEffectTime)
     {
         camEffect.enabled = false;
         _isEffectRunning = true;
@@ -224,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Parachute power down!!
-    IEnumerator ParachutePowerupEnabled (int parachuteTime)
+    IEnumerator ParachutePowerupEnabled(int parachuteTime)
     {
         parachuteEnabled = true;
         yield return new WaitForSeconds(parachuteTime);
@@ -236,5 +251,15 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(ParachutePowerupEnabled(parachuteTime));
     }
+
+    private void LimitJumpVelocity()
+    {
+        if (_rb2D.velocity.y > _maxJumpVelocity)
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, _maxJumpVelocity);
+        }
+    }
+
+    #endregion
 
 }

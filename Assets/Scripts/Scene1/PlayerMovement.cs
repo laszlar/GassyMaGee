@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
     public bool parachuteEnabled;
-    public int parachuteTime;
+    int parachuteTime = 5;
     public bool duckThing;
     public bool sinkThing;
     public bool kettleThing;
@@ -45,10 +45,6 @@ public class PlayerMovement : MonoBehaviour
         camEffect.enabled = true;
         anim = transform.GetComponentInChildren<Animator>();
         parachuteEnabled = false;
-        duckThing = false;
-        sinkThing = false;
-        kettleThing = false;
-        scrollerThing = false;
 
         if (anim == null)
         {
@@ -59,7 +55,10 @@ public class PlayerMovement : MonoBehaviour
     void Update ()
     {
         //Moves the player
-        transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
+        if (!parachuteEnabled)
+            transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
+        else
+            transform.Translate((playerSpeed / 2) * Time.deltaTime, 0, 0);
 
         //Moves Player to the left as he gets hit/dies
         if (dead)
@@ -81,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (parachuteEnabled)
         {
+            Debug.Log("you hit the parachute");
             ParachuteMethod();
         }
 
@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(col.gameObject.tag == "Parachute")
         {
-            parachuteEnabled = true;
+            ParachuteMethod();
         }
     }
 
@@ -215,9 +215,9 @@ public class PlayerMovement : MonoBehaviour
     //Parachute powerup
     IEnumerator ParachutePowerupEnabled (int parachuteTime)
     {
-        SlowmoController();
+        parachuteEnabled = true;
         yield return new WaitForSeconds(parachuteTime);
-        SpeedupController();
+        parachuteEnabled = false;
     }
 
     //Parachute coroutine
@@ -226,21 +226,4 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(ParachutePowerupEnabled(parachuteTime));
     }
 
-    //parachute enabled
-    public void SlowmoController()
-    {
-        duckThing = true;
-        sinkThing = true;
-        kettleThing = true;
-        scrollerThing = true;
-    }
-
-    //parachute disabled
-    public void SpeedupController ()
-    {
-        duckThing = false;
-        sinkThing = false;
-        kettleThing = false;
-        scrollerThing = false;
-    }
 }

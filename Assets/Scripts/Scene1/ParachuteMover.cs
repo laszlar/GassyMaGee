@@ -6,16 +6,19 @@ Moves the parachute
 using UnityEngine;
 using System.Collections;
 
-public class ParachuteMover : MonoBehaviour {
+public class ParachuteMover : MonoBehaviour
+{
 
     public float parachuteSpeed;
+    GameObject PlayerMovement;
 
-	
-	//move that Parachute!
-	void Update ()
+
+
+    //move that Parachute!
+    void Update()
     {
         transform.Translate(parachuteSpeed * Time.deltaTime, 0f, 0f);
-	}
+    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,7 +32,11 @@ public class ParachuteMover : MonoBehaviour {
             }*/
 
         if (other.gameObject.tag == "Player")
+        {
+            PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
             Destroy(gameObject);
+            player.ParachuteMethod();
         }
     }
+}
 

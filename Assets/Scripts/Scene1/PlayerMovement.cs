@@ -133,12 +133,23 @@ public class PlayerMovement : MonoBehaviour
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
-        else if(col.gameObject.tag == "Parachute")
+        ///////////////////////Parachute Methods///////////////////////////////////
+        /*else if(col.gameObject.tag == "Parachute")
         {
+            Debug.Log("you trashed that parachute");
+            ParachuteMethod();
+        }*/
+    }
+
+    void OnTriggerEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Parachute")
+        {
+            Debug.Log("you trashed that parachute");
             ParachuteMethod();
         }
     }
-
+    
     //the following below invokes that makes him invincible for x amount of time
     public void SetInvincible()
     {
@@ -212,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("IsDead");
     }
 
-    //Parachute powerup
+    //Parachute power down!!
     IEnumerator ParachutePowerupEnabled (int parachuteTime)
     {
         parachuteEnabled = true;

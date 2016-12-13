@@ -144,17 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
-        ///////////////////////Parachute Methods///////////////////////////////////
-        /*else if(col.gameObject.tag == "Parachute")
-        {
-            Debug.Log("you trashed that parachute");
-            ParachuteMethod();
-        }*/
-    }
-
-    void OnTriggerEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Parachute")
+        else if(col.gameObject.tag == "Parachute")
         {
             Debug.Log("you trashed that parachute");
             ParachuteMethod();

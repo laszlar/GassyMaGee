@@ -19,6 +19,8 @@ public class PlankSpawner : MonoBehaviour {
     private Vector2 _newSpawnPosition;
     private float _offset;
 
+    public int plankPercent = 95;
+
     private readonly System.Random _rand = new System.Random(Guid.NewGuid().GetHashCode());
 
 	// Use this for initialization
@@ -40,7 +42,7 @@ public class PlankSpawner : MonoBehaviour {
         var isThisPlankMissing = RandomInt();
         Debug.Log(isThisPlankMissing);
 
-	    if (isThisPlankMissing < 95)
+	    if (isThisPlankMissing < plankPercent)
 	    {
 	        _rrgWeWalkThePlank = Instantiate(plankPrefab, _newSpawnPosition, Quaternion.identity);
 	        _newSpawnPosition = _rrgWeWalkThePlank.transform.position;

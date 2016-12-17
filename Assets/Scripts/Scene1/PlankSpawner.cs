@@ -19,7 +19,7 @@ public class PlankSpawner : MonoBehaviour {
     private Vector2 _newSpawnPosition;
     private float _offset;
 
-    public int plankPercent = 95;
+    public int plankPercent = 100;
 
     private readonly System.Random _rand = new System.Random(Guid.NewGuid().GetHashCode());
 

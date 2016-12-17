@@ -43,13 +43,11 @@ public class ScoreTracker : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-       if(score > 10)
-        {
-            levelOne = true;
-        }
-
+       //if the score is greater than 50 start limiting the number of planks that spawn
        switch (score)
         {
+            case 150: plank.plankPercent = 75;
+                break;
             case 100: plank.plankPercent = 80;
                 break;
             case 75: plank.plankPercent = 90;

@@ -9,7 +9,6 @@ using System.Collections;
 public class MoveKettle : MonoBehaviour {
 
     public float kettleSpeed;
-    public float halfKettleSpeed;
     PlayerMovement script;
     
     // Use this for initialization
@@ -17,19 +16,13 @@ public class MoveKettle : MonoBehaviour {
     {
         script = GameObject.Find("Player").GetComponent<PlayerMovement>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        if (!script.kettleThing)
-        {
-            transform.Translate(kettleSpeed * Time.deltaTime, 0f, 0f);          //if player hits parachute power up, 
-        }                                                                       //slows down kettle and everything else.
-        else
-        {
-            transform.Translate(halfKettleSpeed * Time.deltaTime, 0f, 0f);
-        }
-	}
+        transform.Translate(kettleSpeed * Time.deltaTime, 0f, 0f);          //if player hits parachute power up, 
+    }
+
 
     void OnCollisionEnter2D(Collision2D coll)                       //if player hits paint canister, turn player into god mode,
     {                                                               //and object goes flying when player hits them.

@@ -28,10 +28,6 @@ public class PlayerMovement : MonoBehaviour
     public int camEffectTime = 7;
     public bool parachuteEnabled;
     int parachuteTime = 5;
-    public bool duckThing;
-    public bool sinkThing;
-    public bool kettleThing;
-    public bool scrollerThing;
     public bool punch;
     public bool isPunching;
 

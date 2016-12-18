@@ -26,7 +26,7 @@ public class BeansCounter : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("IsJumping: " + PlayerMovement.IsJumping);
+        //Debug.Log("IsJumping: " + PlayerMovement.IsJumping);
         if (PlayerMovement.IsJumping)
         {
             _getFloat = _mat.GetFloat(C);

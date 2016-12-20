@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (transform.position.y > 0)
+        if (transform.position.y > 0 || transform.position.y < -0.5f)
         {
             IsJumping = true;
             _elapsedTime += Time.deltaTime;
@@ -117,6 +117,12 @@ public class PlayerMovement : MonoBehaviour
             IsJumping = false;
             _canJump = true;
             _elapsedTime = 0;
+        }
+
+        if (transform.position.y < -2)
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, 0f);
+            dead = true;
         }
         LimitJumpVelocity();
     }

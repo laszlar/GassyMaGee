@@ -24,6 +24,7 @@ public class PlankDestroyingTime : MonoBehaviour
         if(coll.gameObject.tag == "Plank")
         {
             Destroy(coll.gameObject);
+            PlankSpawner.Planks.RemoveAt(0);
         }
     }
 }

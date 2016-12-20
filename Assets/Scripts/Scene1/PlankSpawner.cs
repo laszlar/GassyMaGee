@@ -6,6 +6,7 @@ Spawns the planks
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 public class PlankSpawner : MonoBehaviour {
@@ -19,7 +20,9 @@ public class PlankSpawner : MonoBehaviour {
     private Vector2 _newSpawnPosition;
     private float _offset;
 
-    public int plankPercent = 100;
+    public static int plankPercent = 100;
+
+    public static List<GameObject> Planks = new List<GameObject>();
 
     private readonly System.Random _rand = new System.Random(Guid.NewGuid().GetHashCode());
 
@@ -30,10 +33,12 @@ public class PlankSpawner : MonoBehaviour {
 	    _rrgWeWalkThePlank = Instantiate(plankPrefab, _startPosition, Quaternion.identity);
 	    _newSpawnPosition = _rrgWeWalkThePlank.transform.position;
 	    _newSpawnPosition.x += _offset;
-	}
+        Planks.Add(_rrgWeWalkThePlank);
+    }
 
     void Update()
     {
+        Debug.Log(Planks.Count);
             Spawn();
     }
 	
@@ -41,21 +46,24 @@ public class PlankSpawner : MonoBehaviour {
 	{
         var isThisPlankMissing = RandomInt();
         //Debug.Log(isThisPlankMissing);
-
-	    if (isThisPlankMissing < plankPercent)
+	    if (Planks.Count < 100)
 	    {
-	        _rrgWeWalkThePlank = Instantiate(plankPrefab, _newSpawnPosition, Quaternion.identity);
-	        _newSpawnPosition = _rrgWeWalkThePlank.transform.position;
-	        _newSpawnPosition.x += _offset;
-	    }
-	    else
-	    {
-	        _newSpawnPosition.x += _offset * 2;
+	        if (isThisPlankMissing < plankPercent)
+	        {
+	            _rrgWeWalkThePlank = Instantiate(plankPrefab, _newSpawnPosition, Quaternion.identity);
+                _newSpawnPosition = _rrgWeWalkThePlank.transform.position;
+	            _newSpawnPosition.x += _offset;
+                Planks.Add(_rrgWeWalkThePlank);
+	        }
+	        else
+	        {
+	            _newSpawnPosition.x += _offset*2;
+	        }
 	    }
 	}
 
     private int RandomInt()
     {
-        return _rand.Next(0, 101);
+        return _rand.Next(0, 100);
     }
 }

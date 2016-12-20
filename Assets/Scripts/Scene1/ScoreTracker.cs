@@ -11,9 +11,8 @@ public class ScoreTracker : MonoBehaviour
 {
 
     PlayerMovement player;
-    PlankSpawner plank;
     Text text;
-    public int score;
+    public static int score;
     public int highScore;
     public bool levelOne;
 
@@ -27,8 +26,6 @@ public class ScoreTracker : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         text = gameObject.GetComponent<Text>();
-
-        plank = GetComponent<PlankSpawner>();
     }
 	
 	// Update is called once per frame
@@ -44,17 +41,26 @@ public class ScoreTracker : MonoBehaviour
         }
 
        //if the score is greater than 50 start limiting the number of planks that spawn
-       switch (score)
-        {
-            case 150: plank.plankPercent = 75;
-                break;
-            case 100: plank.plankPercent = 80;
-                break;
-            case 75: plank.plankPercent = 90;
-                break;
-            case 50: plank.plankPercent = 95;
-                break;
-        }
+       ChangePlankPercent();
 
 	}
+
+    public static void ChangePlankPercent()
+    {
+        switch (score)
+        {
+            case 100:
+                PlankSpawner.plankPercent = 75;
+                break;
+            case 50:
+                PlankSpawner.plankPercent = 80;
+                break;
+            case 25:
+                PlankSpawner.plankPercent = 90;
+                break;
+            case 1:
+                PlankSpawner.plankPercent = 95;
+                break;
+        }
+    }
 }

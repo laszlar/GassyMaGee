@@ -31,16 +31,6 @@ public class PowEffectChildren : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerScript.isPunching)
-        {
-            PowEffectOnC();
-
-            Debug.Log("it's on");
-        }
-        else
-        {
-            isHitting.enabled = false;
-        }
         
     }
 

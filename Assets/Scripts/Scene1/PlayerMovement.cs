@@ -28,8 +28,6 @@ public class PlayerMovement : MonoBehaviour
     public int camEffectTime = 7;
     public bool parachuteEnabled;
     int parachuteTime = 5;
-    public bool punch;
-    public bool isPunching;
 
     private bool _isEffectRunning;
     public static bool IsJumping;
@@ -39,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private float _maxJumpVelocity = 3f;
 
     private Rigidbody2D _rb2D;
+    private EdgeCollider2D edgeCol;
 
     #endregion
 
@@ -52,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         parachuteEnabled = false;
 
         _rb2D = GetComponent<Rigidbody2D>();
+        edgeCol = GetComponent<EdgeCollider2D>();
 
         if (anim == null)
         {
@@ -102,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        //Disables player jump after set amount of time
         if (transform.position.y > 0 || transform.position.y < -0.5f)
         {
             IsJumping = true;
@@ -153,8 +154,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //bounce player off of enemies!
+    void OnTriggerEnter2D(EdgeCollider2D coll)
+    {
+        if (!godMode && coll.gameObject.tag == "Enemy")
+        {
+            dead = false;
+            _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
+            anim.SetTrigger("IsGroundedJump");
+            points++;
+        }
+    }
+
     //Gives player a score && Resets punch upon exit
-    void OnTriggerExit2D(Collider2D coll)
+    /*void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.gameObject.tag == "Enemy")
         {
@@ -163,23 +176,8 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
             ++points;
-            punch = false;
-            isPunching = false;
         }
-    }
-
-    //Punch enemies upon entering collider
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (godMode && coll.gameObject.tag == "AnimTrigger")
-        {
-            if (!punch)
-            {
-                PunchAnimation();
-                isPunching = true;
-            }
-        }
-    }
+    }*/
 
     #endregion
 
@@ -197,14 +195,6 @@ public class PlayerMovement : MonoBehaviour
     public void SetDamageable()
     {
         godMode = false;
-    }
-
-    //Punch Animation
-    public void PunchAnimation()
-    {
-        punch = true;
-        isPunching = true;
-        //anim.SetTrigger("IsPunch");
     }
 
     //Wait to change scene after death

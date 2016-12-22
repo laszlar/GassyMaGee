@@ -28,15 +28,8 @@ public class PowEffect : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (playerScript.isPunching)
-        {
-            PowEffectOn();
-        }
-        else
-        {
-            PowEffectOff();
-        }
-	}
+
+    }
 
     void PowEffectOn ()
     {

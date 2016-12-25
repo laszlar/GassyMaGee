@@ -29,6 +29,7 @@ public class PlankSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
+		ResetStaticVars ();
 	    _offset = plankPrefab.GetComponent<Renderer>().bounds.size.x;
 	    _rrgWeWalkThePlank = Instantiate(plankPrefab, _startPosition, Quaternion.identity);
 	    _newSpawnPosition = _rrgWeWalkThePlank.transform.position;
@@ -66,4 +67,11 @@ public class PlankSpawner : MonoBehaviour {
     {
         return _rand.Next(0, 100);
     }
+
+	void ResetStaticVars() {
+		if (Planks.Count != 0) {
+			Planks.Clear ();
+		}
+		plankPercent = 100;
+	}
 }

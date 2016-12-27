@@ -1,6 +1,7 @@
 ﻿/*
 Destroys the planks
 !attached to plank destroyer!
+Effectively also destroys the PostsandFuckingRopes my nigga v2.398398798359385398 @Tony
 */
 
 using UnityEngine;
@@ -26,5 +27,9 @@ public class PlankDestroyingTime : MonoBehaviour
             Destroy(coll.gameObject);
             PlankSpawner.Planks.RemoveAt(0);
         }
+		if (coll.gameObject.tag == "fuckingPostsAndRope") {
+			Destroy (coll.gameObject);
+			MovePostsRopeBG._allTheFuckingRopeThings.RemoveAt (0);
+		}
     }
 }

@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rb2D;
     private EdgeCollider2D edgeCol;
+	private Transform _child;
+	private bool _isEnemy;
+	private Collider2D collider;
 
     #endregion
 
@@ -49,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
         camEffect.enabled = true;
         anim = transform.GetComponentInChildren<Animator>();
         parachuteEnabled = false;
+
+		_child = transform.FindChild("Player GFX");
 
         _rb2D = GetComponent<Rigidbody2D>();
         edgeCol = GetComponent<EdgeCollider2D>();
@@ -66,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
         else
             transform.Translate((playerSpeed / 2) * Time.deltaTime, 0, 0);
+		
+		var child = transform.FindChild ("Player GFX");
 
         //Moves Player to the left as he gets hit/dies
         if (dead)
@@ -128,10 +135,25 @@ public class PlayerMovement : MonoBehaviour
         LimitJumpVelocity();
     }
 
+	void FixedUpdate() {
+		var hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -
+			_child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+		if (hit.collider.gameObject.tag == "Enemy") {
+			_isEnemy = true;
+			collider = hit.collider;
+		} else {
+			_isEnemy = false;
+		}
+	}
+
     //Kills player, 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (!godMode && col.gameObject.tag == "Enemy")
+		if (_isEnemy) {
+			_rb2D.velocity = new Vector2 (_rb2D.velocity.x, (-_rb2D.velocity.y*2f));
+			Destroy (collider.gameObject);
+		}
+        if (!godMode && !_isEnemy && col.gameObject.tag == "Enemy")
         {
             dead = true;
         }
@@ -236,10 +258,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void LimitJumpVelocity()
     {
-        if (_rb2D.velocity.y > _maxJumpVelocity)
-        {
-            _rb2D.velocity = new Vector2(_rb2D.velocity.x, _maxJumpVelocity);
-        }
+		if (!_isEnemy) {
+			if (_rb2D.velocity.y > _maxJumpVelocity) {
+				_rb2D.velocity = new Vector2 (_rb2D.velocity.x, _maxJumpVelocity);
+			}
+			if (_rb2D.velocity.y < -_maxJumpVelocity) {
+				_rb2D.velocity = new Vector2 (_rb2D.velocity.x, -_maxJumpVelocity);
+			}
+		}
     }
 
     #endregion

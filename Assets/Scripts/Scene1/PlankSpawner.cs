@@ -39,7 +39,6 @@ public class PlankSpawner : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log(Planks.Count);
             Spawn();
     }
 	

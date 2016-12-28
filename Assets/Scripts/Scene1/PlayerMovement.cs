@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed = 2f;
     public Vector2 jumpHeight;
     public int points = 0;
+    private int addPointsPerSecond = 1;
     Animator anim;
     public bool dead = false;
     public float windSpeed;
@@ -62,6 +63,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("No animator, dude!");
         }
+
+        //Repeat the AddPoints function to add to score
+        InvokeRepeating("AddPoints", 3, 3);
     }
 
     void Update()
@@ -152,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
 		if (_isEnemy) {
 			_rb2D.velocity = new Vector2 (_rb2D.velocity.x, (-_rb2D.velocity.y*2f));
 			Destroy (collider.gameObject);
+            points += 5;
 		}
         if (!godMode && !_isEnemy && col.gameObject.tag == "Enemy")
         {
@@ -168,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
             Vector2 direction = 14 * (target - bomb);
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
+            points += 3;
         }
         else if(col.gameObject.tag == "Parachute")
         {
@@ -176,34 +182,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //bounce player off of enemies!
-    void OnTriggerEnter2D(EdgeCollider2D coll)
-    {
-        if (!godMode && coll.gameObject.tag == "Enemy")
-        {
-            dead = false;
-            _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
-            anim.SetTrigger("IsGroundedJump");
-            points++;
-        }
-    }
-
-    //Gives player a score && Resets punch upon exit
-    /*void OnTriggerExit2D(Collider2D coll)
-    {
-        if (coll.gameObject.tag == "Enemy")
-        {
-            if (dead)
-            {
-                return;
-            }
-            ++points;
-        }
-    }*/
-
     #endregion
 
     #region Methods
+    
+    //add to points function correlates with InvokeRepeating in Start Method
+    private void AddPoints()
+    {
+        points += addPointsPerSecond;
+    }
 
     //the following below invokes that makes him invincible for x amount of time
     public void SetInvincible()

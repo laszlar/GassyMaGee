@@ -38,10 +38,9 @@ public class PlayerMovement : MonoBehaviour
     private float _maxJumpVelocity = 3f;
 
     private Rigidbody2D _rb2D;
-    private EdgeCollider2D edgeCol;
 	private Transform _child;
 	private bool _isEnemy;
-	private Collider2D collider;
+	private Collider2D _collider;
 
     #endregion
 
@@ -57,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
 		_child = transform.FindChild("Player GFX");
 
         _rb2D = GetComponent<Rigidbody2D>();
-        edgeCol = GetComponent<EdgeCollider2D>();
 
         if (anim == null)
         {
@@ -139,23 +137,28 @@ public class PlayerMovement : MonoBehaviour
         LimitJumpVelocity();
     }
 
-	void FixedUpdate() {
-		var hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -
-			_child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
-		if (hit.collider.gameObject.tag == "Enemy") {
-			_isEnemy = true;
-			collider = hit.collider;
-		} else {
-			_isEnemy = false;
-		}
-	}
+        void FixedUpdate()
+    {
+            var hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -
+                _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+
+            var hit1 = Physics2D.Raycast(new Vector2((transform.position.x + _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
+                _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+
+            var hit2 = Physics2D.Raycast(new Vector2((transform.position.x - _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
+                _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+
+            IsEnemy(hit.collider);
+            IsEnemy(hit1.collider);
+            IsEnemy(hit2.collider);
+        }
 
     //Kills player, 
     void OnCollisionEnter2D(Collision2D col)
     {
 		if (_isEnemy) {
 			_rb2D.velocity = new Vector2 (_rb2D.velocity.x, (-_rb2D.velocity.y*2f));
-			Destroy (collider.gameObject);
+			Destroy (_collider.gameObject);
             points += 5;
 		}
         if (!godMode && !_isEnemy && col.gameObject.tag == "Enemy")
@@ -253,6 +256,22 @@ public class PlayerMovement : MonoBehaviour
 				_rb2D.velocity = new Vector2 (_rb2D.velocity.x, -_maxJumpVelocity);
 			}
 		}
+    }
+
+    public void IsEnemy(Collider2D col)
+    {
+        if (col != null)
+        {
+            if (col.gameObject.tag == "Enemy")
+            {
+                _isEnemy = true;
+                _collider = col;
+            }
+            else
+            {
+                _isEnemy = false;
+            }
+        }
     }
 
     #endregion

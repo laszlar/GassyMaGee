@@ -153,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
             IsEnemy(hit2.collider);
         }
 
-    //Kills player, 
+    //Kills player 
     void OnCollisionEnter2D(Collision2D col)
     {
 		if (_isEnemy) {

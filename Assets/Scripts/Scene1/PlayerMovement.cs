@@ -28,7 +28,9 @@ public class PlayerMovement : MonoBehaviour
     CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
     public bool parachuteEnabled;
+    public bool bananaEnabled;
     int parachuteTime = 5;
+    int bananaTime = 2;
 
     private bool _isEffectRunning;
     public static bool IsJumping;
@@ -69,11 +71,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Moves the player
-        if (!parachuteEnabled)
+        if (!parachuteEnabled && !bananaEnabled)
             transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
-        else
+        else if (parachuteEnabled)
             transform.Translate((playerSpeed / 2) * Time.deltaTime, 0, 0);
-		
+		else if (bananaEnabled)
+            transform.Translate((playerSpeed * 2) * Time.deltaTime, 0, 0);
+
 		var child = transform.FindChild ("Player GFX");
 
         //Moves Player to the left as he gets hit/dies
@@ -232,7 +236,21 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("IsDead");
     }
 
-    //Parachute power down!!
+    //Banana Power down!
+    IEnumerator BananaPowerupEnabled(int bananaTime)
+    {
+        bananaEnabled = true;
+        //There's always money in the banana stand.
+        yield return new WaitForSeconds(bananaTime);
+        bananaEnabled = false;
+    }
+
+    public void BananaMethod()
+    {
+        StartCoroutine(BananaPowerupEnabled(bananaTime));
+    }
+
+    //Parachute power up!!
     IEnumerator ParachutePowerupEnabled(int parachuteTime)
     {
         parachuteEnabled = true;

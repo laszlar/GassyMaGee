@@ -1,0 +1,44 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BananaLauncher : MonoBehaviour
+{
+    public GameObject player;
+    public GameObject banana;
+    BananaPowerup bananaPowerupScript;
+
+    public float offset;
+
+    private float initSpawn = 1.0f;
+    private float continuousSpawn = 3.0f;
+    private float bananaSpawnLocation;
+    
+    Vector2 playerPos;
+
+	// Use this for initialization
+	void Start ()
+    {
+        player = GameObject.Find("Player");
+        bananaPowerupScript = gameObject.GetComponent<BananaPowerup>();
+
+        InvokeRepeating("CheckOutThatBanana", initSpawn, continuousSpawn);	
+	}
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        playerPos.x = player.transform.position.x;
+
+        bananaSpawnLocation = playerPos.x + offset;
+
+        //if that banana don't touch the ground spawn a new one
+        while(!bananaPowerupScript.touchingGround)
+            Invoke("CheckOutThatBanana", 1.0f);
+	}
+
+    void CheckOutThatBanana()
+    {
+        Instantiate(banana, new Vector2(bananaSpawnLocation, -0.484f), transform.rotation);
+    }
+}

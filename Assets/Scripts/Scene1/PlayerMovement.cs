@@ -105,13 +105,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //makes player jump & play jump animation
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        //Tony, all you man :)
+        if (!bananaEnabled)
         {
-            if (_canJump)
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
             {
-                _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
-                anim.SetTrigger("IsGroundedJump");
-                //isFarting.fart.gameObject.SetActive(true);
+                if (_canJump)
+                {
+                    _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
+                    anim.SetTrigger("IsGroundedJump");
+                    //isFarting.fart.gameObject.SetActive(true);
+                }
             }
         }
 

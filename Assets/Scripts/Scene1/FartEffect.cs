@@ -12,13 +12,19 @@ public class FartEffect : MonoBehaviour
     public ParticleSystem constantlyFarting;
     public ParticleSystem.EmissionModule fart;
     public float timer;
+    PlayerMovement player;
 
     void Awake()
     {
         NotFarting();
     }
 
-    void Update ()
+    void Start()
+    {
+        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+    }
+
+    void Update()
     {
         CheckInput();
         Farted();
@@ -27,10 +33,20 @@ public class FartEffect : MonoBehaviour
 
     void CheckInput()
     {
-        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        //fart less if you hit that banana
+        if (player.bananaEnabled)
         {
-            //we shall see if this works.
-            timer += 0.3f;
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                timer += 0.05f;
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                timer += 0.3f;
+            }
         }
     }
 

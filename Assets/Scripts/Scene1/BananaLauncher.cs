@@ -31,10 +31,6 @@ public class BananaLauncher : MonoBehaviour
         playerPos.x = player.transform.position.x;
 
         bananaSpawnLocation = playerPos.x + offset;
-
-        //if that banana don't touch the ground spawn a new one
-        while(!bananaPowerupScript.touchingGround)
-            Invoke("CheckOutThatBanana", 1.0f);
 	}
 
     void CheckOutThatBanana()

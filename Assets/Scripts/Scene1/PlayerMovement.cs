@@ -100,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (parachuteEnabled)
         {
-            Debug.Log("you hit the parachute");
             ParachuteMethod();
         }
 

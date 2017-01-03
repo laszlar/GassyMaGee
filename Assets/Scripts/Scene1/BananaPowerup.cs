@@ -13,11 +13,18 @@ public class BananaPowerup : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
+
+    void Update()
+    {
+        if (!touchingGround)
+            Destroy(gameObject);
+    }
+
+
     void OnTriggerEnter2D(Collider2D col)
     {
-
-        //this isn't working as we speak
-        if (col.gameObject.tag == "Plank")
+        //check to see if it is touching the floor
+        if (col.gameObject.tag == "Plank" || col.gameObject.tag == "Floor")
         {
             touchingGround = true;
         }
@@ -26,19 +33,11 @@ public class BananaPowerup : MonoBehaviour
             touchingGround = false;
         }
 
-        if (!touchingGround)
-            Destroy(gameObject);
-
-        //this is working however
+        //turn on banana powerup for the player
         if (col.gameObject.tag == "Player")
         {
             player.BananaMethod();
             Destroy(gameObject);
         }
-    }
-
-    void OnCollisionEnter2D(Collider2D col)
-    {
-        
     }
 }

@@ -27,8 +27,9 @@ public class PlankDestroyingTime : MonoBehaviour
             Destroy(coll.gameObject);
             PlankSpawner.Planks.RemoveAt(0);
         }
-		if (coll.gameObject.tag == "fuckingPostsAndRope") {
-			Destroy (coll.gameObject);
+		else if (coll.gameObject.tag == "fuckingPostsAndRope")
+        {
+		    Destroy (coll.gameObject);
 			MovePostsRopeBG._allTheFuckingRopeThings.RemoveAt (0);
 		}
     }

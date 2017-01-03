@@ -23,6 +23,7 @@ public class Destroyer : MonoBehaviour
         {
             StartCoroutine(DeathAfterSec(deathTime));
         }
+
         Destroy(collision.gameObject);
     }
 

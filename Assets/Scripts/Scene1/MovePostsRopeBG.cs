@@ -38,7 +38,7 @@ public class MovePostsRopeBG : MonoBehaviour
 	}
 
 	private void ResetStaticVars() {
-		_allTheFuckingRopeThings.Clear ();
+		_allTheFuckingRopeThings.Clear();
 	}
 }
 

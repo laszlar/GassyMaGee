@@ -15,7 +15,9 @@ public class FollowPlayerCam : MonoBehaviour
     public int cameraFollowSpeed = 1;
     public GameObject player;
     public Vector3 offset;
+    public float deadZone;
     Vector3 targetPos;
+    Vector3 lerpidyLerpLerpDerp;
 
 	// Use this for initialization
 	void Start ()
@@ -36,8 +38,8 @@ public class FollowPlayerCam : MonoBehaviour
 
         targetPos = transform.position + (targetDirection.normalized * interVelocity * Time.deltaTime); //the actual moving of the camera
 
-        transform.position = Vector3.Lerp(transform.position, targetPos + offset, 0.25f);
-
-
-	}
+        lerpidyLerpLerpDerp = Vector3.Lerp(transform.position, targetPos + offset, 0.25f);
+        lerpidyLerpLerpDerp.y = Mathf.Clamp(lerpidyLerpLerpDerp.y, -0.05f, 10.0f);
+        transform.position = lerpidyLerpLerpDerp;
+    }
 }

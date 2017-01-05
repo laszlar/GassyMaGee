@@ -15,19 +15,23 @@ public class PlayerMovement : MonoBehaviour
 
     #region Global Variables
 
+    private GameObject player;
     public float playerSpeed = 2f;
     public Vector2 jumpHeight;
     public int points = 0;
     private int addPointsPerSecond = 1;
-    Animator anim;
+    private  Animator anim;
     public bool dead = false;
     public float windSpeed;
     public bool godMode = false;
     public float invTime = 7f;
     public int timeAfterDeath = 2;
-    CameraFilterPack_TV_Old_Movie_2 camEffect;
+    private CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
     public bool parachuteEnabled;
+    private bool parachuteCreated;
+    public GameObject parachuteAnim;
+    private ParachuteFollowPlayer parachuteScript;
     public bool bananaEnabled;
     int parachuteTime = 5;
     int bananaTime = 2;
@@ -54,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         camEffect.enabled = true;
         anim = transform.GetComponentInChildren<Animator>();
         parachuteEnabled = false;
+        parachuteCreated = false;
 
 		_child = transform.FindChild("Player GFX");
 
@@ -64,8 +69,13 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("No animator, dude!");
         }
 
+        player = GameObject.Find("Player");
+
         //Repeat the AddPoints function to add to score
         InvokeRepeating("AddPoints", 3, 3);
+
+        //for the parachute animation
+        parachuteScript = GameObject.Find("ParachuteAnim").GetComponent<ParachuteFollowPlayer>();
     }
 
     void Update()
@@ -259,13 +269,21 @@ public class PlayerMovement : MonoBehaviour
         parachuteEnabled = true;
         yield return new WaitForSeconds(parachuteTime);
         parachuteEnabled = false;
+        parachuteCreated = false;
     }
 
     //Parachute coroutine
     public void ParachuteMethod()
     {
         StartCoroutine(ParachutePowerupEnabled(parachuteTime));
-    }
+        transform.position = player.transform.position;
+
+        if (!parachuteCreated)
+        {
+            Instantiate(parachuteAnim, new Vector2(transform.position.x, transform.position.y), transform.rotation);
+            parachuteCreated = true;
+        }
+   }
 
     private void LimitJumpVelocity()
     {

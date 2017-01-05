@@ -5,15 +5,17 @@ using UnityEngine;
 public class ParachuteFollowPlayer : MonoBehaviour
 {
     private GameObject player;
+    private PlayerMovement playerScript;
     private float offsetX = 0.30f;
     private float offsetY = 0.05f;
-    private Vector2 position;
+    public Vector2 position;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        player = GameObject.Find("Player");	
+        player = GameObject.Find("Player");
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
@@ -21,5 +23,10 @@ public class ParachuteFollowPlayer : MonoBehaviour
     {
         transform.position = position;
         position = new Vector2((player.transform.position.x - offsetX), (player.transform.position.y + offsetY));
+
+        if(!playerScript.parachuteEnabled)
+        {
+             Destroy(gameObject);
+        }
 	}
 }

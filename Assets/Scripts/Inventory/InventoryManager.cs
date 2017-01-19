@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : Singleton<Inventory>
+public class InventoryManager : Singleton<InventoryManager>
 {
     private bool inventoryFull;
 
@@ -14,8 +14,15 @@ public class Inventory : Singleton<Inventory>
     private PlayerMovement playerScript;
     [SerializeField]
 
+    private ScoreTracker score;
+
+    private GameObject firstInventorySlot;
+    private GameObject secondInventorySlot;
+    private GameObject thirdInventorySlot;
 
     List <GameObject> inventoryItems = new List<GameObject>();
+
+    private int highScore;
 
     void Awake()
     {
@@ -26,9 +33,13 @@ public class Inventory : Singleton<Inventory>
     // Use this for initialization
     void Start ()
     {
+        score = GetComponent<ScoreTracker>();
         paint = GameObject.Find("PaintImage");
         parachute = GameObject.Find("ParachuteImage");
-	}
+        firstInventorySlot = GameObject.FindGameObjectWithTag("Slot1");
+        secondInventorySlot = GameObject.FindGameObjectWithTag("Slot2");
+        thirdInventorySlot = GameObject.FindGameObjectWithTag("Slot3");
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -39,26 +50,51 @@ public class Inventory : Singleton<Inventory>
             inventoryFull = true;
         }
 
-
-        if (!inventoryFull)
-        {
-            inventoryItems.Add(gameObject);
-        }
-        else
-        {
-            return;
-        }
-
+        firstInventorySlot = inventoryItems[0];
+        secondInventorySlot = inventoryItems[1];
+        thirdInventorySlot = inventoryItems[2];
         
 	}
 
-    private void ParachuteButton()
+    public void ParachuteButton()
     {
-        if 
+        if (!inventoryFull)
+        {
+            if (PlayerPrefs.HasKey("High Score"))
+            {
+                highScore = PlayerPrefs.GetInt("High Score");
+
+                if (highScore >= 5)
+                {
+                    highScore -= 5;
+                    PlayerPrefs.SetInt("High Score", highScore);
+                    PlayerPrefs.Save();
+                    inventoryItems.Add(parachute);
+                }
+            }
+        }
+        else
+            return;
     }
 
-    private void PaintButton()
+    public void PaintButton()
     {
+        if (!inventoryFull)
+        {
+            if (PlayerPrefs.HasKey("High Score"))
+            {
+                highScore = PlayerPrefs.GetInt("High Score");
 
+                if (highScore >= 10)
+                {
+                    highScore -= 10;
+                    PlayerPrefs.SetInt("High Score", highScore);
+                    PlayerPrefs.Save();
+                    inventoryItems.Add(paint);
+                }
+            }  
+        }
+        else
+            return;
     }
 }

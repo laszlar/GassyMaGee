@@ -19,10 +19,14 @@ public class InventoryManager : Singleton<InventoryManager>
     private GameObject firstInventorySlot;
     private GameObject secondInventorySlot;
     private GameObject thirdInventorySlot;
+    public Vector2 firstSlotPosition;
+    public Vector2 secondSlotPosition;
+    public Vector2 thirdSlotPosition;
 
     List <GameObject> inventoryItems = new List<GameObject>();
 
     private int highScore;
+    private bool listInstantiated;
 
     void Awake()
     {
@@ -34,11 +38,18 @@ public class InventoryManager : Singleton<InventoryManager>
     void Start ()
     {
         score = GetComponent<ScoreTracker>();
-        paint = GameObject.Find("PaintImage");
-        parachute = GameObject.Find("ParachuteImage");
+        paint = GameObject.Find("PaintStoreImg");
+        parachute = GameObject.Find("ParachuteStoreImg");
+
         firstInventorySlot = GameObject.FindGameObjectWithTag("Slot1");
         secondInventorySlot = GameObject.FindGameObjectWithTag("Slot2");
         thirdInventorySlot = GameObject.FindGameObjectWithTag("Slot3");
+
+        firstSlotPosition = firstInventorySlot.transform.position;
+        secondSlotPosition = secondInventorySlot.transform.position;
+        thirdSlotPosition = thirdInventorySlot.transform.position;
+
+        listInstantiated = false;
     }
 	
 	// Update is called once per frame
@@ -50,10 +61,8 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryFull = true;
         }
 
-        firstInventorySlot = inventoryItems[0];
-        secondInventorySlot = inventoryItems[1];
-        thirdInventorySlot = inventoryItems[2];
-        
+        if (!listInstantiated)
+            InstantiateList();
 	}
 
     public void ParachuteButton()
@@ -70,6 +79,7 @@ public class InventoryManager : Singleton<InventoryManager>
                     PlayerPrefs.SetInt("High Score", highScore);
                     PlayerPrefs.Save();
                     inventoryItems.Add(parachute);
+                    listInstantiated = false;
                 }
             }
         }
@@ -91,10 +101,20 @@ public class InventoryManager : Singleton<InventoryManager>
                     PlayerPrefs.SetInt("High Score", highScore);
                     PlayerPrefs.Save();
                     inventoryItems.Add(paint);
+                    listInstantiated = false;
                 }
             }  
         }
         else
             return;
+    }
+
+    private void InstantiateList()
+    {
+        Instantiate(inventoryItems[0], firstSlotPosition, transform.rotation);
+        Instantiate(inventoryItems[1], secondSlotPosition, transform.rotation);
+        Instantiate(inventoryItems[2], thirdSlotPosition, transform.rotation);
+
+        listInstantiated = true;
     }
 }

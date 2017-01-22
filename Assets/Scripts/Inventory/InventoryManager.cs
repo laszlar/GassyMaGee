@@ -56,8 +56,11 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryFull = true;
         }
 
-        if (!listInstantiated)
-            InstantiateList();
+        if (inventoryItems[0] != null || inventoryItems[1] != null || inventoryItems[2] != null)
+        {
+            if (!listInstantiated)
+                InstantiateList();
+        }
 	}
 
     public void ParachuteButton()
@@ -111,7 +114,6 @@ public class InventoryManager : Singleton<InventoryManager>
         Instantiate(inventoryItems[1], secondSlotPosition, transform.rotation);
         listInstantiated = true;
         Instantiate(inventoryItems[2], thirdSlotPosition, transform.rotation);
-
         listInstantiated = true;
     }
 }

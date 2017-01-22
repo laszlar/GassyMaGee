@@ -6,13 +6,10 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     private bool inventoryFull;
 
-    [SerializeField]
-    private GameObject paint;
-    [SerializeField]
-    private GameObject parachute;
+    public GameObject paint;
+    public GameObject parachute;
     [SerializeField]
     private PlayerMovement playerScript;
-    [SerializeField]
 
     private ScoreTracker score;
 
@@ -38,8 +35,6 @@ public class InventoryManager : Singleton<InventoryManager>
     void Start ()
     {
         score = GetComponent<ScoreTracker>();
-        paint = GameObject.Find("PaintStoreImg");
-        parachute = GameObject.Find("ParachuteStoreImg");
 
         firstInventorySlot = GameObject.FindGameObjectWithTag("Slot1");
         secondInventorySlot = GameObject.FindGameObjectWithTag("Slot2");
@@ -112,7 +107,9 @@ public class InventoryManager : Singleton<InventoryManager>
     private void InstantiateList()
     {
         Instantiate(inventoryItems[0], firstSlotPosition, transform.rotation);
+        listInstantiated = true;
         Instantiate(inventoryItems[1], secondSlotPosition, transform.rotation);
+        listInstantiated = true;
         Instantiate(inventoryItems[2], thirdSlotPosition, transform.rotation);
 
         listInstantiated = true;

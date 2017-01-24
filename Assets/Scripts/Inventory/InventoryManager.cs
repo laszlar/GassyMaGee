@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
@@ -8,8 +9,12 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public GameObject paint;
     public GameObject parachute;
+    public GameObject paintStore;
+    public GameObject parachuteStore;
+
     [SerializeField]
     private PlayerMovement playerScript;
+    public Scene activeScene;
 
     private ScoreTracker score;
 
@@ -20,10 +25,12 @@ public class InventoryManager : Singleton<InventoryManager>
     public Vector2 secondSlotPosition;
     public Vector2 thirdSlotPosition;
 
-    List <GameObject> inventoryItems = new List<GameObject>();
+    //List <GameObject> inventoryItems = new List<GameObject>();
+    List<bool> inventoryItems = new List<bool>();
 
     private int highScore;
     private bool listInstantiated;
+    private bool paintStored;
 
     void Awake()
     {
@@ -45,6 +52,8 @@ public class InventoryManager : Singleton<InventoryManager>
         thirdSlotPosition = thirdInventorySlot.transform.position;
 
         listInstantiated = false;
+
+        activeScene = SceneManager.GetActiveScene();
     }
 	
 	// Update is called once per frame
@@ -76,7 +85,8 @@ public class InventoryManager : Singleton<InventoryManager>
                     highScore -= 5;
                     PlayerPrefs.SetInt("High Score", highScore);
                     PlayerPrefs.Save();
-                    inventoryItems.Add(parachute);
+                    //inventoryItems.Add(parachute);
+                    inventoryItems.Add(!paintStored);
                     listInstantiated = false;
                 }
             }
@@ -98,7 +108,8 @@ public class InventoryManager : Singleton<InventoryManager>
                     highScore -= 10;
                     PlayerPrefs.SetInt("High Score", highScore);
                     PlayerPrefs.Save();
-                    inventoryItems.Add(paint);
+                    //inventoryItems.Add(paint);
+                    inventoryItems.Add(paintStored);
                     listInstantiated = false;
                 }
             }  
@@ -109,11 +120,20 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void InstantiateList()
     {
-        Instantiate(inventoryItems[0], firstSlotPosition, transform.rotation);
+        /*Instantiate(inventoryItems[0], firstSlotPosition, transform.rotation);
         listInstantiated = true;
         Instantiate(inventoryItems[1], secondSlotPosition, transform.rotation);
         listInstantiated = true;
         Instantiate(inventoryItems[2], thirdSlotPosition, transform.rotation);
         listInstantiated = true;
+        */
+        
+        if (activeScene.name == "Scene1")
+        {
+            if (inventoryItems[0] == paintStored)
+            {
+
+            }
+        }    
     }
 }

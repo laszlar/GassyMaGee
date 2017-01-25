@@ -10,8 +10,8 @@ public class BananaLauncher : MonoBehaviour
 
     public float offset;
 
-    private float initSpawn = 1.0f;
-    private float continuousSpawn = 3.0f;
+    public float initSpawn = 20.0f;
+    public float continuousSpawn = 20.0f;
     private float bananaSpawnLocation;
     
     Vector2 playerPos;

@@ -41,6 +41,7 @@ public class InventoryManager : Singleton<InventoryManager>
     // Use this for initialization
     void Start()
     {
+        InstantiateList();
         score = GetComponent<ScoreTracker>();
 
         firstInventorySlot = GameObject.FindGameObjectWithTag("Slot1");
@@ -65,11 +66,10 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryFull = true;
         }
 
-        if (inventoryItems[0] != null || inventoryItems[1] != null || inventoryItems[2] != null)
-        {
             if (!listInstantiated)
                 InstantiateList();
-        }
+
+        Debug.Log(inventoryItems);
     }
 
     public void ParachuteButton()
@@ -135,31 +135,33 @@ public class InventoryManager : Singleton<InventoryManager>
                 Instantiate(paint, firstSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[0] == !paintStored)
+            if (inventoryItems[0] == !paintStored)
             {
                 Instantiate(parachute, firstSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[1] == paintStored)
+            if (inventoryItems[1] == paintStored)
             {
                 Instantiate(paint, secondSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[1] == !paintStored)
+            if (inventoryItems[1] == !paintStored)
             {
                 Instantiate(parachute, secondSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[2] == paintStored)
+            if (inventoryItems[2] == paintStored)
             {
                 Instantiate(paint, thirdSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[2] == !paintStored)
+            if (inventoryItems[2] == !paintStored)
             {
                 Instantiate(parachute, thirdSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
+
+            listInstantiated = true;
         }
 
         if (activeScene.name == "Scene3")
@@ -169,31 +171,33 @@ public class InventoryManager : Singleton<InventoryManager>
                 Instantiate(paintStore, firstSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[0] == !paintStored)
+            if (inventoryItems[0] == !paintStored)
             {
                 Instantiate(parachuteStore, firstSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[1] == paintStored)
+            if (inventoryItems[1] == paintStored)
             {
                 Instantiate(paintStore, secondSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[1] == !paintStored)
+            if (inventoryItems[1] == !paintStored)
             {
                 Instantiate(parachuteStore, secondSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[2] == paintStored)
+            if (inventoryItems[2] == paintStored)
             {
                 Instantiate(paintStore, thirdSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
-            else if (inventoryItems[2] == !paintStored)
+            if (inventoryItems[2] == !paintStored)
             {
                 Instantiate(parachuteStore, thirdSlotPosition, transform.rotation);
                 listInstantiated = true;
             }
+
+            listInstantiated = true;
         }
     }
 }

@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isEffectRunning;
     public static bool IsJumping;
     private bool _canJump;
-    private float _jumpTime = 4.0f;
+    private float _jumpTime = 1.0f;
     private float _elapsedTime;
     private float _maxJumpVelocity = 3f;
 

@@ -25,8 +25,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public Vector2 secondSlotPosition;
     public Vector2 thirdSlotPosition;
 
-    //List <GameObject> inventoryItems = new List<GameObject>();
-    List<bool> inventoryItems = new List<bool>();
+    static List<bool> inventoryItems = new List<bool>();
 
     private int highScore;
     private bool listInstantiated;
@@ -55,6 +54,7 @@ public class InventoryManager : Singleton<InventoryManager>
         listInstantiated = false;
 
         activeScene = SceneManager.GetActiveScene();
+        Debug.Log(activeScene.name);
     }
 
     // Update is called once per frame
@@ -68,8 +68,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
             if (!listInstantiated)
                 InstantiateList();
-
-        Debug.Log(inventoryItems);
     }
 
     public void ParachuteButton()
@@ -120,14 +118,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void InstantiateList()
     {
-        /*Instantiate(inventoryItems[0], firstSlotPosition, transform.rotation);
-        listInstantiated = true;
-        Instantiate(inventoryItems[1], secondSlotPosition, transform.rotation);
-        listInstantiated = true;
-        Instantiate(inventoryItems[2], thirdSlotPosition, transform.rotation);
-        listInstantiated = true;
-        */
-
         if (activeScene.name == "Scene1")
         {
             if (inventoryItems[0] == paintStored)
@@ -138,6 +128,7 @@ public class InventoryManager : Singleton<InventoryManager>
             if (inventoryItems[0] == !paintStored)
             {
                 Instantiate(parachute, firstSlotPosition, transform.rotation);
+                Debug.Log("this should work");
                 listInstantiated = true;
             }
             if (inventoryItems[1] == paintStored)
@@ -174,6 +165,7 @@ public class InventoryManager : Singleton<InventoryManager>
             if (inventoryItems[0] == !paintStored)
             {
                 Instantiate(parachuteStore, firstSlotPosition, transform.rotation);
+                Debug.Log("stored parachute");
                 listInstantiated = true;
             }
             if (inventoryItems[1] == paintStored)

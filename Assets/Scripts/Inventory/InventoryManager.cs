@@ -5,19 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
-    private bool inventoryFull;
+    //private bool inventoryFull;
 
-    public GameObject paint;
-    public GameObject parachute;
-    public GameObject paintStore;
-    public GameObject parachuteStore;
+    /*
+    [SerializeField]
+    GameObject paint;
+    [SerializeField]
+    GameObject parachute;
+    [SerializeField]
+    GameObject paintStore;
+    [SerializeField]
+    GameObject parachuteStore;
+    */
+
+    public GameObject playerInventory;
+    public InventoryHolderThing inventory;
 
     [SerializeField]
     private PlayerMovement playerScript;
+
     public Scene activeScene;
 
     private ScoreTracker score;
 
+    /*
     private GameObject firstInventorySlot;
     private GameObject secondInventorySlot;
     private GameObject thirdInventorySlot;
@@ -27,8 +38,10 @@ public class InventoryManager : Singleton<InventoryManager>
 
     static List<bool> inventoryItems = new List<bool>();
 
-    private int highScore;
     private bool listInstantiated;
+    */
+
+    private int highScore;
     private bool paintStored;
 
     void Awake()
@@ -40,9 +53,9 @@ public class InventoryManager : Singleton<InventoryManager>
     // Use this for initialization
     void Start()
     {
-        InstantiateList();
-        score = GetComponent<ScoreTracker>();
+        //InstantiateList();
 
+        /*
         firstInventorySlot = GameObject.FindGameObjectWithTag("Slot1");
         secondInventorySlot = GameObject.FindGameObjectWithTag("Slot2");
         thirdInventorySlot = GameObject.FindGameObjectWithTag("Slot3");
@@ -52,6 +65,10 @@ public class InventoryManager : Singleton<InventoryManager>
         thirdSlotPosition = thirdInventorySlot.transform.position;
 
         listInstantiated = false;
+        */
+        playerInventory = GameObject.Find("PlayerInventory");
+        inventory = playerInventory.GetComponent<InventoryHolderThing>();
+        score = GetComponent<ScoreTracker>();
 
         activeScene = SceneManager.GetActiveScene();
         Debug.Log(activeScene.name);
@@ -60,19 +77,35 @@ public class InventoryManager : Singleton<InventoryManager>
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if (inventoryItems.Count == 3)
         {
             inventoryFull = true;
         }
+        */
 
-            if (!listInstantiated)
-                InstantiateList();
+        if (activeScene.name == "Scene1")
+        {
+            if (InventoryHolderThing.inventoryItems.Count != 0)
+            {
+                if (!inventory.listInstantiated)
+                    inventory.InstantiateGameList();
+            }
+        }
+
+        if (activeScene.name == "Scene3")
+        {
+            if (InventoryHolderThing.inventoryItems.Count != 0)
+            {
+                if (!inventory.listInstantiated)
+                    inventory.InstantiateStoreList();
+            }
+        }
     }
 
     public void ParachuteButton()
     {
-        if (!inventoryFull)
+        if (!inventory.inventoryFull)
         {
             if (PlayerPrefs.HasKey("High Score"))
             {
@@ -83,19 +116,18 @@ public class InventoryManager : Singleton<InventoryManager>
                     highScore -= 5;
                     PlayerPrefs.SetInt("High Score", highScore);
                     PlayerPrefs.Save();
-                    //inventoryItems.Add(parachute);
-                    inventoryItems.Add(!paintStored);
-                    listInstantiated = false;
+                    InventoryHolderThing.inventoryItems.Add(!paintStored);
+                    inventory.listInstantiated = false;
                 }
             }
         }
-        else
+        else if (inventory.inventoryFull)
             return;
     }
 
     public void PaintButton()
     {
-        if (!inventoryFull)
+        if (!inventory.inventoryFull)
         {
             if (PlayerPrefs.HasKey("High Score"))
             {
@@ -107,16 +139,16 @@ public class InventoryManager : Singleton<InventoryManager>
                     PlayerPrefs.SetInt("High Score", highScore);
                     PlayerPrefs.Save();
                     //inventoryItems.Add(paint);
-                    inventoryItems.Add(paintStored);
-                    listInstantiated = false;
+                    InventoryHolderThing.inventoryItems.Add(paintStored);
+                    inventory.listInstantiated = false;
                 }
             }
         }
-        else
+        else if (inventory.inventoryFull)
             return;
     }
 
-    private void InstantiateList()
+    /*private void InstantiateList()
     {
         if (activeScene.name == "Scene1")
         {
@@ -192,4 +224,5 @@ public class InventoryManager : Singleton<InventoryManager>
             listInstantiated = true;
         }
     }
+    */
 }

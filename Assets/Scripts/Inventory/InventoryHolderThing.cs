@@ -16,6 +16,8 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
 
     public static List<bool> inventoryItems;
 
+    private InventoryManager inventoryManager;
+
     private GameObject firstInventorySlot;
     private GameObject secondInventorySlot;
     private GameObject thirdInventorySlot;
@@ -23,8 +25,8 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
     public Vector2 secondSlotPosition;
     public Vector2 thirdSlotPosition;
 
-    public bool listInstantiated;
-    public bool inventoryFull;
+    public static bool listInstantiated;
+    public static bool inventoryFull;
     private bool paintStored;
     #endregion
 
@@ -36,7 +38,18 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
 
     void Start()
     {
-        listInstantiated = false;
+        inventoryManager = GetComponent<InventoryManager>();
+
+        if (inventoryManager.activeScene.name == "Scene1")
+        {
+            listInstantiated = false;
+        }
+        
+        if (inventoryManager.activeScene.name == "Scene3")
+        {
+            listInstantiated = false;
+        }
+
         inventoryItems = new List<bool>();
 
         firstInventorySlot = GameObject.FindGameObjectWithTag("Slot1");
@@ -60,6 +73,12 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
 
     public void InstantiateGameList()
     {
+        //first inventory Item. Instantiate if not null
+        if (inventoryItems[0] != paintStored && inventoryItems[0] != !paintStored)
+        {
+            return;
+            Debug.Log("There's nothing Stored!");
+        }
         if (inventoryItems[0] == paintStored)
         {
             Instantiate(paint, firstSlotPosition, transform.rotation);
@@ -68,8 +87,14 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
         if (inventoryItems[0] == !paintStored)
         {
             Instantiate(parachute, firstSlotPosition, transform.rotation);
-            Debug.Log("this should work");
+            Debug.Log("I just instantiated the parachute");
             listInstantiated = true;
+        }
+
+        //Second inventory Item. Instantiate if not null
+        if (inventoryItems[1] != paintStored && inventoryItems[1] != !paintStored)
+        {
+            return;
         }
         if (inventoryItems[1] == paintStored)
         {
@@ -80,6 +105,12 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
         {
             Instantiate(parachute, secondSlotPosition, transform.rotation);
             listInstantiated = true;
+        }
+
+        //Third inventory Item. Instantiate if not null
+        if (inventoryItems[2] != paintStored && inventoryItems[2] != !paintStored)
+        {
+            return;
         }
         if (inventoryItems[2] == paintStored)
         {
@@ -95,6 +126,12 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
 
     public void InstantiateStoreList()
     {
+
+        //first inventory Item. Instantiate if not null
+        if (inventoryItems[0] != paintStored && inventoryItems[0] != !paintStored)
+        {
+            return;
+        }
         if (inventoryItems[0] == paintStored)
         {
             Instantiate(paintStore, firstSlotPosition, transform.rotation);
@@ -106,6 +143,12 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
             Debug.Log("stored parachute");
             listInstantiated = true;
         }
+
+        //Second inventory Item. Instantiate if not null
+        if (inventoryItems[1] != paintStored && inventoryItems[1] != !paintStored)
+        {
+            return;
+        }
         if (inventoryItems[1] == paintStored)
         {
             Instantiate(paintStore, secondSlotPosition, transform.rotation);
@@ -115,6 +158,12 @@ public class InventoryHolderThing : Singleton<InventoryHolderThing>
         {
             Instantiate(parachuteStore, secondSlotPosition, transform.rotation);
             listInstantiated = true;
+        }
+
+        //Third inventory Item. Instantiate if not null
+        if (inventoryItems[2] != paintStored && inventoryItems[2] != !paintStored)
+        {
+            return;
         }
         if (inventoryItems[2] == paintStored)
         {

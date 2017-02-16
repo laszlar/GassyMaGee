@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     #region Global Variables
-
+    private float counter = 0.05f;
     private GameObject player;
     public float playerSpeed = 2f;
     public Vector2 jumpHeight;
@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 		else if (bananaEnabled)
             transform.Translate((playerSpeed * 2) * Time.deltaTime, 0, 0);
 
-		var child = transform.FindChild ("Player GFX");
+		Transform child = transform.FindChild ("Player GFX");
 
         //Moves Player to the left as he gets hit/dies
         if (dead)
@@ -154,21 +154,59 @@ public class PlayerMovement : MonoBehaviour
         LimitJumpVelocity();
     }
 
+    //Adding all the raycasts here to detect if Gassy is jumping on an enemy
         void FixedUpdate()
     {
-            var hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -
-                _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+        /*//Far left raycast
+        RaycastHit2D hitFL = Physics2D.Raycast(new Vector2((transform.position.x - _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
+            _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
 
-            var hit1 = Physics2D.Raycast(new Vector2((transform.position.x + _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
+        //Halfway left raycast
+        RaycastHit2D hitHL = Physics2D.Raycast(new Vector2((transform.position.x - (0.5f * _child.GetComponent<Renderer>().bounds.extents.x)), transform.position.y -
+            _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+            
+        //Middle raycast
+        RaycastHit2D hitM = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -
                 _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
-
-            var hit2 = Physics2D.Raycast(new Vector2((transform.position.x - _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
+        
+        //Halfway right raycast
+        RaycastHit2D hitHR = Physics2D.Raycast(new Vector2((transform.position.x + (0.5f * _child.GetComponent<Renderer>().bounds.extents.x)), transform.position.y -
+            _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+            
+        //Far right raycast
+        RaycastHit2D hitFR = Physics2D.Raycast(new Vector2((transform.position.x + _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
                 _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
+        Debug.DrawRay((new Vector3(transform.position.x, transform.position.y, transform.position.z)), Vector2.down, Color.green);
+       
+        //Make these raycasts work.
+        IsEnemy(hitFL.collider);
+        IsEnemy(hitHL.collider);
+        IsEnemy(hitM.collider);
+        IsEnemy(hitHR.collider);
+        IsEnemy(hitFR.collider);
+        */
+    }
 
-            IsEnemy(hit.collider);
-            IsEnemy(hit1.collider);
-            IsEnemy(hit2.collider);
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col != null)
+        {
+            if (col.gameObject.tag == "Enemy")
+            {
+                _isEnemy = true;
+                Debug.Log(_isEnemy);
+            }
         }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (_isEnemy)
+        {
+            _isEnemy = false;
+            Debug.Log(_isEnemy);
+        }
+    }
 
     //Kills player 
     void OnCollisionEnter2D(Collision2D col)
@@ -182,10 +220,14 @@ public class PlayerMovement : MonoBehaviour
         {
             dead = true;
         }
+
+        //enter god mode when collided with paint canister
         else if (col.gameObject.tag == "Paint")
         {
             SetInvincible();
         }
+
+        //funny god mode, knock enemies away when collided with player in god mode
         else if (godMode && col.gameObject.tag == "Enemy")
         {
             Vector2 target = col.gameObject.transform.position;
@@ -287,11 +329,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void LimitJumpVelocity()
     {
-		if (!_isEnemy) {
-			if (_rb2D.velocity.y > _maxJumpVelocity) {
+		if (!_isEnemy)
+        {
+			if (_rb2D.velocity.y > _maxJumpVelocity)
+            {
 				_rb2D.velocity = new Vector2 (_rb2D.velocity.x, _maxJumpVelocity);
 			}
-			if (_rb2D.velocity.y < -_maxJumpVelocity) {
+			if (_rb2D.velocity.y < -_maxJumpVelocity)
+            {
 				_rb2D.velocity = new Vector2 (_rb2D.velocity.x, -_maxJumpVelocity);
 			}
 		}
@@ -299,18 +344,33 @@ public class PlayerMovement : MonoBehaviour
 
     public void IsEnemy(Collider2D col)
     {
-        if (col != null)
-        {
+        
+        //if (col != null)
+        //{
             if (col.gameObject.tag == "Enemy")
             {
                 _isEnemy = true;
                 _collider = col;
+            counter = 0.05f;
             }
-            else
+            if (col == null || col != null || col.gameObject.tag != "Enemy")
+        {
+            counter -= Time.deltaTime;
+            if (counter < 0)
             {
                 _isEnemy = false;
             }
         }
+        
+            //else
+            //{
+                //_isEnemy = false;
+            //}
+            //if (col != null && col.gameObject.tag != "Enemy")
+        //{
+            //_isEnemy = false;
+       // }
+        //}
     }
 
     #endregion

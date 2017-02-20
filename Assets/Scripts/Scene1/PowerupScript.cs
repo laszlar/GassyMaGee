@@ -1,6 +1,6 @@
 ﻿/*
 Enables God Mode.
-!Attached to PaintLauncher!
+!Attached to Paint Prefab!
 */
 
 using UnityEngine;
@@ -21,14 +21,4 @@ public class PowerupScript : MonoBehaviour {
             }
         }
     }
-    
-    // Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

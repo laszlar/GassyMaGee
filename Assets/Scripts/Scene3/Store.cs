@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Store : MonoBehaviour {
 
-    private readonly Inventory _inv = new Inventory();
+    private readonly Inventory _inv = new Inventory(); 
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +21,13 @@ public class Store : MonoBehaviour {
         if (!!_inv.IsFull)
             return;
 
-        if (!_inv.IsFull)
+        if(ScoreTracker.score < 10)
+        {
+            Debug.Log("You don't have enough points to buy this item.");
+            return;
+        }
+
+        if (!_inv.IsFull && ScoreTracker.score >= 10)
         {
             Debug.Log("Paint added to inventory");
             _inv.InventoryList.Add(Inventory.Items.Paint);
@@ -33,7 +39,13 @@ public class Store : MonoBehaviour {
         if (!!_inv.IsFull)
             return;
 
-        if (!_inv.IsFull)
+        if (ScoreTracker.score < 5)
+        {
+            Debug.Log("You don't have enough points to buy this item.");
+            return;
+        }
+
+        if (!_inv.IsFull && ScoreTracker.score >= 5)
         {
             Debug.Log("Parachute added to inventory");
             _inv.InventoryList.Add(Inventory.Items.Chute);

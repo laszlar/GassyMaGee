@@ -5,6 +5,10 @@ using UnityEngine;
 public class InventoryLoader : MonoBehaviour {
 
     private readonly Inventory _inv = new Inventory();
+    [SerializeField]
+    private Sprite _paint;
+    [SerializeField]
+    private Sprite _chute;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +17,7 @@ public class InventoryLoader : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        DisplaySprites();
 	}
 
     public void Btn1()
@@ -49,6 +53,21 @@ public class InventoryLoader : MonoBehaviour {
         {
             Debug.Log("Pressed the mother fucking button");
             _inv.InventoryList.RemoveAt(2);
+        }
+    }
+
+    private void DisplaySprites()
+    {
+        for (var i = 0; i < _inv.InventoryList.Count; i++)
+        {
+            if (_inv.InventoryList[i] == Inventory.Items.Chute)
+            {
+                // dislpay chute in slot [i]
+            }
+            else if ( _inv.InventoryList[i] == Inventory.Items.Paint)
+            {
+                // display paint in slot [i]
+            }
         }
     }
 }

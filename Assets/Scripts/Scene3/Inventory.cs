@@ -34,7 +34,7 @@ public class Inventory {
 
         for (var i = 0; i < 3; i++)
         {
-            PlayerPrefs.SetInt("Inv" + i, Convert.ToInt32(InventoryList[i]));
+            PlayerPrefs.SetInt("Inv" + i, (int)(InventoryList[i]));
         }
 
         PlayerPrefs.Save();

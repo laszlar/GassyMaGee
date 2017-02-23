@@ -69,5 +69,18 @@ public class InventoryLoader : MonoBehaviour {
                 // display paint in slot [i]
             }
         }
+
+        if(_inv.InventoryList.Count < 3)
+        {
+            // remove item slot sprite 3
+        }
+        if (_inv.InventoryList.Count < 2)
+        {
+            // remove item slot sprite 2
+        }
+        if (_inv.InventoryList.Count < 1)
+        {
+            // remove item slot sprite 1
+        }
     }
 }

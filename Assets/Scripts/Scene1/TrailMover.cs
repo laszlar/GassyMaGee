@@ -5,21 +5,28 @@ using UnityEngine;
 public class TrailMover : MonoBehaviour
 {
     //decrease this value to speed the object up
-    private float trailSpeed = 3.0f; 
-
+    [SerializeField]
+    private float trailSpeed = 1.5f; 
+    [SerializeField]
     private float amplitudeX = 10.0f;
+    [SerializeField]
     private float amplitudeY = 0.75f;
+    [SerializeField]
+    private float omegaX = 1.0f;
+    [SerializeField]
+    private float omegaY = 5.0f;
+
     private float x;
     private float y;
-    private float omegaX = 1.0f;
-    private float omegaY = 5.0f;
+    
 
     private float timeIndex;
     private float trailXOffset;
 
     private GameObject player;
     private float playerPos;
-    private int offset = 1;
+    [SerializeField]
+    private float offset = 0.0f;
 
     private Vector2 cubePos;
 

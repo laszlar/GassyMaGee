@@ -32,5 +32,10 @@ public class PlankDestroyingTime : MonoBehaviour
 		    Destroy (coll.gameObject);
 			MovePostsRopeBG._allTheFuckingRopeThings.RemoveAt (0);
 		}
+        else if (coll.gameObject.tag == "Wave")
+        {
+            Destroy(coll.gameObject);
+            WaveSpawner.Waves.RemoveAt(0);
+        }
     }
 }

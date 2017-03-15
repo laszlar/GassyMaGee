@@ -10,7 +10,9 @@ public class WaveDestroyer : MonoBehaviour
         if (coll.gameObject.tag == "Wave")
         {
             Destroy(coll.gameObject);
-            WaveSpawner.Waves.RemoveAt(0);
+            WaveSpawner.Waves0.RemoveAt(0);
+            WaveSpawner.Waves1.RemoveAt(0);
+            WaveSpawner.Waves2.RemoveAt(0);
         }    
     }
 

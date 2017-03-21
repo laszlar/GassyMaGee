@@ -194,7 +194,6 @@ public class PlayerMovement : MonoBehaviour
             if (col.gameObject.tag == "Enemy")
             {
                 _isEnemy = true;
-                Debug.Log(_isEnemy);
             }
         }
     }
@@ -204,7 +203,6 @@ public class PlayerMovement : MonoBehaviour
         if (_isEnemy)
         {
             _isEnemy = false;
-            Debug.Log(_isEnemy);
         }
     }
 
@@ -239,7 +237,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(col.gameObject.tag == "Parachute")
         {
-            Debug.Log("you trashed that parachute");
             ParachuteMethod();
         }
     }

@@ -49,7 +49,6 @@ public class WaveSpawner : MonoBehaviour
         //Making the waves generate in the list and so forth
         waveAsset = wavePrefab.transform.Find("WaveArt");
         waveSize = waveAsset.GetComponent<SpriteRenderer>().bounds.size.x;
-        Debug.Log(waveSize);
         waveOrder0 = waveAsset.GetComponent<SpriteRenderer>().sortingOrder;
         wavingIt = Instantiate(wavePrefab, startPosition0, Quaternion.identity);
         newPosition0 = wavingIt.transform.position;
@@ -148,6 +147,7 @@ public class WaveSpawner : MonoBehaviour
             Waves0.Clear();
             Waves1.Clear();
             Waves2.Clear();
+            Waves3.Clear();
         }
     }
 }

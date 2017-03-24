@@ -8,9 +8,9 @@ using System.Collections;
 
 public class KettleLauncher : MonoBehaviour
 {
-    public float delay = 30f;
-    public float rate = 20f;
-    public float offset = 5f;
+    public float delay;
+    public float rate;
+    public float offset;
     public GameObject kettle;
     public GameObject player;
     float kettleSpawnLocation;

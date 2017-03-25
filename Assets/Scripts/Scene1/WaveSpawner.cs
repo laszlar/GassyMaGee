@@ -34,6 +34,10 @@ public class WaveSpawner : MonoBehaviour
         waveAsset = wavePrefab.transform.Find("WaveArt");
         waveSize = waveAsset.GetComponent<SpriteRenderer>().bounds.size.x;
         waveOrder = waveAsset.GetComponent<SpriteRenderer>().sortingOrder;
+        wavingIt = Instantiate(wavePrefab, startPosition0, Quaternion.identity);
+        newPosition0 = wavingIt.transform.position;
+        newPosition0.x += waveSize;
+        Waves0.Add(wavingIt);
         /*
         InitiateSpawn0();
         InitiateSpawn1();
@@ -52,7 +56,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (Waves0.Count < 15)
         {
-            wavingIt = Instantiate(wavePrefab, startPosition0, Quaternion.identity);
+            wavingIt = Instantiate(wavePrefab, newPosition0, Quaternion.identity);
             newPosition0 = wavingIt.transform.position;
             newPosition0.x += waveSize;
             Waves0.Add(wavingIt);

@@ -244,7 +244,6 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Methods
-    
     //add to points function correlates with InvokeRepeating in Start Method
     private void AddPoints()
     {

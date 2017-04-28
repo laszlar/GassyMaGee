@@ -15,12 +15,14 @@ public class FattyCannon : MonoBehaviour {
     private Vector2 _playerPos;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         InvokeRepeating("Spawn", _delay, _rate);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         _playerPos.x = _player.transform.position.x;
         _spawnLocation = _playerPos.x + _offset;
     }

@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         InvokeRepeating("AddPoints", 3, 3);
 
         //for the parachute animation
-        parachuteScript = GameObject.Find("ParachuteAnim").GetComponent<ParachuteFollowPlayer>();
+        parachuteScript = GetComponent<ParachuteFollowPlayer>();
     }
 
     void Update()
@@ -209,7 +209,8 @@ public class PlayerMovement : MonoBehaviour
     //Kills player 
     void OnCollisionEnter2D(Collision2D col)
     {
-		if (_isEnemy) {
+		if (_isEnemy)
+        {
 			_rb2D.velocity = new Vector2 (_rb2D.velocity.x, (-_rb2D.velocity.y*2f));
 			Destroy (_collider.gameObject);
             points += 5;

@@ -57,7 +57,6 @@ public class InventoryManager : Singleton<InventoryManager>
         score = GetComponent<ScoreTracker>();
 
         activeScene = SceneManager.GetActiveScene();
-        Debug.Log(activeScene.name);
     }
 
     void Update()

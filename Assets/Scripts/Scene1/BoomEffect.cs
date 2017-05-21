@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoomEffect : MonoBehaviour
 {
     Bomb bombScript;
+    public GameObject bomb;
     ParticleSystem boomEffect;
 
     void Start()

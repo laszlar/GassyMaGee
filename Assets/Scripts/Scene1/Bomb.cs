@@ -8,12 +8,17 @@ public class Bomb : MonoBehaviour
     public GameObject player;
     public bool playerHitBomb;
     float timeToDisappear = 0f;
+    float travelSpeed = -1.0f;
+
+    int chanceOfSpin;
+    float spinSpeed = -2.0f;
 
     private void Start()
     {
         player = GameObject.Find("Player");
         playerHitBomb = false;
         bombRenderer = GetComponent<SpriteRenderer>();
+        chanceOfSpin = Random.Range(0, 100);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -31,6 +36,9 @@ public class Bomb : MonoBehaviour
 
     void Update ()
     {
+        ChangeBombSpeed();
+        Spin();
+
         if (playerHitBomb)
         {
             bombRenderer.enabled = false;
@@ -41,6 +49,40 @@ public class Bomb : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+        else
+        {
+            transform.Translate(travelSpeed * Time.deltaTime, 0f, 0f);
+        }
+    }
+
+    void ChangeBombSpeed()
+    {
+        switch (ScoreTracker.score)
+        {
+            case 25:
+                travelSpeed = -1.25f;
+                break;
+
+            case 50:
+                travelSpeed = -1.5f;
+                break;
+
+            case 75:
+                travelSpeed = -1.75f;
+                break;
+
+            case 100:
+                travelSpeed = 2.0f;
+                break;
+        }
+    }
+
+    void Spin()
+    {
+        if (chanceOfSpin <= 45)
+        {
+            transform.Translate(0f, 0f, spinSpeed * Time.deltaTime);
         }
     }
 }

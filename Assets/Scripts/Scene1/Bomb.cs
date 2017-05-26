@@ -13,12 +13,11 @@ public class Bomb : MonoBehaviour
     int chanceOfSpin;
     float spinSpeed = -2.0f;
 
-    private void Start()
+    void Start()
     {
         player = GameObject.Find("Player");
         playerHitBomb = false;
         bombRenderer = GetComponent<SpriteRenderer>();
-        chanceOfSpin = Random.Range(0, 100);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -36,6 +35,7 @@ public class Bomb : MonoBehaviour
 
     void Update ()
     {
+        chanceOfSpin = Random.Range(0, 100);
         ChangeBombSpeed();
         Spin();
 
@@ -82,7 +82,7 @@ public class Bomb : MonoBehaviour
     {
         if (chanceOfSpin <= 45)
         {
-            transform.Translate(0f, 0f, spinSpeed * Time.deltaTime);
+            transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
         }
     }
 }

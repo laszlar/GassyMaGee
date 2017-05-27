@@ -240,6 +240,10 @@ public class PlayerMovement : MonoBehaviour
         {
             ParachuteMethod();
         }
+        else if(godMode && col.gameObject.tag == "Bomb" || !godMode && col.gameObject.tag == "Bomb")
+        {
+            dead = true;
+        }
     }
 
     #endregion

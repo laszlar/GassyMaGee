@@ -17,6 +17,7 @@ public class StarEffect : MonoBehaviour {
     void Awake()
     {
         StarEffectOff();
+        stars = GetComponent<ParticleSystem>();
     }
 
 	void Start ()
@@ -33,6 +34,11 @@ public class StarEffect : MonoBehaviour {
         else
         {
             StarEffectOff();
+        }
+
+        if (playerScript.dead)
+        {
+            stars.Stop();
         }
 	}
 

@@ -29,16 +29,12 @@ public class Bomb : MonoBehaviour
             {
                 timeToDisappear = 0f;
             }
-            playerHitBomb = true;          
+            playerHitBomb = true;
         }
     }
 
-    void Update ()
+    void Update()
     {
-        chanceOfSpin = Random.Range(0, 100);
-        ChangeBombSpeed();
-        Spin();
-
         if (playerHitBomb)
         {
             bombRenderer.enabled = false;
@@ -53,6 +49,8 @@ public class Bomb : MonoBehaviour
         else
         {
             transform.Translate(travelSpeed * Time.deltaTime, 0f, 0f);
+            ChangeBombSpeed();
+            Spin();
         }
     }
 
@@ -80,9 +78,7 @@ public class Bomb : MonoBehaviour
 
     void Spin()
     {
-        if (chanceOfSpin <= 45)
-        {
+        if ((Random.Range(0, 100)) <= 65)
             transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
-        }
     }
 }

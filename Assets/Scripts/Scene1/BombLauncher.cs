@@ -19,7 +19,7 @@ public class BombLauncher : MonoBehaviour
         player = GameObject.Find("Player");
 
         //Move that bomb! Featuring Ty Pennington!!!
-        InvokeRepeating("SpawnBombs", 1f, 8f);
+        InvokeRepeating("SpawnBombs", 0f, 8f);
 	}
 	
 	// Update is called once per frame
@@ -31,7 +31,7 @@ public class BombLauncher : MonoBehaviour
         if (timer >= 3.0f)
         {
             timer = 0f;
-            if (ScoreTracker.score >= 1)
+            if (ScoreTracker.score >= 0)
             {
                 launchBombs = true;
             }

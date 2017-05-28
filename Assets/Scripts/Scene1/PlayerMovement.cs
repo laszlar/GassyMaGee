@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
             DeathAnimation();
             StartCoroutine(PlayerDied(timeAfterDeath));
             _rb2D.isKinematic = true;
+            _rb2D.velocity = Vector2.zero;
             return;
         }
 
@@ -107,8 +108,9 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(PlayerDied(timeAfterDeath));
             _rb2D.isKinematic = true;
             _rb2D.gravityScale = 0;
-            //rigidbodyconstraints... enum.. works! yay.
-            _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation; 
+            //rigidbodyconstraints... enum, doesn't really work.
+            _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            _rb2D.velocity = Vector2.zero;
             return;
         }
 

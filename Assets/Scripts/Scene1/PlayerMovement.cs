@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private int addPointsPerSecond = 1;
     private  Animator anim;
     public bool dead = false;
+    public bool explDeath = false;
     public float windSpeed;
     public bool godMode = false;
     public float invTime = 7f;
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private float _maxJumpVelocity = 3f;
 
     private Rigidbody2D _rb2D;
+    private RigidbodyConstraints2D rigidConstraints;
 	private Transform _child;
 	private bool _isEnemy;
 	private Collider2D _collider;
@@ -81,11 +83,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Moves the player
-        if (!parachuteEnabled && !bananaEnabled)
+        if (!parachuteEnabled && !bananaEnabled && !dead && !explDeath)
             transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
-        else if (parachuteEnabled)
+        else if (parachuteEnabled && !dead && !explDeath)
             transform.Translate((playerSpeed / 2) * Time.deltaTime, 0, 0);
-		else if (bananaEnabled)
+		else if (bananaEnabled && !dead && !explDeath)
             transform.Translate((playerSpeed * 2) * Time.deltaTime, 0, 0);
 
 		Transform child = transform.FindChild ("Player GFX");
@@ -96,7 +98,17 @@ public class PlayerMovement : MonoBehaviour
             DeathAnimation();
             StartCoroutine(PlayerDied(timeAfterDeath));
             _rb2D.isKinematic = true;
-            transform.Translate(windSpeed * Time.deltaTime, 0f, 0f);
+            return;
+        }
+
+        if (explDeath)
+        {
+            ExplodedDeathAnimation();
+            StartCoroutine(PlayerDied(timeAfterDeath));
+            _rb2D.isKinematic = true;
+            _rb2D.gravityScale = 0;
+            //rigidbodyconstraints... enum.. works! yay.
+            _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation; 
             return;
         }
 
@@ -240,9 +252,9 @@ public class PlayerMovement : MonoBehaviour
         {
             ParachuteMethod();
         }
-        else if(godMode && col.gameObject.tag == "Bomb" || !godMode && col.gameObject.tag == "Bomb")
+        else if(col.gameObject.tag == "Bomb")
         {
-            dead = true;
+            explDeath = true;
         }
     }
 
@@ -290,6 +302,11 @@ public class PlayerMovement : MonoBehaviour
     public void DeathAnimation()
     {
         anim.SetTrigger("IsDead");
+    }
+
+    public void ExplodedDeathAnimation()
+    {
+        anim.SetTrigger("IsExplDead");
     }
 
     //Banana Power down!

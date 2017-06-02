@@ -201,14 +201,15 @@ public class PlayerMovement : MonoBehaviour
         */
     }
 
+    //Don't think OnTriggerIscurrentlyworking...Maybe...
+    
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col != null)
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Enemy")
         {
-            if (col.gameObject.tag == "Enemy")
-            {
-                _isEnemy = true;
-            }
+            dead = false;
+           _isEnemy = true;
         }
     }
 
@@ -217,8 +218,10 @@ public class PlayerMovement : MonoBehaviour
         if (_isEnemy)
         {
             _isEnemy = false;
+            dead = false;
         }
     }
+    
 
     //Kills player 
     void OnCollisionEnter2D(Collision2D col)
@@ -260,6 +263,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            _isEnemy = false;
+        }
+    }
+    */
     #endregion
 
     #region Methods
@@ -362,23 +374,26 @@ public class PlayerMovement : MonoBehaviour
 		}
     }
 
+    //unused at the moment
+    /*
     public void IsEnemy(Collider2D col)
     {
-        
-        //if (col != null)
-        //{
+
+        if (col != null)
+        {
             if (col.gameObject.tag == "Enemy")
             {
                 _isEnemy = true;
                 _collider = col;
-            counter = 0.05f;
+                counter = 0.05f;
             }
             if (col == null || col != null || col.gameObject.tag != "Enemy")
-        {
-            counter -= Time.deltaTime;
-            if (counter < 0)
             {
-                _isEnemy = false;
+                counter -= Time.deltaTime;
+                if (counter < 0)
+                {
+                    _isEnemy = false;
+                }
             }
         }
         
@@ -392,7 +407,7 @@ public class PlayerMovement : MonoBehaviour
        // }
         //}
     }
-
+    */
     #endregion
 
 }

@@ -83,17 +83,17 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Moves the player
-        if (!parachuteEnabled && !bananaEnabled && !dead && !explDeath)
+       /* if (!parachuteEnabled && !bananaEnabled && !dead && !explDeath)
             transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
         else if (parachuteEnabled && !dead && !explDeath)
             transform.Translate((playerSpeed / 2) * Time.deltaTime, 0, 0);
 		else if (bananaEnabled && !dead && !explDeath)
             transform.Translate((playerSpeed * 2) * Time.deltaTime, 0, 0);
-
+        */    
 		Transform child = transform.FindChild ("Player GFX");
 
         //Moves Player to the left as he gets hit/dies
-        if (dead)
+        if (dead && !_isEnemy)
         {
             DeathAnimation();
             StartCoroutine(PlayerDied(timeAfterDeath));
@@ -208,7 +208,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(col.gameObject.tag);
         if (col.gameObject.tag == "Enemy")
         {
-            dead = false;
            _isEnemy = true;
         }
     }
@@ -218,7 +217,6 @@ public class PlayerMovement : MonoBehaviour
         if (_isEnemy)
         {
             _isEnemy = false;
-            dead = false;
         }
     }
     
@@ -257,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ParachuteMethod();
         }
-        else if(col.gameObject.tag == "Bomb")
+        else if(godMode && col.gameObject.tag == "Bomb" || !godMode && col.gameObject.tag == "Bomb")
         {
             explDeath = true;
         }

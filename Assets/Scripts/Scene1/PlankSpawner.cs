@@ -16,7 +16,7 @@ public class PlankSpawner : MonoBehaviour {
     //private float ySpawnLoacation = -0.625f;
 
     private GameObject _rrgWeWalkThePlank;
-    private readonly Vector2 _startPosition = new Vector2(8.177698f, -0.625f);
+    private readonly Vector2 _startPosition = new Vector2(9.29f, -0.6292f);
     private Vector2 _newSpawnPosition;
     private float _offset;
 
@@ -33,7 +33,7 @@ public class PlankSpawner : MonoBehaviour {
 	    _offset = plankPrefab.GetComponent<Renderer>().bounds.size.x;
 	    _rrgWeWalkThePlank = Instantiate(plankPrefab, _startPosition, Quaternion.identity);
 	    _newSpawnPosition = _rrgWeWalkThePlank.transform.position;
-	    _newSpawnPosition.x += _offset;
+        _newSpawnPosition.x += _offset;
         Planks.Add(_rrgWeWalkThePlank);
     }
 
@@ -41,8 +41,8 @@ public class PlankSpawner : MonoBehaviour {
     {
             Spawn();
     }
-	
-	void Spawn ()
+
+    void Spawn ()
 	{
         var isThisPlankMissing = RandomInt();
         //Debug.Log(isThisPlankMissing);
@@ -52,7 +52,7 @@ public class PlankSpawner : MonoBehaviour {
 	        {
 	            _rrgWeWalkThePlank = Instantiate(plankPrefab, _newSpawnPosition, Quaternion.identity);
                 _newSpawnPosition = _rrgWeWalkThePlank.transform.position;
-	            _newSpawnPosition.x += _offset;
+                _newSpawnPosition.x += _offset;
                 Planks.Add(_rrgWeWalkThePlank);
 	        }
 	        else

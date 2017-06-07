@@ -26,7 +26,8 @@ public class MovePostsRopeBG : MonoBehaviour
 	{
 		Spawn();
 	}
-	private void Spawn()
+    
+    private void Spawn()
 	{
 		if (_allTheFuckingRopeThings.Count < 10)
 		{

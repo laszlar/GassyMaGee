@@ -11,9 +11,9 @@ I think I have better idea.
 using UnityEngine;
 using System.Collections;
 
-public class MovePlank : MonoBehaviour
+public class MoveFlooring : MonoBehaviour
 {
-    public float plankMover = -2.0f;
+    public float moveSpeed = 0.5f;
     public float slowMover;
     ScoreTracker checkScore;
 
@@ -25,6 +25,8 @@ public class MovePlank : MonoBehaviour
     public float omegaX = 1.0f;
     public float omegaY = 5.0f;
     public float offset;
+    private float counter;
+    private bool move;
 
     float index;
     float checkScoreTime = 1.0f;
@@ -35,16 +37,26 @@ public class MovePlank : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        player = GameObject.Find("Player");
-        checkScore = GameObject.Find("Score").GetComponent<ScoreTracker>();
+        //player = GameObject.Find("Player");
+        //checkScore = GameObject.Find("Score").GetComponent<ScoreTracker>();
+        move = false;
+        counter = 0f;
 	}
 
 	void Update ()
     {
-        playerPos.x = player.transform.position.x;
-        amplitudeX = playerPos.x + offset;
+        //playerPos.x = player.transform.position.x;
+        //amplitudeX = playerPos.x + offset;
+        counter += Time.deltaTime;
 
-        //transform.Translate(plankMover * Time.deltaTime, 0f, 0f);
+        if (counter >= 1.0f)
+            move = true;
+
+        if (move)
+        {
+            transform.Translate(-moveSpeed * Time.deltaTime, 0f, 0f);
+        }
+
 
 
       /*(  if (!running)                                               //continuously check score

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveHolderBehaviour : MonoBehaviour
+public class WaveManager_Mover : MonoBehaviour
 {
-    //original code!
-    /*
     //Variables are for moving the waves appropriately
     float movementY;
     float timeIndex;
@@ -29,14 +27,5 @@ public class WaveHolderBehaviour : MonoBehaviour
         //Original === transform.Translate(0f, (0.015f * movementY), 0f);
         transform.Translate(-1.0f * Time.deltaTime, (0.003f * movementY), 0f);  //original X setting is (-0.2f * Time.deltaTime)
     }
-    */
 
-    //New_Code
-    public GameObject daddyWave;
-
-    private void Start()
-    {
-        daddyWave = GameObject.Find("WaveManager");
-        this.transform.parent = daddyWave.transform;
-    }
 }

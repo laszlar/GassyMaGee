@@ -39,7 +39,7 @@ public class WaveSpawner : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        //player = GameObject.Find("Player");
         ResetList();
         InitiateSpawn0();
         InitiateSpawn1();
@@ -110,66 +110,54 @@ public class WaveSpawner : MonoBehaviour
         //This is where the info goes to add to the list and such
         //
         //if(playerMovementScript.spawnWave)
-        if (player.transform.position.x - oldXValue >= 0.10f)
-        {
-            if (Waves0.Count < 3)
+            if (Waves0.Count < 8)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition0, Quaternion.identity);
                 newPosition0 = wavingIt.transform.position;
                 newPosition0.x += waveSize;
                 Waves0.Add(wavingIt);
                 waveOrder0 = 0;
-                oldXValue += 0.1f;
+                //oldXValue += 0.1f;
             }
-        }
     }
 
     void Spawn1()
     {
-        if (player.transform.position.x - oldXValue1 >= 0.50f)
-        {
-            if (Waves1.Count < 3)
+            if (Waves1.Count < 8)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition1, Quaternion.identity);
                 newPosition1 = wavingIt.transform.position;
                 newPosition1.x += waveSize;
                 Waves1.Add(wavingIt);
                 waveOrder1 = 1;
-                oldXValue1 += 0.1f;
+                //oldXValue1 += 0.1f;
             }
-        }
     }
 
     void Spawn2()
     {
-        if (player.transform.position.x - oldXValue2 >= 1.0f)
-        {
-            if (Waves2.Count < 3)
+            if (Waves2.Count < 8)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition2, Quaternion.identity);
                 newPosition2 = wavingIt.transform.position;
                 newPosition2.x += waveSize;
                 Waves2.Add(wavingIt);
                 waveOrder2 = 2;
-                oldXValue2 += 0.1f;
+                //oldXValue2 += 0.1f;
             }
-        }
     }
 
     void Spawn3()
     {
-        if (player.transform.position.x - oldXValue3 >= 2.0f)
-        {
-            if (Waves3.Count < 3)
+            if (Waves3.Count < 8)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition3, Quaternion.identity);
                 newPosition3 = wavingIt.transform.position;
                 newPosition3.x += waveSize;
                 Waves3.Add(wavingIt);
                 waveOrder3 = 3;
-                oldXValue3 += 0.1f;
+                //oldXValue3 += 0.1f;
             }
-        }
     }
 
     void ResetList()

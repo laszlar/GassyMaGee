@@ -20,12 +20,12 @@ public class WaveManager_Mover : MonoBehaviour
     //Fixedupdate is called less than per frame if the frame rate is high, however will call more than once per frame if FPS is low
     void FixedUpdate()
     {
-        //This is where I keep the info to make the waves move on their own
-        //best to keep the number divided between 1 - 100, if you make it closer to OmegaY, it'll do the reverse effect
-        timeIndex += Time.deltaTime / 30;
-        movementY = Mathf.Sin(omegaY * timeIndex);
-        //Original === transform.Translate(0f, (0.015f * movementY), 0f);
-        transform.Translate(-1.0f * Time.deltaTime, (0.003f * movementY), 0f);  //original X setting is (-0.2f * Time.deltaTime)
+            //This is where I keep the info to make the waves move on their own
+            //best to keep the number divided between 1 - 100, if you make it closer to OmegaY, it'll do the reverse effect
+            timeIndex += Time.deltaTime / 30;
+            movementY = Mathf.Sin(omegaY * timeIndex);
+            //Original === transform.Translate(0f, (0.015f * movementY), 0f);
+            transform.Translate(-1.0f * Time.deltaTime, (0.003f * movementY), 0f);  //original X setting is (-0.2f * Time.deltaTime)
     }
 
 }

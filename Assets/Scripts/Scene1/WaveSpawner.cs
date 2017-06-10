@@ -10,14 +10,10 @@ public class WaveSpawner : MonoBehaviour
     private GameObject wavingIt;
     private Transform waveAsset;
     private float waveSize;
-    private int waveOrder0;
-    private int waveOrder1;
-    private int waveOrder2;
-    private int waveOrder3;
     private Vector2 startPosition0 = new Vector2(8.521999f, -1.50f);
-    private Vector2 startPosition1 = new Vector2(-0.116f, -1.55f);
-    private Vector2 startPosition2 = new Vector2(-0.116f, -1.70f);
-    private Vector2 startPosition3 = new Vector2(-0.3724f, -1.80f);
+    private Vector2 startPosition1 = new Vector2(8.941f, -1.55f);
+    private Vector2 startPosition2 = new Vector2(8.58f, -1.70f);
+    private Vector2 startPosition3 = new Vector2(8.98f, -1.80f);
     private Vector2 newPosition0;
     private Vector2 newPosition1;
     private Vector2 newPosition2;
@@ -26,6 +22,8 @@ public class WaveSpawner : MonoBehaviour
     public static List<GameObject> Waves1 = new List<GameObject>();
     public static List<GameObject> Waves2 = new List<GameObject>();
     public static List<GameObject> Waves3 = new List<GameObject>();
+    public int[] order = new int[4];
+    private SpriteRenderer waveSprite;
 
     //using this for calculation on the new waves
     public GameObject player;
@@ -37,15 +35,20 @@ public class WaveSpawner : MonoBehaviour
 
     #endregion
 
-    void Start()
+    private void Awake()
     {
-        //player = GameObject.Find("Player");
+
         ResetList();
         InitiateSpawn0();
         InitiateSpawn1();
         InitiateSpawn2();
         InitiateSpawn3();
-        
+
+    }
+
+    void Start()
+    {
+
     }
 
     void FixedUpdate()
@@ -57,17 +60,19 @@ public class WaveSpawner : MonoBehaviour
         Spawn3();
     }
 
+    #region InitiateSpawnMethods
     //COMMENTING THIS OUT FOR TESTING PURPOSSES!!!
     void InitiateSpawn0()
     {
+        //first wave set
         //Making the waves generate in the list and so forth
         waveAsset = wavePrefab.transform.Find("WaveArt");
         waveSize = waveAsset.GetComponent<SpriteRenderer>().bounds.size.x;
-        waveOrder0 = waveAsset.GetComponent<SpriteRenderer>().sortingOrder;
         wavingIt = Instantiate(wavePrefab, startPosition0, Quaternion.identity);
         newPosition0 = wavingIt.transform.position;
         newPosition0.x += waveSize;
         Waves0.Add(wavingIt);
+        order[0] = 0;
     }
     
     void InitiateSpawn1()
@@ -75,11 +80,11 @@ public class WaveSpawner : MonoBehaviour
         //Making the waves generate in the list and so forth
         waveAsset = wavePrefab.transform.Find("WaveArt");
         waveSize = waveAsset.GetComponent<SpriteRenderer>().bounds.size.x;
-        waveOrder1 = waveAsset.GetComponent<SpriteRenderer>().sortingOrder;
         wavingIt = Instantiate(wavePrefab, startPosition1, Quaternion.identity);
         newPosition1 = wavingIt.transform.position;
         newPosition1.x += waveSize;
         Waves1.Add(wavingIt);
+        order[1] = 1;
     }
 
 
@@ -87,24 +92,26 @@ public class WaveSpawner : MonoBehaviour
     {
         waveAsset = wavePrefab.transform.Find("WaveArt");
         waveSize = waveAsset.GetComponent<SpriteRenderer>().bounds.size.x;
-        waveOrder2 = waveAsset.GetComponent<SpriteRenderer>().sortingOrder;
         wavingIt = Instantiate(wavePrefab, startPosition2, Quaternion.identity);
         newPosition2 = wavingIt.transform.position;
         newPosition2.x += waveSize;
         Waves2.Add(wavingIt);
+        order[2] = 2;
     }
 
     void InitiateSpawn3()
     {
         waveAsset = wavePrefab.transform.Find("WaveArt");
         waveSize = waveAsset.GetComponent<SpriteRenderer>().bounds.size.x;
-        waveOrder3 = waveAsset.GetComponent<SpriteRenderer>().sortingOrder;
         wavingIt = Instantiate(wavePrefab, startPosition3, Quaternion.identity);
         newPosition3 = wavingIt.transform.position;
         newPosition3.x += waveSize;
         Waves3.Add(wavingIt);
+        order[3] = 3;
     }
-    
+    #endregion
+
+    #region UpdateSpawnMethods
     void Spawn0()
     {
         //This is where the info goes to add to the list and such
@@ -116,8 +123,6 @@ public class WaveSpawner : MonoBehaviour
                 newPosition0 = wavingIt.transform.position;
                 newPosition0.x += waveSize;
                 Waves0.Add(wavingIt);
-                waveOrder0 = 0;
-                //oldXValue += 0.1f;
             }
     }
 
@@ -129,8 +134,6 @@ public class WaveSpawner : MonoBehaviour
                 newPosition1 = wavingIt.transform.position;
                 newPosition1.x += waveSize;
                 Waves1.Add(wavingIt);
-                waveOrder1 = 1;
-                //oldXValue1 += 0.1f;
             }
     }
 
@@ -142,8 +145,6 @@ public class WaveSpawner : MonoBehaviour
                 newPosition2 = wavingIt.transform.position;
                 newPosition2.x += waveSize;
                 Waves2.Add(wavingIt);
-                waveOrder2 = 2;
-                //oldXValue2 += 0.1f;
             }
     }
 
@@ -155,10 +156,9 @@ public class WaveSpawner : MonoBehaviour
                 newPosition3 = wavingIt.transform.position;
                 newPosition3.x += waveSize;
                 Waves3.Add(wavingIt);
-                waveOrder3 = 3;
-                //oldXValue3 += 0.1f;
             }
     }
+    #endregion
 
     void ResetList()
     {

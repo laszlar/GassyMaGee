@@ -13,27 +13,33 @@ public class WaveSpin : MonoBehaviour
     {
         waveSprite = GetComponent<SpriteRenderer>();
         waveScript = GameObject.Find("WaveMover").GetComponent<WaveSpawner>();
-
         for (int x = 0; x < 4; x++)
         {
-            if (waveScript.order[x] == 0)
+            if (waveScript.order[x] < 0 || waveScript.order[x] > 3)
             {
-                waveSprite.sortingOrder = 0;
+                return;
             }
-
-            if (waveScript.order[x] == 1)
+            else
             {
-                waveSprite.sortingOrder = 1;
-            }
+                if (waveScript.order[x] == 0)
+                {
+                    waveSprite.sortingOrder = 0;
+                }
 
-            if (waveScript.order[x] == 2)
-            {
-                waveSprite.sortingOrder = 2;
-            }
+                if (waveScript.order[x] == 1)
+                {
+                    waveSprite.sortingOrder = 1;
+                }
 
-            if (waveScript.order[x] == 3)
-            {
-                waveSprite.sortingOrder = 3;
+                if (waveScript.order[x] == 2)
+                {
+                    waveSprite.sortingOrder = 2;
+                }
+
+                if (waveScript.order[x] == 3)
+                {
+                    waveSprite.sortingOrder = 3;
+                }
             }
         }
     }

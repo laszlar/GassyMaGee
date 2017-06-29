@@ -2,27 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waves : MonoBehaviour {
-
-    #region Variables
-    public float widthOfThisObject;
-    public int numOfBGObjects;
+public class Waves : MonoBehaviour
+{
+    /*
+    private GameObject waveLooper;
+    WaveDestroyer waveLooperScript;
+    private float widthOfThisObject = 1.526f;
+    private int numOfBGObjects = 5;
     float newPos;
 
-    public float slowWaves;
-    #endregion
-
-    void Update()
+    private void Start()
     {
-        transform.Translate(slowWaves * Time.deltaTime, 0, 0);
+        waveLooper = GameObject.Find("WaveDestroyer");
+        waveLooperScript = waveLooper.GetComponent<WaveDestroyer>();
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void FixedUpdate()
     {
-        if (collider.tag == "Looper")
+        newPos = widthOfThisObject * numOfBGObjects;
+
+        if (waveLooperScript.move)
         {
-            newPos = widthOfThisObject * numOfBGObjects;
-            transform.Translate(Vector2.right * newPos, 0);
+            this.gameObject.transform.Translate(Vector2.right * newPos, 0);
+        }
+        else
+        {
+            return;
         }
     }
+    */
+    
 }

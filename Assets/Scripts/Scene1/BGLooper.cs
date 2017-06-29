@@ -8,6 +8,7 @@ public class BGLooper : MonoBehaviour {
     public float actualWidth;
     private float bgWidth;
     private float cloudWidth;
+    private float waveWidth;
     private GameObject deepOcean0;
     private GameObject deepOcean1;
     private GameObject deepOcean2;
@@ -30,6 +31,7 @@ public class BGLooper : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D collider)
     {
+        Debug.Log(collider.name);
         float widthOfBGObject = ((BoxCollider2D)collider).size.x;
 
         if (collider.name == "Deepocean" || collider.name == "Deepocean1" || collider.name == "Deepocean2")
@@ -57,6 +59,17 @@ public class BGLooper : MonoBehaviour {
             cloudWidth = widthOfBGObject * 0.25f;
             cloudPos.x += cloudWidth * numCloudPanels;
             collider.transform.position = cloudPos;
+        }
+
+        if (collider.name == "WaveChunk" || collider.name == "WaveChunk2" ||
+            collider.name == "WaveChunk3" || collider.name == "WaveChunk4" ||
+            collider.name == "WaveChunk5" || collider.name == "WaveChunk6" ||
+            collider.name == "WaveChunk7" || collider.name == "WaveChunk8")
+        {
+            Vector2 wavePos = collider.transform.position;
+            waveWidth = widthOfBGObject;
+            wavePos.x += waveWidth * 8;
+            collider.transform.position = wavePos;
         }
     }
 

@@ -22,42 +22,34 @@ public class WaveSpawner : MonoBehaviour
     public static List<GameObject> Waves1 = new List<GameObject>();
     public static List<GameObject> Waves2 = new List<GameObject>();
     public static List<GameObject> Waves3 = new List<GameObject>();
-    public int[] order = new int[4];
     private SpriteRenderer waveSprite;
 
     //using this for calculation on the new waves
     public GameObject player;
     private float waveCounter = 0f;
-    private double oldXValue = 1f;
-    private double oldXValue1 = 1f;
-    private double oldXValue2 = 1f;
-    private double oldXValue3 = 1f;
 
     #endregion
 
-    private void Awake()
+    void Start()
     {
-
+        /*
         ResetList();
         InitiateSpawn0();
         InitiateSpawn1();
         InitiateSpawn2();
         InitiateSpawn3();
-
-    }
-
-    void Start()
-    {
-
+        */
     }
 
     void FixedUpdate()
     {
+        /*
         //Make those waves spawn yo!
         Spawn0();
         Spawn1();
         Spawn2();
         Spawn3();
+        */
     }
 
     #region InitiateSpawnMethods
@@ -72,7 +64,6 @@ public class WaveSpawner : MonoBehaviour
         newPosition0 = wavingIt.transform.position;
         newPosition0.x += waveSize;
         Waves0.Add(wavingIt);
-        order[0] = 0;
     }
     
     void InitiateSpawn1()
@@ -84,7 +75,6 @@ public class WaveSpawner : MonoBehaviour
         newPosition1 = wavingIt.transform.position;
         newPosition1.x += waveSize;
         Waves1.Add(wavingIt);
-        order[1] = 1;
     }
 
 
@@ -96,7 +86,6 @@ public class WaveSpawner : MonoBehaviour
         newPosition2 = wavingIt.transform.position;
         newPosition2.x += waveSize;
         Waves2.Add(wavingIt);
-        order[2] = 2;
     }
 
     void InitiateSpawn3()
@@ -107,17 +96,13 @@ public class WaveSpawner : MonoBehaviour
         newPosition3 = wavingIt.transform.position;
         newPosition3.x += waveSize;
         Waves3.Add(wavingIt);
-        order[3] = 3;
     }
     #endregion
 
     #region UpdateSpawnMethods
     void Spawn0()
     {
-        //This is where the info goes to add to the list and such
-        //
-        //if(playerMovementScript.spawnWave)
-            if (Waves0.Count < 8)
+            if (Waves0.Count < 10)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition0, Quaternion.identity);
                 newPosition0 = wavingIt.transform.position;
@@ -128,7 +113,7 @@ public class WaveSpawner : MonoBehaviour
 
     void Spawn1()
     {
-            if (Waves1.Count < 8)
+            if (Waves1.Count < 10)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition1, Quaternion.identity);
                 newPosition1 = wavingIt.transform.position;
@@ -139,7 +124,7 @@ public class WaveSpawner : MonoBehaviour
 
     void Spawn2()
     {
-            if (Waves2.Count < 8)
+            if (Waves2.Count < 10)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition2, Quaternion.identity);
                 newPosition2 = wavingIt.transform.position;
@@ -150,7 +135,7 @@ public class WaveSpawner : MonoBehaviour
 
     void Spawn3()
     {
-            if (Waves3.Count < 8)
+            if (Waves3.Count < 10)
             {
                 wavingIt = Instantiate(wavePrefab, newPosition3, Quaternion.identity);
                 newPosition3 = wavingIt.transform.position;
@@ -162,7 +147,7 @@ public class WaveSpawner : MonoBehaviour
 
     void ResetList()
     {
-        if (Waves0.Count != 0 || Waves1.Count != 0 || Waves2.Count != 0)
+        if (Waves0.Count != 0 || Waves1.Count != 0 || Waves2.Count != 0 || Waves3.Count != 0)
         {
             Waves0.Clear();
             Waves1.Clear();

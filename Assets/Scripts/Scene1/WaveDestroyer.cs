@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class WaveDestroyer : MonoBehaviour
 {
+    //public bool move;
 
-	void OnTriggerEnter2D(Collider2D coll)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (coll.gameObject == null)
-            return;
-
-        if (coll.gameObject.tag == "Wave")
+        /*
+        if (collision.gameObject.tag == "Wave")
         {
+            Vector2 pos = collision.transform.position;
+            pos.x += 1.526f;
+            collision.transform.position = pos;
+        }
+        */
+    }
+
+
+            /*
             Destroy(coll.gameObject);
-            if (WaveSpawner.Waves0.Count != 0 && WaveSpawner.Waves1.Count != 0 && WaveSpawner.Waves2.Count != 0 &&
+            if (WaveSpawner.Waves0.Count != 0 || WaveSpawner.Waves1.Count != 0 || WaveSpawner.Waves2.Count != 0 ||
                 WaveSpawner.Waves3.Count != 0)
             {
                 WaveSpawner.Waves0.RemoveAt(0);
@@ -21,6 +30,33 @@ public class WaveDestroyer : MonoBehaviour
                 WaveSpawner.Waves2.RemoveAt(0);
                 WaveSpawner.Waves3.RemoveAt(0);
             }
-        }    
+            
+            move = true;
+            */
+
+
+
+    /*
+public void OnTriggerEnter2D(Collider2D collision)
+{
+    float widthOfObject = ((BoxCollider2D)collision).size.x;
+
+
+    if (collision.name == "WaveChunk" || collision.name == "WaveChunk2" || collision.name == "WaveChunk3" 
+        || collision.name == "WaveChunk4" || collision.name == "WaveChunk5")
+    {
+        Vector2 actualPos = collision.transform.position;
+        actualPos.x += widthOfObject;
+        collision.transform.position = actualPos;
     }
+
+
+    if (collision.gameObject.tag == "Wave")
+    {
+        Vector2 actualPos = collision.transform.position;
+        actualPos.x += widthOfObject;
+        collision.transform.position = actualPos;
+    }
+}
+    */
 }

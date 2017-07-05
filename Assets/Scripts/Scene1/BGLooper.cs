@@ -31,7 +31,6 @@ public class BGLooper : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D collider)
     {
-        Debug.Log(collider.name);
         float widthOfBGObject = ((BoxCollider2D)collider).size.x;
 
         if (collider.name == "Deepocean" || collider.name == "Deepocean1" || collider.name == "Deepocean2")

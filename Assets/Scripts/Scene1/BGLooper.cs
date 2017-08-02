@@ -9,6 +9,7 @@ public class BGLooper : MonoBehaviour {
     private float bgWidth;
     private float cloudWidth;
     private float waveWidth;
+    private float cobbleWidth;
     private GameObject deepOcean0;
     private GameObject deepOcean1;
     private GameObject deepOcean2;
@@ -69,6 +70,15 @@ public class BGLooper : MonoBehaviour {
             waveWidth = widthOfBGObject;
             wavePos.x += waveWidth * 8;
             collider.transform.position = wavePos;
+        }
+
+        if (collider.name == "cobblestone-1" || collider.name == "cobblestone-2" ||
+            collider.name == "cobblestone-3" || collider.name == "cobblestone-4")
+        {
+            Vector2 cobblePos = collider.transform.position;
+            cobbleWidth = widthOfBGObject;
+            cobblePos.x += cobbleWidth * 0.5f;
+            collider.transform.position = cobblePos;
         }
     }
 

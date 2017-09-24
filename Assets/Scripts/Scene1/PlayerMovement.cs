@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Disables player jump after set amount of time
-        if (transform.position.y > 0 || transform.position.y < -0.5f)
+        if (transform.position.y > 0)
         {
             IsJumping = true;
             _elapsedTime += Time.deltaTime;

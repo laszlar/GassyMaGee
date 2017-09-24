@@ -34,6 +34,6 @@ public class DuckLauncher : MonoBehaviour
 	
 	void Spawn () //Time to spawn the ducks!
     {
-        Instantiate(duck, new Vector2(duckSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Instantiate(duck, new Vector2(duckSpawnLocation, Random.Range(-0.44f, 1.8f)), Quaternion.identity);
 	} 
 }

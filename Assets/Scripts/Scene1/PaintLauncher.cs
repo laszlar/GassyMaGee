@@ -36,6 +36,6 @@ public class PaintLauncher : MonoBehaviour
     }
     void Spawn() //Time to spawn the paint PowerUP
     {
-        Instantiate(Paint, new Vector3(paintSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Instantiate(Paint, new Vector3(paintSpawnLocation, Random.Range(-0.55f, 1.5f)), Quaternion.identity);
     }
 }

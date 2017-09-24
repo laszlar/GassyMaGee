@@ -18,7 +18,7 @@ public class KettleLauncher : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
+            InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
     }
 
     void Update()
@@ -30,6 +30,6 @@ public class KettleLauncher : MonoBehaviour
 
     void Spawn() //Time to spawn the ducks!
     {
-        Instantiate(kettle, new Vector2(kettleSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Instantiate(kettle, new Vector2(kettleSpawnLocation, Random.Range(-0.47f, 2)), Quaternion.identity);
     }
 }

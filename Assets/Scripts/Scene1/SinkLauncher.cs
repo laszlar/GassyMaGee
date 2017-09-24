@@ -31,6 +31,6 @@ public class SinkLauncher : MonoBehaviour
 
     void Spawn() //Time to spawn the ducks!
     {
-        Instantiate(sink, new Vector2(sinkSpawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Instantiate(sink, new Vector2(sinkSpawnLocation, Random.Range(-0.43f, 2)), Quaternion.identity);
     }
 }

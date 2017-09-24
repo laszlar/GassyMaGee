@@ -29,6 +29,6 @@ public class FattyCannon : MonoBehaviour {
 
     private void Spawn()
     {
-        Instantiate(_fattyFatty, new Vector2(_spawnLocation, Random.Range(-0.7f, 1)), Quaternion.identity);
+        Instantiate(_fattyFatty, new Vector2(_spawnLocation, Random.Range(-0.275f, 2)), Quaternion.identity);
     }
 }

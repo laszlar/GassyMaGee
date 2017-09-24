@@ -167,47 +167,13 @@ public class PlayerMovement : MonoBehaviour
         }
         LimitJumpVelocity();
     }
-
-    //Adding all the raycasts here to detect if Gassy is jumping on an enemy
-        void FixedUpdate()
-    {
-        /*//Far left raycast
-        RaycastHit2D hitFL = Physics2D.Raycast(new Vector2((transform.position.x - _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
-            _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
-
-        //Halfway left raycast
-        RaycastHit2D hitHL = Physics2D.Raycast(new Vector2((transform.position.x - (0.5f * _child.GetComponent<Renderer>().bounds.extents.x)), transform.position.y -
-            _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
-            
-        //Middle raycast
-        RaycastHit2D hitM = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y -
-                _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
-        
-        //Halfway right raycast
-        RaycastHit2D hitHR = Physics2D.Raycast(new Vector2((transform.position.x + (0.5f * _child.GetComponent<Renderer>().bounds.extents.x)), transform.position.y -
-            _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
-            
-        //Far right raycast
-        RaycastHit2D hitFR = Physics2D.Raycast(new Vector2((transform.position.x + _child.GetComponent<Renderer>().bounds.extents.x), transform.position.y -
-                _child.GetComponent<Renderer>().bounds.extents.y), Vector2.down, 0.2f);
-        Debug.DrawRay((new Vector3(transform.position.x, transform.position.y, transform.position.z)), Vector2.down, Color.green);
-       
-        //Make these raycasts work.
-        IsEnemy(hitFL.collider);
-        IsEnemy(hitHL.collider);
-        IsEnemy(hitM.collider);
-        IsEnemy(hitHR.collider);
-        IsEnemy(hitFR.collider);
-        */
-    }
-
-    //Don't think OnTriggerIscurrentlyworking...Maybe...
     
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Enemy")
         {
            _isEnemy = true;
+            Destroy(col.gameObject);
         }
     }
 
@@ -218,17 +184,21 @@ public class PlayerMovement : MonoBehaviour
             _isEnemy = false;
         }
     }
-    
+
+    void FixedUpdate()
+    {
+        if (_isEnemy)
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
+            points += 5;
+        }
+    }
+
 
     //Kills player 
     void OnCollisionEnter2D(Collision2D col)
     {
-		if (_isEnemy)
-        {
-			_rb2D.velocity = new Vector2 (_rb2D.velocity.x, (-_rb2D.velocity.y*2f));
-			Destroy (_collider.gameObject);
-            points += 5;
-		}
+        
         if (!godMode && !_isEnemy && col.gameObject.tag == "Enemy")
         {
             dead = true;
@@ -393,16 +363,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        
-            //else
-            //{
-                //_isEnemy = false;
-            //}
-            //if (col != null && col.gameObject.tag != "Enemy")
-        //{
-            //_isEnemy = false;
-       // }
-        //}
     }
     */
     #endregion

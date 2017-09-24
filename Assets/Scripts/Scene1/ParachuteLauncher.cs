@@ -30,6 +30,6 @@ public class ParachuteLauncher : MonoBehaviour
 
     void Spawn() //Time to spawn the paint PowerUP
     {
-        Instantiate(Parachute, new Vector2(parachuteSpawnLocation, Random.Range(-0.3f, 1.15f)), Quaternion.identity);
+        Instantiate(Parachute, new Vector2(parachuteSpawnLocation, Random.Range(-0.4f, 2f)), Quaternion.identity);
     }
 }

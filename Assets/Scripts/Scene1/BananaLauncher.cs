@@ -35,6 +35,6 @@ public class BananaLauncher : MonoBehaviour
 
     void CheckOutThatBanana()
     {
-        Instantiate(banana, new Vector2(bananaSpawnLocation, -0.484f), transform.rotation);
+        Instantiate(banana, new Vector2(bananaSpawnLocation, -0.488f), transform.rotation);
     }
 }

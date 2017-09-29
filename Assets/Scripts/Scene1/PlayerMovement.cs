@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     int parachuteTime = 5;
     int bananaTime = 2;
 
+    float timeCounter;
+
     private bool _isEffectRunning;
     public static bool IsJumping;
     private bool _canJump;
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         parachuteEnabled = false;
         parachuteCreated = false;
 
-		_child = transform.FindChild("Player GFX");
+		_child = transform.Find("Player GFX");
 
         _rb2D = GetComponent<Rigidbody2D>();
 
@@ -82,15 +84,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Moves the player
-       /* if (!parachuteEnabled && !bananaEnabled && !dead && !explDeath)
-            transform.Translate(playerSpeed * Time.deltaTime, 0f, 0f);
-        else if (parachuteEnabled && !dead && !explDeath)
-            transform.Translate((playerSpeed / 2) * Time.deltaTime, 0, 0);
-		else if (bananaEnabled && !dead && !explDeath)
-            transform.Translate((playerSpeed * 2) * Time.deltaTime, 0, 0);
-        */    
-		Transform child = transform.FindChild ("Player GFX");
 
         //Moves Player to the left as he gets hit/dies
         if (dead && !_isEnemy)
@@ -137,7 +130,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
                     anim.SetTrigger("IsGroundedJump");
-                    //isFarting.fart.gameObject.SetActive(true);
                 }
             }
         }
@@ -194,7 +186,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     //Kills player 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -230,15 +221,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*
-    void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Enemy")
-        {
-            _isEnemy = false;
-        }
-    }
-    */
     #endregion
 
     #region Methods

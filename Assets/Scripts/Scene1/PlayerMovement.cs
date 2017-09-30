@@ -165,7 +165,6 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
            _isEnemy = true;
-            Destroy(col.gameObject);
         }
     }
 
@@ -189,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
     //Kills player 
     void OnCollisionEnter2D(Collision2D col)
     {
-        
+        Debug.Log(col.gameObject.name);
         if (!godMode && !_isEnemy && col.gameObject.tag == "Enemy")
         {
             dead = true;

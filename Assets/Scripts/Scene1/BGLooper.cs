@@ -10,37 +10,10 @@ public class BGLooper : MonoBehaviour {
     private float cloudWidth;
     private float waveWidth;
     private float cobbleWidth;
-    private GameObject deepOcean0;
-    private GameObject deepOcean1;
-    private GameObject deepOcean2;
-    private GameObject sand0;
-    private GameObject sand1;
-    private GameObject sand2;
-
-    void Start()
-    {
-        /*deepOcean0 = GameObject.Find("Deepocean");
-        deepOcean1 = GameObject.Find("Deepocean");
-        deepOcean2 = GameObject.Find("Deepocean");
-
-        sand0 = GameObject.Find("Sand0");
-        sand1 = GameObject.Find("Sand1");
-        
-        sand2 = GameObject.Find("Sand2");
-    */
-    }
 
 	void OnTriggerEnter2D (Collider2D collider)
     {
         float widthOfBGObject = ((BoxCollider2D)collider).size.x;
-
-        if (collider.name == "Deepocean" || collider.name == "Deepocean1" || collider.name == "Deepocean2")
-        {
-            Vector2 actualPos = collider.transform.position;
-            actualWidth = widthOfBGObject * 0.3f;
-            actualPos.x += actualWidth * (numBGPanels / 2);
-            collider.transform.position = actualPos;
-        }
 
         if (collider.name == "subprototype_edificios01_0" || collider.name == "subprototype_dificios01.1_0" || 
             collider.name == "subprototype_edificios02_0" || collider.name == "subprototype_edificios02.1_0" || 
@@ -73,7 +46,8 @@ public class BGLooper : MonoBehaviour {
         }
 
         if (collider.name == "cobblestone-1" || collider.name == "cobblestone-2" ||
-            collider.name == "cobblestone-3" || collider.name == "cobblestone-4")
+            collider.name == "cobblestone-3" || collider.name == "cobblestone-4" ||
+            collider.name == "cobblestone-5")
         {
             Vector2 cobblePos = collider.transform.position;
             cobbleWidth = widthOfBGObject;

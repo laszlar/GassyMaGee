@@ -188,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
     //Kills player 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log(col.gameObject.name);
         if (!godMode && !_isEnemy && col.gameObject.tag == "Enemy")
         {
             dead = true;

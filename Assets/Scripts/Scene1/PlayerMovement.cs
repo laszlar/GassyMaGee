@@ -86,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         //Moves Player to the left as he gets hit/dies
         if (dead && !_isEnemy)
         {
@@ -115,11 +114,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine(CamEffectOff(camEffectTime));
             }
-        }
-
-        if (parachuteEnabled)
-        {
-            ParachuteMethod();
         }
 
         //makes player jump & play jump animation
@@ -198,7 +192,6 @@ public class PlayerMovement : MonoBehaviour
         //enter god mode when collided with paint canister
         else if (col.gameObject.tag == "Paint")
         {
-            PaintPowerAllTheThings(fastSpeed);
             SetInvincible();
         }
 
@@ -215,6 +208,10 @@ public class PlayerMovement : MonoBehaviour
         else if(col.gameObject.tag == "Parachute")
         {
             ParachuteMethod();
+        }
+        else if (col.gameObject.tag == "Banana")
+        {
+            BananaMethod();
         }
         else if(godMode && col.gameObject.tag == "Bomb" || !godMode && col.gameObject.tag == "Bomb")
         {
@@ -350,7 +347,7 @@ public class PlayerMovement : MonoBehaviour
     */
     #endregion
 
-    public void PaintPowerAllTheThings(float fastSpeed)
+    public void BananaPowerAllTheThings(float fastSpeed)
     {
         List<GameObject> shitFlyingAround = new List<GameObject>();
         Scene scene = SceneManager.GetActiveScene();
@@ -361,7 +358,23 @@ public class PlayerMovement : MonoBehaviour
             var powerObj = obj.GetComponent<IPowerUp>();
             if (powerObj != null)
             {
-                powerObj.PaintPower(fastSpeed);
+                powerObj.BananaPower(fastSpeed);
+            }
+        }
+    }
+
+    public void ParachutePowerAllTheThings(float slowSpeed)
+    {
+        List<GameObject> allTheShitFlyingAroundToMakeGoSlow = new List<GameObject>();
+        Scene sceneSlow = SceneManager.GetActiveScene();
+        sceneSlow.GetRootGameObjects(allTheShitFlyingAroundToMakeGoSlow);
+
+        foreach(var obj in allTheShitFlyingAroundToMakeGoSlow)
+        {
+            var toBeParachutedPowerObj = obj.GetComponent<IPowerUp>();
+            if (toBeParachutedPowerObj != null)
+            {
+                toBeParachutedPowerObj.ParachutePower(slowSpeed);
             }
         }
     }

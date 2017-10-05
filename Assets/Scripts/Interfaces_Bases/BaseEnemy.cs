@@ -17,7 +17,7 @@ public class BaseEnemy : MonoBehaviour, IPowerUp {
         transform.Translate((speed * Time.deltaTime), 0f, 0f);
     }
 
-    public virtual void PaintPower(float fastSpeed)
+    public virtual void BananaPower(float fastSpeed)
     {
         this.speed = fastSpeed;
     }

@@ -40,7 +40,7 @@ public class MoveDuck : BaseEnemy
 #region Interface
     public void PaintPower(float fastSpeed)
     {
-        base.PaintPower(Speed);
+        base.BananaPower(Speed);
     }
 
     public void ParachutePower(float slowSpeed)

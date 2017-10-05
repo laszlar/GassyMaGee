@@ -9,8 +9,9 @@ The Grunt of all scripts.
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPowerUp
 {
 
     #region Global Variables
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 	private Transform _child;
 	private bool _isEnemy;
 	private Collider2D _collider;
+    private float fastSpeed;
 
     #endregion
 
@@ -178,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        PaintPower(fastSpeed);
         if (_isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
@@ -346,5 +349,21 @@ public class PlayerMovement : MonoBehaviour
     }
     */
     #endregion
+
+    public void PaintPower(float fastSpeed)
+    {
+        List<GameObject> shitFlyingAround = new List<GameObject>();
+        Scene scene = SceneManager.GetActiveScene();
+        scene.GetRootGameObjects(shitFlyingAround);
+
+        foreach(var obj in shitFlyingAround)
+        {
+            var powerObj = obj.GetComponent<IPowerUp>();
+            if (powerObj != null)
+            {
+                powerObj = PaintPower(2.5f);
+            }
+        }
+    }
 
 }

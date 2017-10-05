@@ -6,7 +6,7 @@ Moves ducks at player
 using UnityEngine;
 using System.Collections;
 
-public class MoveDuck : MonoBehaviour
+public class MoveDuck : BaseEnemy
 {
 
     public int duckSpeed;
@@ -20,9 +20,9 @@ public class MoveDuck : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        transform.Translate(duckSpeed * Time.deltaTime, 0f, 0f);
+        base.Update();
     }
 
     void OnCollisionEnter2D (Collision2D coll)
@@ -36,4 +36,16 @@ public class MoveDuck : MonoBehaviour
                 coll.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);  
         }
     }
+
+#region Interface
+    public void PaintPower(float fastSpeed)
+    {
+        base.PaintPower(Speed);
+    }
+
+    public void ParachutePower(float slowSpeed)
+    {
+        base.ParachutePower(Speed);
+    }
+#endregion
 }

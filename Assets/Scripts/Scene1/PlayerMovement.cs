@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerMovement : MonoBehaviour, IPowerUp
+public class PlayerMovement : MonoBehaviour
 {
 
     #region Global Variables
@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour, IPowerUp
         //enter god mode when collided with paint canister
         else if (col.gameObject.tag == "Paint")
         {
-            PaintPower(fastSpeed);
+            PaintPowerAllTheThings(fastSpeed);
             SetInvincible();
         }
 
@@ -350,7 +350,7 @@ public class PlayerMovement : MonoBehaviour, IPowerUp
     */
     #endregion
 
-    public void PaintPower(float fastSpeed)
+    public void PaintPowerAllTheThings(float fastSpeed)
     {
         List<GameObject> shitFlyingAround = new List<GameObject>();
         Scene scene = SceneManager.GetActiveScene();
@@ -361,14 +361,9 @@ public class PlayerMovement : MonoBehaviour, IPowerUp
             var powerObj = obj.GetComponent<IPowerUp>();
             if (powerObj != null)
             {
-                powerObj.PaintPower(2.5f);
+                powerObj.PaintPower(fastSpeed);
             }
         }
-    }
-
-    public void ParachutePower(float slowSpeed)
-    {
-        Debug.LogError("Not implemented yet.");
     }
 
 }

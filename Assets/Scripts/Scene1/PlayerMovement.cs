@@ -180,7 +180,6 @@ public class PlayerMovement : MonoBehaviour, IPowerUp
 
     void FixedUpdate()
     {
-        PaintPower(fastSpeed);
         if (_isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
@@ -199,6 +198,7 @@ public class PlayerMovement : MonoBehaviour, IPowerUp
         //enter god mode when collided with paint canister
         else if (col.gameObject.tag == "Paint")
         {
+            PaintPower(fastSpeed);
             SetInvincible();
         }
 

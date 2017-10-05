@@ -361,9 +361,14 @@ public class PlayerMovement : MonoBehaviour, IPowerUp
             var powerObj = obj.GetComponent<IPowerUp>();
             if (powerObj != null)
             {
-                powerObj = PaintPower(2.5f);
+                powerObj.PaintPower(2.5f);
             }
         }
+    }
+
+    public void ParachutePower(float slowSpeed)
+    {
+        Debug.LogError("Not implemented yet.");
     }
 
 }

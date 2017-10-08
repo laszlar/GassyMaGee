@@ -81,4 +81,14 @@ public class Bomb : MonoBehaviour
         if ((Random.Range(0, 100)) <= 65)
             transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
     }
+
+    void SpeedUp()
+    {
+        transform.Translate(((travelSpeed * 1.5f) * Time.deltaTime), 0f, 0f);
+    }
+
+    void SlowDown()
+    {
+        transform.Translate(((travelSpeed * 0.5f) * Time.deltaTime), 0f, 0f);
+    }
 }

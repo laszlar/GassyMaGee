@@ -18,6 +18,8 @@ public class BananaPowerup : MonoBehaviour
     {
         if (!touchingGround)
             Destroy(gameObject);
+
+        transform.Translate((-1 * Time.deltaTime), 0f, 0f);
     }
 
 

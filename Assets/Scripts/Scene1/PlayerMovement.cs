@@ -52,8 +52,18 @@ public class PlayerMovement : MonoBehaviour
 	private Transform _child;
 	private bool _isEnemy;
 	private Collider2D _collider;
-    private float fastSpeed;
 
+    /* UNUSED FOR THE MOMENT.
+    //Interface Setup variables
+    private float fastSpeed;
+    private float slowSpeed;
+    public bool bananaActiveI;
+    public bool bananaReset;
+    public float bananaResetTimer = 0f;
+    public bool parachuteActiveI;
+    public bool parachuteReset;
+    public float parachuteResetTimer = 0f;
+    */
     #endregion
 
     #region MonoBehaviors
@@ -347,11 +357,16 @@ public class PlayerMovement : MonoBehaviour
     */
     #endregion
 
+    /* 
+    //Discontinued for now!!
+    #region Interface Setup
     public void BananaPowerAllTheThings(float fastSpeed)
     {
         List<GameObject> shitFlyingAround = new List<GameObject>();
         Scene scene = SceneManager.GetActiveScene();
         scene.GetRootGameObjects(shitFlyingAround);
+        bananaReset = false;
+        bananaActiveI = true;
 
         foreach(var obj in shitFlyingAround)
         {
@@ -366,8 +381,8 @@ public class PlayerMovement : MonoBehaviour
     public void ParachutePowerAllTheThings(float slowSpeed)
     {
         List<GameObject> allTheShitFlyingAroundToMakeGoSlow = new List<GameObject>();
-        Scene sceneSlow = SceneManager.GetActiveScene();
-        sceneSlow.GetRootGameObjects(allTheShitFlyingAroundToMakeGoSlow);
+        Scene scene = SceneManager.GetActiveScene();
+        scene.GetRootGameObjects(allTheShitFlyingAroundToMakeGoSlow);
 
         foreach(var obj in allTheShitFlyingAroundToMakeGoSlow)
         {
@@ -379,4 +394,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    #endregion
+    */
 }

@@ -34,4 +34,14 @@ public class MoveSink : MonoBehaviour
             coll.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
     }
+
+    void SpeedUp()
+    {
+        transform.Translate(((sinkSpeed * 1.5f) * Time.deltaTime), 0f, 0f);
+    }
+
+    void SlowDown()
+    {
+        transform.Translate(((sinkSpeed * 0.5f) * Time.deltaTime), 0f, 0f);
+    }
 }

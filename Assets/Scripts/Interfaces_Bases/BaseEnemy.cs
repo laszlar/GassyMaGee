@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour, IPowerUp {
-
-    private float speed = -1.0f; 
+public class BaseEnemy : MonoBehaviour {
+    /*
+    private float speed = -1.0f;
+    GameObject player;
+    PlayerMovement playerScript;
 
 	public float Speed
     {
         get { return speed; }
         set { speed = value; }
+    }
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+        playerScript = player.GetComponent<PlayerMovement>();
     }
 
     public virtual void Update ()
@@ -19,12 +27,19 @@ public class BaseEnemy : MonoBehaviour, IPowerUp {
 
     public virtual void BananaPower(float fastSpeed)
     {
-        this.speed = fastSpeed;
+        if (playerScript.bananaActiveI)
+        {
+            this.speed = fastSpeed;
+        }
+        else
+        {
+            return;
+        } 
     }
 
     public virtual void ParachutePower(float slowSpeed)
     {
         this.speed = slowSpeed;
     }
-
+    */
 }

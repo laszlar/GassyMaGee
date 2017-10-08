@@ -35,4 +35,14 @@ public class MoveKettle : MonoBehaviour {
             coll.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
     }
+
+    void SpeedUp()
+    {
+        transform.Translate(((kettleSpeed * 1.5f) * Time.deltaTime), 0f, 0f);
+    }
+
+    void SlowDown()
+    {
+        transform.Translate(((kettleSpeed * 0.5f) * Time.deltaTime), 0f, 0f);
+    }
 }

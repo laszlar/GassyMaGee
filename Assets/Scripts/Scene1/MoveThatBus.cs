@@ -16,4 +16,14 @@ public class MoveThatBus : MonoBehaviour
     {
         transform.Translate(speed * Time.deltaTime, 0f, 0f);
 	}
+
+    void SpeedUp()
+    {
+        transform.Translate(((speed * 1.5f) * Time.deltaTime), 0f, 0f);
+    }
+
+    void SlowDown()
+    {
+        transform.Translate(((speed * 0.5f) * Time.deltaTime), 0f, 0f);
+    }
 }

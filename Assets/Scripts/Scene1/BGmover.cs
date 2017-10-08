@@ -18,4 +18,9 @@ public class BGmover : MonoBehaviour
     {
         transform.Translate((-moveSpeed * Time.deltaTime), 0f, 0f);
     }
+
+    void SlowDown()
+    {
+        transform.Translate((slowSpeed * Time.deltaTime), 0f, 0f);
+    }
 }

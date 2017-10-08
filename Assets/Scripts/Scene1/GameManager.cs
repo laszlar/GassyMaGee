@@ -20,8 +20,10 @@ public class GameManager : MonoBehaviour {
 
     //Enemy and Object variables
     GameObject enemy;
-    GameObject[] enemies;
-    GameObject[] bombies;
+    GameObject[] enemyTag;
+    GameObject[] bombTag;
+    GameObject backGround;
+    GameObject[] bGTag;
 
     private void Start()
     {
@@ -61,18 +63,24 @@ public class GameManager : MonoBehaviour {
         //to speed up or slow down based on player's condition.
         if (playerScript.parachuteEnabled)
         {
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            bombies = GameObject.FindGameObjectsWithTag("Bomb");
+            enemyTag = GameObject.FindGameObjectsWithTag("Enemy");
+            bombTag = GameObject.FindGameObjectsWithTag("Bomb");
+            bGTag = GameObject.FindGameObjectsWithTag("Background");
 
-
-            foreach (GameObject enemy in enemies)
+            foreach (GameObject enemy in enemyTag)
             {
                 enemy.SendMessage("SlowDown");
+                print("slow down enemy");
             }
 
-            foreach (GameObject bomb in bombies)
+            foreach (GameObject bomb in bombTag)
             {
                 bomb.SendMessage("SlowDown");
+            }
+
+            foreach (GameObject backGround in bGTag)
+            {
+                backGround.SendMessage("SlowDown");
             }
         }
         else
@@ -82,16 +90,16 @@ public class GameManager : MonoBehaviour {
 
         if (playerScript.bananaEnabled)
         {      
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            bombies = GameObject.FindGameObjectsWithTag("Bomb");
+            enemyTag = GameObject.FindGameObjectsWithTag("Enemy");
+            bombTag = GameObject.FindGameObjectsWithTag("Bomb");
 
             
-            foreach (GameObject enemy in enemies)
+            foreach (GameObject enemy in enemyTag)
             {
                 enemy.SendMessage("SpeedUp");
             }
 
-            foreach (GameObject bomb in bombies)
+            foreach (GameObject bomb in bombTag)
             {
                 bomb.SendMessage("SpeedUp");
             }

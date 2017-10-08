@@ -44,6 +44,7 @@ public class MoveDuck : MonoBehaviour
 
     void SlowDown()
     {
-        transform.Translate(((duckSpeed * 0.5f) * Time.deltaTime), 0f, 0f);
+        halfDuckSpeed = duckSpeed / 2.5f;
+        transform.Translate((halfDuckSpeed * Time.deltaTime), 0f, 0f);
     }
 }

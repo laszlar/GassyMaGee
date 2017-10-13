@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     SpriteRenderer bombRenderer;
-    public GameObject player;
+    private GameObject player;
+    private PlayerMovement playerScript;
     public bool playerHitBomb;
     float timeToDisappear = 0f;
     float travelSpeed = -1.0f;
@@ -16,6 +17,7 @@ public class Bomb : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        playerScript = player.GetComponent<PlayerMovement>();
         playerHitBomb = false;
         bombRenderer = GetComponent<SpriteRenderer>();
     }
@@ -51,6 +53,21 @@ public class Bomb : MonoBehaviour
             transform.Translate(travelSpeed * Time.deltaTime, 0f, 0f);
             ChangeBombSpeed();
             Spin();
+
+            //check for powerups and adjust speed accordingly!
+            if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
+            playerScript.parachuteEnabled && playerScript.bananaEnabled)
+                transform.Translate((travelSpeed * Time.deltaTime), 0f, 0f);
+
+            if (playerScript.bananaEnabled && !playerScript.parachuteEnabled)
+            {
+                SpeedUp();
+            }
+
+            if (playerScript.parachuteEnabled && !playerScript.bananaEnabled)
+            {
+                SlowDown();
+            }
         }
     }
 

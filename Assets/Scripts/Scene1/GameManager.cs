@@ -58,10 +58,10 @@ public class GameManager : MonoBehaviour {
             Destroy(bomb);
         }
         //=================================================================//
-
+        //Discontinuning this for now!!!!!!!
         //This is the logic for finding all enemies and telling them 
         //to speed up or slow down based on player's condition.
-        if (playerScript.parachuteEnabled)
+        /*if (playerScript.parachuteEnabled)
         {
             enemyTag = GameObject.FindGameObjectsWithTag("Enemy");
             bombTag = GameObject.FindGameObjectsWithTag("Bomb");
@@ -107,6 +107,6 @@ public class GameManager : MonoBehaviour {
         else
         {
             return;
-        }
+        }*/
 	}
 }

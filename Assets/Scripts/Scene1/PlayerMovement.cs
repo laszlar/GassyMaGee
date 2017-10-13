@@ -99,6 +99,9 @@ public class PlayerMovement : MonoBehaviour
         //Moves Player to the left as he gets hit/dies
         if (dead && !_isEnemy)
         {
+            godMode = false;
+            parachuteEnabled = false;
+            bananaEnabled = false;
             DeathAnimation();
             StartCoroutine(PlayerDied(timeAfterDeath));
             _rb2D.isKinematic = true;

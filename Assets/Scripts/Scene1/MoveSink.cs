@@ -8,24 +8,40 @@ using System.Collections;
 
 public class MoveSink : MonoBehaviour
 {
-    public float sinkSpeed;
-    PlayerMovement script;
+    private float sinkSpeed;
+    PlayerMovement playerScript;
 
 	// Use this for initialization
 	void Start ()
     {
-        script = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        transform.Translate(sinkSpeed * Time.deltaTime, 0f, 0f);
-	}
+        //if no powerups or if both powerups are active then run at regular speed!
+        if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
+            playerScript.parachuteEnabled && playerScript.bananaEnabled)
+        {
+            transform.Translate((sinkSpeed * Time.deltaTime), 0f, 0f);
+        }
+
+        //check for powerups
+        if (playerScript.bananaEnabled && !playerScript.parachuteEnabled)
+        {
+            SpeedUp();
+        }
+
+        if (playerScript.parachuteEnabled && !playerScript.bananaEnabled)
+        {
+            SlowDown();
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (script.godMode && coll.gameObject.tag == "Enemy")
+        if (playerScript.godMode && coll.gameObject.tag == "Enemy")
         {
             Vector2 target = coll.gameObject.transform.position;
             Vector2 bomb = gameObject.transform.position;

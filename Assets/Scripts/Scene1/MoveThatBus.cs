@@ -4,18 +4,37 @@ using UnityEngine;
 
 public class MoveThatBus : MonoBehaviour
 {
-    public float speed = -1.0f;
+    private float speed = -1.0f;
+
+    PlayerMovement playerScript;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        transform.Translate(speed * Time.deltaTime, 0f, 0f);
-	}
+        //if no powerups or if both powerups are active then run at regular speed!
+        if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
+            playerScript.parachuteEnabled && playerScript.bananaEnabled)
+        {
+            transform.Translate((speed * Time.deltaTime), 0f, 0f);
+        }
+
+        //check for powerups
+        if (playerScript.bananaEnabled && !playerScript.parachuteEnabled)
+        {
+            SpeedUp();
+        }
+
+        if (playerScript.parachuteEnabled && !playerScript.bananaEnabled)
+        {
+            SlowDown();
+        }
+    }
 
     void SpeedUp()
     {

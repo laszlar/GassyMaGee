@@ -8,25 +8,41 @@ using System.Collections;
 
 public class MoveKettle : MonoBehaviour {
 
-    public float kettleSpeed;
-    PlayerMovement script;
+    private float kettleSpeed;
+    PlayerMovement playerScript;
     
     // Use this for initialization
 	void Start ()
     {
-        script = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
 	}
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(kettleSpeed * Time.deltaTime, 0f, 0f);          //if player hits parachute power up, 
+        //if no powerups or if both powerups are active then run at regular speed!
+        if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
+            playerScript.parachuteEnabled && playerScript.bananaEnabled)
+        {
+            transform.Translate((kettleSpeed * Time.deltaTime), 0f, 0f);
+        }
+
+        //check for powerups
+        if (playerScript.bananaEnabled && !playerScript.parachuteEnabled)
+        {
+            SpeedUp();
+        }
+
+        if (playerScript.parachuteEnabled && !playerScript.bananaEnabled)
+        {
+            SlowDown();
+        }
     }
 
 
     void OnCollisionEnter2D(Collision2D coll)                       //if player hits paint canister, turn player into god mode,
     {                                                               //and object goes flying when player hits them.
-        if (script.godMode && coll.gameObject.tag == "Enemy") 
+        if (playerScript.godMode && coll.gameObject.tag == "Enemy") 
         {
             Vector2 target = coll.gameObject.transform.position;
             Vector2 bomb = gameObject.transform.position;

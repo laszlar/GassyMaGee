@@ -8,26 +8,42 @@ using System.Collections;
 
 public class MoveDuck : MonoBehaviour
 {
+    private float moveSpeed = -1.0f;
+    private float slowSpeed = -0.5f;
+    private float fastSpeed = -1.5f;
 
-    public int duckSpeed;
-    public float halfDuckSpeed;
-    PlayerMovement script;
+    PlayerMovement playerScript;
 
     // Use this for initialization
     void Start()
     {
-        script = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
-    public void Update()
+    private void Update()
     {
-        transform.Translate((duckSpeed * Time.deltaTime), 0f, 0f);
+        //If neither banana or parachute is active duck moves at regular speed.
+        if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
+            playerScript.parachuteEnabled && playerScript.bananaEnabled)
+            transform.Translate((moveSpeed * Time.deltaTime), 0f, 0f);
+
+        if (playerScript.bananaEnabled && !playerScript.parachuteEnabled)
+        {
+            SpeedUp();
+        }
+
+        if (playerScript.parachuteEnabled && !playerScript.bananaEnabled)
+        {
+            SlowDown();
+        }
     }
+
+    
 
     void OnCollisionEnter2D (Collision2D coll)
     {
-        if (script.godMode && coll.gameObject.tag == "Enemy")
+        if (playerScript.godMode && coll.gameObject.tag == "Enemy")
         {
                 Vector2 target = coll.gameObject.transform.position;
                 Vector2 bomb = gameObject.transform.position;
@@ -39,12 +55,11 @@ public class MoveDuck : MonoBehaviour
 
     void SpeedUp()
     {
-        transform.Translate(((duckSpeed * 1.5f) * Time.deltaTime), 0f, 0f);
+        transform.Translate((fastSpeed * Time.deltaTime), 0f, 0f);
     }
 
     void SlowDown()
     {
-        halfDuckSpeed = duckSpeed / 2.5f;
-        transform.Translate((halfDuckSpeed * Time.deltaTime), 0f, 0f);
+        transform.Translate((slowSpeed * Time.deltaTime), 0f, 0f);
     }
 }

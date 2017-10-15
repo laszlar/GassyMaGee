@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class BananaPowerup : MonoBehaviour
 {
-    public bool touchingGround;
-    PlayerMovement player;
+    //variables of the speed of the banana!
+    private float slowSpeed = -0.5f;
+    private float normalSpeed = -1.0f;
+    private float fastSpeed = -1.5f;
+
+    private bool touchingGround;
+    PlayerMovement playerScript;
     
 
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
 
@@ -19,7 +24,23 @@ public class BananaPowerup : MonoBehaviour
         if (!touchingGround)
             Destroy(gameObject);
 
-        transform.Translate((-1 * Time.deltaTime), 0f, 0f);
+        //if no powerups or if both powerups are active then run at regular speed!
+        if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
+            playerScript.parachuteEnabled && playerScript.bananaEnabled)
+        {
+            transform.Translate((normalSpeed * Time.deltaTime), 0f, 0f);
+        }
+
+        //check for powerups
+        if (playerScript.bananaEnabled && !playerScript.parachuteEnabled)
+        {
+            SpeedUp();
+        }
+
+        if (playerScript.parachuteEnabled && !playerScript.bananaEnabled)
+        {
+            SlowDown();
+        }
     }
 
 
@@ -38,8 +59,18 @@ public class BananaPowerup : MonoBehaviour
         //turn on banana powerup for the player
         if (col.gameObject.tag == "Player")
         {
-            player.BananaMethod();
+            playerScript.BananaMethod();
             Destroy(gameObject);
         }
+    }
+
+    void SpeedUp()
+    {
+        transform.Translate((fastSpeed * Time.deltaTime), 0f, 0f);
+    }
+
+    void SlowDown()
+    {
+        transform.Translate((slowSpeed * Time.deltaTime), 0f, 0f);
     }
 }

@@ -53,17 +53,15 @@ public class PlayerMovement : MonoBehaviour
 	private bool _isEnemy;
 	private Collider2D _collider;
 
-    /* UNUSED FOR THE MOMENT.
-    //Interface Setup variables
-    private float fastSpeed;
-    private float slowSpeed;
-    public bool bananaActiveI;
-    public bool bananaReset;
-    public float bananaResetTimer = 0f;
-    public bool parachuteActiveI;
-    public bool parachuteReset;
-    public float parachuteResetTimer = 0f;
-    */
+    //Here I will put the variables in for the touch 
+    //response. Responsible for increasing Gassy's 
+    //scale. 
+    private Vector2 startTouchPosition;
+    private Vector2 endTouchPosition;
+    private float deltaTouch;
+    private float maxSize;
+    private float minSize;
+    private bool beanAbility;
     #endregion
 
     #region MonoBehaviors
@@ -92,6 +90,11 @@ public class PlayerMovement : MonoBehaviour
 
         //for the parachute animation
         parachuteScript = GetComponent<ParachuteFollowPlayer>();
+
+        //==============================//
+        //Auto-enabling bean ability for now!
+        beanAbility = true;
+        //=============================//
     }
 
     void Update()
@@ -139,6 +142,9 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
                     anim.SetTrigger("IsGroundedJump");
+
+                    //Recording Gassy's initial swipe position here...
+                    startTouchPosition = Input.mousePosition;
                 }
             }
         }
@@ -167,6 +173,28 @@ public class PlayerMovement : MonoBehaviour
             dead = true;
         }
         LimitJumpVelocity();
+
+        //==================================================//
+        //Inserting addditional touch response here for Gassy's scaling!
+        if (Input.GetMouseButtonUp(0))
+        {
+            endTouchPosition = Input.mousePosition;
+            deltaTouch = endTouchPosition.y - startTouchPosition.y;
+        }
+
+        if (deltaTouch < 0)
+        {
+            Debug.Log("Swipe down complete!");
+            //do shit here (just don't shart.)
+        }
+
+        if (deltaTouch > 0)
+        {
+            Debug.Log("Swipe up complete!");
+            //do shit here (just don't shart.)
+        }
+
+        
     }
     
     void OnTriggerEnter2D(Collider2D col)

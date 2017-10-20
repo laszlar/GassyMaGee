@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     private float maxSize;
     private float minSize;
     private bool beanAbility;
+    private bool swiped;
     #endregion
 
     #region MonoBehaviors
@@ -132,6 +133,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        
+        //======OLD TAP LOGIC HERE=======//
         //makes player jump & play jump animation
         //Tony, all you man :)
         if (!bananaEnabled)
@@ -144,10 +147,75 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetTrigger("IsGroundedJump");
 
                     //Recording Gassy's initial swipe position here...
-                    startTouchPosition = Input.mousePosition;
+                    //startTouchPosition = Input.mousePosition;
                 }
             }
         }
+
+
+        if (!bananaEnabled)
+        {
+            for (int i = 0; i < Input.touchCount; ++i)
+            {
+                if (Input.GetTouch(i).phase == TouchPhase.Began)
+                {
+                    if (_canJump)
+                    {
+                        _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
+                        anim.SetTrigger("IsGroundedJump");
+                        Debug.Log(i);
+                    }
+                }
+            }
+        }
+            /*
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                Debug.Log(Input.touchCount);
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        startTouchPosition = touch.position;
+                        break;
+
+                    case TouchPhase.Moved:
+                        endTouchPosition = touch.position;
+                        break;
+
+                    case TouchPhase.Ended:
+                        swiped = true;
+                        
+                        if (touch.deltaTime < 0.20f)  //if the user "taps" make him jump
+                        {
+                            if (_canJump)
+                            {
+                                if (Mathf.Abs(deltaTouch) < 0.05f) //making sure there wasn't any negligible finger movement.
+                                _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
+                                anim.SetTrigger("IsGroundedJump");
+                            }
+                        }
+                        break;
+                }
+            }*/ 
+        //}
+        /*
+        Debug.Log(startTouchPosition);
+        Debug.Log(endTouchPosition);
+
+        if (swiped)
+        {
+            Debug.Log("I just swipped!");
+            if (deltaTouch > 0)
+            {
+                Debug.Log("I just swiped up!");
+            }
+
+            if (deltaTouch < 0)
+            {
+                Debug.Log("I just swiped down");
+            }
+        }*/
 
         //Disables player jump after set amount of time
         if (transform.position.y > 0)
@@ -174,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
         }
         LimitJumpVelocity();
 
+        /*
         //==================================================//
         //Inserting addditional touch response here for Gassy's scaling!
         if (Input.GetMouseButtonUp(0))
@@ -193,7 +262,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Swipe up complete!");
             //do shit here (just don't shart.)
         }
-
+        */
         
     }
     

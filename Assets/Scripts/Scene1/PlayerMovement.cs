@@ -59,10 +59,19 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     private float deltaTouch;
+    private float delta;
     private float maxSize;
     private float minSize;
     private bool beanAbility;
     private bool swiped;
+    private float touchCounter = 0f;
+    //setting the sclae
+    private Vector3 adjustableScale;
+    private float setScaleX = 1.0f;
+    private float setScaleY = 1.0f;
+    private float minScale = 0.40f;
+    private float maxScale = 3.0f;
+    
     #endregion
 
     #region MonoBehaviors
@@ -92,9 +101,12 @@ public class PlayerMovement : MonoBehaviour
         //for the parachute animation
         parachuteScript = GetComponent<ParachuteFollowPlayer>();
 
+        //Scaling stuff inserted here to reset!
         //==============================//
         //Auto-enabling bean ability for now!
         beanAbility = true;
+        adjustableScale = new Vector3(setScaleX, setScaleY, 1);
+        transform.localScale = adjustableScale;
         //=============================//
     }
 
@@ -133,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        
+#if UNITY_EDITOR
         //======OLD TAP LOGIC HERE=======//
         //makes player jump & play jump animation
         //Tony, all you man :)
@@ -147,11 +159,37 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetTrigger("IsGroundedJump");
 
                     //Recording Gassy's initial swipe position here...
-                    //startTouchPosition = Input.mousePosition;
+                    startTouchPosition = Input.mousePosition;
+                    Debug.Log("This is where I touched = " + startTouchPosition.y);
+
                 }
             }
         }
 
+        if (Input.GetMouseButtonUp(0))
+        {
+            endTouchPosition = Input.mousePosition;
+        }
+
+        deltaTouch = endTouchPosition.y - startTouchPosition.y;
+        delta = Mathf.Abs((endTouchPosition.y - startTouchPosition.y)/startTouchPosition.y);
+        Debug.Log(deltaTouch);
+        Debug.Log("This is the change percentage " + delta);
+
+        if (deltaTouch > 0)
+        {
+            setScaleX *= (delta + 1);
+            setScaleY *= (delta + 1);
+
+            adjustableScale = new Vector2(setScaleX, setScaleY);
+            transform.localScale = adjustableScale;
+        }
+
+        if (deltaTouch < 0)
+        {
+
+        }
+#endif
 
         if (!bananaEnabled)
         {

@@ -172,8 +172,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         deltaTouch = endTouchPosition.y - startTouchPosition.y;
-        delta = Mathf.Abs((endTouchPosition.y - startTouchPosition.y)/startTouchPosition.y);
-        Debug.Log(deltaTouch);
+        delta = (endTouchPosition.y - startTouchPosition.y) / Mathf.Abs(startTouchPosition.y);
         Debug.Log("This is the change percentage " + delta);
 
         if (deltaTouch > 0)
@@ -182,13 +181,26 @@ public class PlayerMovement : MonoBehaviour
             setScaleY *= (delta + 1);
 
             adjustableScale = new Vector2(setScaleX, setScaleY);
-            transform.localScale = adjustableScale;
+
+            if (setScaleX <= 3.0f || setScaleY <= 3.0f)
+            {
+                transform.localScale = adjustableScale;
+            }
+            
         }
 
-        if (deltaTouch < 0)
+        /*if (deltaTouch < 0)
         {
+            setScaleX *= (delta);
+            setScaleY *= (delta);
 
-        }
+            adjustableScale = new Vector2(setScaleX, setScaleY);
+
+            if (setScaleX >= 0.5f || setScaleY >= 0.5f)
+            {
+                transform.localScale = adjustableScale;
+            }
+        }*/
 #endif
 
         if (!bananaEnabled)

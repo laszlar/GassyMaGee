@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3a4a39eba88cc2d43af5bbb8ccfe4c14
+timeCreated: 1510341935
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Esencia
+  fontNames:
+  - Esencia
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

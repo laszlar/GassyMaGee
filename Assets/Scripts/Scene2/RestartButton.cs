@@ -4,13 +4,17 @@ using System.Collections;
 
 public class RestartButton : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	public void LoadScene()
+#if UNITY_EDITOR
+
+    private void Update()
+    {
+        gameObject.SetActive(true);
+    }
+
+#endif
+
+    // Update is called once per frame
+    public void LoadScene()
     {
         SceneManager.LoadScene("Scene1");
     }

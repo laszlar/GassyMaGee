@@ -160,7 +160,6 @@ public class PlayerMovement : MonoBehaviour
 
                     //Recording Gassy's initial swipe position here...
                     startTouchPosition = Input.mousePosition;
-                    Debug.Log("This is where I touched = " + startTouchPosition.y);
 
                 }
             }
@@ -173,34 +172,37 @@ public class PlayerMovement : MonoBehaviour
 
         deltaTouch = endTouchPosition.y - startTouchPosition.y;
         delta = (endTouchPosition.y - startTouchPosition.y) / Mathf.Abs(startTouchPosition.y);
-        Debug.Log("This is the change percentage " + delta);
 
         if (deltaTouch > 0)
         {
-            setScaleX *= (delta + 1);
-            setScaleY *= (delta + 1);
+            adjustableScale = transform.localScale;
 
-            adjustableScale = new Vector2(setScaleX, setScaleY);
+            adjustableScale.x *= (delta + 1);
+            adjustableScale.y *= (delta + 1);
 
-            if (setScaleX <= 3.0f || setScaleY <= 3.0f)
+            adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+            if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
             {
                 transform.localScale = adjustableScale;
             }
             
         }
 
-        /*if (deltaTouch < 0)
+        if (deltaTouch < 0)
         {
-            setScaleX *= (delta);
-            setScaleY *= (delta);
+            adjustableScale = transform.localScale;
 
-            adjustableScale = new Vector2(setScaleX, setScaleY);
+            adjustableScale.x *= (delta + 1);
+            adjustableScale.y *= (delta + 1);
 
-            if (setScaleX >= 0.5f || setScaleY >= 0.5f)
+            adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+            if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
             {
                 transform.localScale = adjustableScale;
             }
-        }*/
+        }
 #endif
 
         if (!bananaEnabled)
@@ -213,16 +215,20 @@ public class PlayerMovement : MonoBehaviour
                     {
                         _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
                         anim.SetTrigger("IsGroundedJump");
-                        Debug.Log(i);
                     }
                 }
             }
         }
-            /*
+
+            ///////////////////////////
+            //Android Touch Controls//
+            //////////////////////////
+
+        if (!bananaEnabled)
+        { 
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
-                Debug.Log(Input.touchCount);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
@@ -247,25 +253,42 @@ public class PlayerMovement : MonoBehaviour
                         }
                         break;
                 }
-            }*/ 
-        //}
-        /*
-        Debug.Log(startTouchPosition);
-        Debug.Log(endTouchPosition);
+            }
+        }
+
 
         if (swiped)
         {
-            Debug.Log("I just swipped!");
             if (deltaTouch > 0)
             {
-                Debug.Log("I just swiped up!");
+                adjustableScale = transform.localScale;
+
+                adjustableScale.x *= (delta + 1);
+                adjustableScale.y *= (delta + 1);
+
+                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
+                {
+                    transform.localScale = adjustableScale;
+                }
             }
 
             if (deltaTouch < 0)
             {
-                Debug.Log("I just swiped down");
+                adjustableScale = transform.localScale;
+
+                adjustableScale.x *= (delta + 1);
+                adjustableScale.y *= (delta + 1);
+
+                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
+                {
+                    transform.localScale = adjustableScale;
+                }
             }
-        }*/
+        }
 
         //Disables player jump after set amount of time
         if (transform.position.y > 0)

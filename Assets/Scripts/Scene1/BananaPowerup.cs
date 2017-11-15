@@ -27,9 +27,6 @@ public class BananaPowerup : MonoBehaviour
 
     void Update()
     {
-        if (!touchingGround)
-            Destroy(gameObject);
-
         //if no powerups or if both powerups are active then run at regular speed!
         if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
             playerScript.parachuteEnabled && playerScript.bananaEnabled)
@@ -52,16 +49,6 @@ public class BananaPowerup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        //check to see if it is touching the floor
-        if (col.gameObject.tag == "Plank" || col.gameObject.tag == "Floor")
-        {
-            touchingGround = true;
-        }
-        else
-        {
-            touchingGround = false;
-        }
-
         //turn on banana powerup for the player
         if (col.gameObject.tag == "Player")
         {
@@ -71,13 +58,14 @@ public class BananaPowerup : MonoBehaviour
             render.enabled = false;
 
             audioTimer += Time.deltaTime;
-
-            if (audioTimer >= 1.0f)
+            if (audioTimer >= 0.3f)
             {
                 Destroy(gameObject);
             }
+            
         }
     }
+ 
 
     void SpeedUp()
     {

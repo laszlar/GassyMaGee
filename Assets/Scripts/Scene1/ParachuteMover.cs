@@ -13,10 +13,16 @@ public class ParachuteMover : MonoBehaviour
     private float normalSpeed = -1.0f;
     private float fastSpeed = -1.5f;
     PlayerMovement playerScript;
+    private SpriteRenderer render;
+
+    public AudioSource source;
+    private float audioTimer;
 
     private void Start()
     {
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        source = GetComponent<AudioSource>();
+        render = GetComponent<SpriteRenderer>();
     }
 
     //move that Parachute!
@@ -45,8 +51,16 @@ public class ParachuteMover : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
             playerScript.ParachuteMethod();
+            render.enabled = false;
+            source.Play();
+
+            audioTimer += Time.deltaTime;
+
+            if (audioTimer >= 0.3f)
+            {
+                Destroy(gameObject);
+            }   
         }
     }
 

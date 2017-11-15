@@ -71,7 +71,11 @@ public class PlayerMovement : MonoBehaviour
     private float setScaleY = 1.0f;
     private float minScale = 0.40f;
     private float maxScale = 3.0f;
-    
+
+    /*//audio
+    public AudioSource bananaSource;
+    public AudioSource parachuteSource;
+    */
     #endregion
 
     #region MonoBehaviors
@@ -108,6 +112,11 @@ public class PlayerMovement : MonoBehaviour
         adjustableScale = new Vector3(setScaleX, setScaleY, 1);
         transform.localScale = adjustableScale;
         //=============================//
+
+        /*//Audio
+        bananaSource = GetComponent<AudioSource>();
+        parachuteSource = GetComponent<AudioSource>();
+        */
     }
 
     void Update()

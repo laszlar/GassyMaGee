@@ -11,11 +11,17 @@ public class BananaPowerup : MonoBehaviour
 
     private bool touchingGround;
     PlayerMovement playerScript;
-    
+
+    private SpriteRenderer render;
+
+    public AudioSource source;
+    private float audioTimer = 0f;
 
     void Start()
     {
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        render = GetComponent<SpriteRenderer>();
+        source = GetComponent<AudioSource>();
     }
 
 
@@ -59,8 +65,17 @@ public class BananaPowerup : MonoBehaviour
         //turn on banana powerup for the player
         if (col.gameObject.tag == "Player")
         {
+            Debug.Log("banana touched player");
             playerScript.BananaMethod();
-            Destroy(gameObject);
+            source.Play();
+            render.enabled = false;
+
+            audioTimer += Time.deltaTime;
+
+            if (audioTimer >= 1.0f)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

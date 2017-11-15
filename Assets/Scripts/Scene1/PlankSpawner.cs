@@ -45,7 +45,6 @@ public class PlankSpawner : MonoBehaviour {
     void Spawn ()
 	{
         var isThisPlankMissing = RandomInt();
-        //Debug.Log(isThisPlankMissing);
 	    if (Planks.Count < 100)
 	    {
 	        if (isThisPlankMissing < plankPercent)

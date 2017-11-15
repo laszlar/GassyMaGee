@@ -64,16 +64,16 @@ public class ScoreTracker : MonoBehaviour
     {
         switch (score)
         {
-            case 100:
+            case 250:
                 PlankSpawner.plankPercent = 75;
                 break;
-            case 50:
+            case 150:
                 PlankSpawner.plankPercent = 80;
                 break;
-            case 25:
+            case 75:
                 PlankSpawner.plankPercent = 90;
                 break;
-            case 1:
+            case 25:
                 PlankSpawner.plankPercent = 95;
                 break;
         }

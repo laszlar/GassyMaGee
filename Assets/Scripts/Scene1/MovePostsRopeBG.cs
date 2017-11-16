@@ -6,7 +6,7 @@ public class MovePostsRopeBG : MonoBehaviour
 {
 	public GameObject PostsAndFuckingRope;
 	private GameObject _fuckingObject;
-	private readonly Vector2 _startPosition = new Vector2(10.94f, -0.774f);
+	private readonly Vector2 _startPosition = new Vector2(-1.0f, -0.774f);
 	private Vector2 _newSpawnPosition;
 	private float _offset;
 

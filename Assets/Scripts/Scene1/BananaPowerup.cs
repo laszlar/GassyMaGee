@@ -52,7 +52,6 @@ public class BananaPowerup : MonoBehaviour
         //turn on banana powerup for the player
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("banana touched player");
             playerScript.BananaMethod();
             source.Play();
             render.enabled = false;

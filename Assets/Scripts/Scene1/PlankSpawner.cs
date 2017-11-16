@@ -16,7 +16,7 @@ public class PlankSpawner : MonoBehaviour {
     //private float ySpawnLoacation = -0.625f;
 
     private GameObject _rrgWeWalkThePlank;
-    private readonly Vector2 _startPosition = new Vector2(9.29f, -0.6292f);
+    private readonly Vector2 _startPosition = new Vector2(0f, -0.6292f);
     private Vector2 _newSpawnPosition;
     private float _offset;
 
@@ -45,7 +45,7 @@ public class PlankSpawner : MonoBehaviour {
     void Spawn ()
 	{
         var isThisPlankMissing = RandomInt();
-	    if (Planks.Count < 100)
+	    if (Planks.Count < 50)
 	    {
 	        if (isThisPlankMissing < plankPercent)
 	        {

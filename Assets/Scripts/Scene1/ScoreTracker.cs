@@ -21,6 +21,8 @@ public class ScoreTracker : MonoBehaviour
     GameObject fatty;
     GameObject bomb;
 
+    //timer for debug
+    float timer = 0f;
     void Awake ()
     {
         highScore = PlayerPrefs.GetInt("High Score");
@@ -47,17 +49,26 @@ public class ScoreTracker : MonoBehaviour
        score = player.points;
        text.text = "" + score;
        if (score > highScore)
+       {
+           highScore = score;
+           PlayerPrefs.SetInt("High Score", highScore);
+           PlayerPrefs.Save();
+       }
+
+        timer += Time.deltaTime;
+        
+        if (timer >= 1.0f)
         {
-            highScore = score;
-            PlayerPrefs.SetInt("High Score", highScore);
-            PlayerPrefs.Save();
+            Debug.Log("The score is now " + score);
         }
 
-       //if the score is greater than 50 start limiting the number of planks that spawn
+
+
+       //if the score is greater than 25 start limiting the number of planks that spawn
        ChangePlankPercent();
 
-        //Launch game objects depending on the score
-        GameObjectLogicLauncher();
+      //Launch game objects depending on the score
+      GameObjectLogicLauncher();
 	}
 
     public static void ChangePlankPercent()

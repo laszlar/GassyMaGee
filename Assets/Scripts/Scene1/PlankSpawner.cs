@@ -19,6 +19,10 @@ public class PlankSpawner : MonoBehaviour {
     private readonly Vector2 _startPosition = new Vector2(0f, -0.6292f);
     private Vector2 _newSpawnPosition;
     private float _offset;
+    private float spawnTimer = 0f;
+    private bool timerOn;
+    private bool ranOnce = true;
+    private int timer = 2;
 
     public static int plankPercent = 100;
 
@@ -44,14 +48,35 @@ public class PlankSpawner : MonoBehaviour {
 
     void Spawn ()
 	{
+        //make sure the coroutine runs once only
+        if (ranOnce)
+        ShutTimerOffMethod();
+
+        //start the spawn timer
+        if (timerOn)
+        {
+            spawnTimer += Time.deltaTime;
+        }
+
         var isThisPlankMissing = RandomInt();
 	    if (Planks.Count < 50)
 	    {
 	        if (isThisPlankMissing < plankPercent)
 	        {
 	            _rrgWeWalkThePlank = Instantiate(plankPrefab, _newSpawnPosition, Quaternion.identity);
-                _newSpawnPosition = _rrgWeWalkThePlank.transform.position;
-                _newSpawnPosition.x += _offset;
+                //_newSpawnPosition = _rrgWeWalkThePlank.transform.position;
+
+                //spawn objects closer to each other if the timer is greater than 1.1 seconds
+                if (spawnTimer >= 1.1f)
+                {
+                    _newSpawnPosition.x += 0.001f;
+                }
+                else
+                {
+                    _newSpawnPosition.x += _offset;
+                } 
+
+                //add the game objects to the list
                 Planks.Add(_rrgWeWalkThePlank);
 	        }
 	        else
@@ -72,4 +97,18 @@ public class PlankSpawner : MonoBehaviour {
 		}
 		plankPercent = 100;
 	}
+
+    //shut the timer off, maybe it causes unecessary cpu resources?
+    IEnumerator ShutTimerOff(int timer)
+    {
+        timerOn = true;
+        yield return new WaitForSeconds(timer);
+        timerOn = false;
+        ranOnce = false;
+    }
+
+    private void ShutTimerOffMethod()
+    {
+        StartCoroutine(ShutTimerOff(timer));
+    }
 }

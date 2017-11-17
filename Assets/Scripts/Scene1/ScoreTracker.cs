@@ -55,15 +55,6 @@ public class ScoreTracker : MonoBehaviour
            PlayerPrefs.Save();
        }
 
-        timer += Time.deltaTime;
-        
-        if (timer >= 1.0f)
-        {
-            Debug.Log("The score is now " + score);
-        }
-
-
-
        //if the score is greater than 25 start limiting the number of planks that spawn
        ChangePlankPercent();
 

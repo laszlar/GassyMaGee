@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
     //scale. 
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
-    private float deltaTouch;
+    public static float deltaTouch;
     private float delta;
     private float maxSize;
     private float minSize;

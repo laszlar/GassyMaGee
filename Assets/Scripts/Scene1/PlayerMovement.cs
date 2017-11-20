@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     private float minSize;
     private bool beanAbility;
     public static bool swiped;
-    private float swipeTimer;
+    private float swipeTimer = 0f;
     private float touchCounter = 0f;
     //setting the sclae
     private Vector3 adjustableScale;
@@ -185,6 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (deltaTouch > 0)
         {
+            swipeTimer += Time.deltaTime;
             adjustableScale = transform.localScale;
 
             adjustableScale.x *= (delta + 1);
@@ -200,6 +201,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (deltaTouch < 0)
         {
+            swipeTimer += Time.deltaTime;
             adjustableScale = transform.localScale;
 
             adjustableScale.x *= (delta + 1);

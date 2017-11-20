@@ -16,8 +16,6 @@ public class BombLauncher : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        player = GameObject.Find("Player");
-
         //Move that bomb! Featuring Ty Pennington!!!
         InvokeRepeating("SpawnBombs", 0f, 8f);
 	}
@@ -38,8 +36,7 @@ public class BombLauncher : MonoBehaviour
         }
         //pos = transform.position;
         //manipulate the position of the bomb launcher
-        pos.x = player.transform.position.x + offset;
-        transform.position = new Vector2(pos.x, Random.Range(-0.5f, 1.5f));
+        transform.position = new Vector2(6.0f, Random.Range(-0.5f, 1.5f));
         pos = transform.position;
 	}
 

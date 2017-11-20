@@ -8,7 +8,7 @@ using System.Collections;
 
 public class MoveSink : MonoBehaviour
 {
-    private float sinkSpeed;
+    private float sinkSpeed = -1.0f;
     PlayerMovement playerScript;
 
 	// Use this for initialization

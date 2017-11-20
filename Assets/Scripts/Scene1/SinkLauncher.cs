@@ -12,25 +12,14 @@ public class SinkLauncher : MonoBehaviour
     public float rate;
     public float offset;
     public GameObject sink;
-    public GameObject player;
-    float sinkSpawnLocation;
-    Vector2 playerPos;
-
 
     void Start()
     {
         InvokeRepeating("Spawn", delay, rate);  //InvokeRepeating(string methodName, float time, float repeatRate);
     }
 
-    void Update()
-    {
-        playerPos.x = player.transform.position.x;
-
-        sinkSpawnLocation = playerPos.x + offset;
-    }
-
     void Spawn() //Time to spawn the ducks!
     {
-        Instantiate(sink, new Vector2(sinkSpawnLocation, Random.Range(-0.43f, 2)), Quaternion.identity);
+        Instantiate(sink, new Vector2(6.0f, Random.Range(-0.43f, 2)), Quaternion.identity);
     }
 }

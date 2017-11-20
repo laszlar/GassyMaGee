@@ -11,7 +11,6 @@ public class BeansCounter : MonoBehaviour
 
     private Image _img;
     private static Material _mat;
-    //Speed used to be 0.23
     private const float Speed = 0.75f;
     private const string C = "_Cutoff";
     private static float _getFloat;
@@ -41,7 +40,7 @@ public class BeansCounter : MonoBehaviour
 
     #region private methods
 
-    /** 
+    /*
      * Set the _Cutoff value in the transition shader.
      * @params : floating point number
      *

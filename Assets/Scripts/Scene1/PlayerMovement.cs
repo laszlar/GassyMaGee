@@ -63,11 +63,15 @@ public class PlayerMovement : MonoBehaviour
     private float maxSize;
     private float minSize;
     private bool beanAbility;
-    public static bool swiped;
+    public static bool swiped = false;
+    public static bool swipeEnabler = true;
+    private bool swipeOnce;
+    private int swipeTimeLimit = 4;
     private float swipeTimer = 0f;
     private float touchCounter = 0f;
+    private int troubleshootCounter = 0;
     //setting the sclae
-    private Vector3 adjustableScale;
+    private static Vector3 adjustableScale;
     private float setScaleX = 1.0f;
     private float setScaleY = 1.0f;
     private float minScale = 0.40f;
@@ -83,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        swipeEnabler = true;
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
         camEffect.enabled = true;
         anim = transform.GetComponentInChildren<Animator>();
@@ -178,42 +183,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             endTouchPosition = Input.mousePosition;
+            swipeOnce = true;
         }
 
         deltaTouch = endTouchPosition.y - startTouchPosition.y;
         delta = (endTouchPosition.y - startTouchPosition.y) / Mathf.Abs(startTouchPosition.y);
-
-        if (deltaTouch > 0)
-        {
-            swipeTimer += Time.deltaTime;
-            adjustableScale = transform.localScale;
-
-            adjustableScale.x *= (delta + 1);
-            adjustableScale.y *= (delta + 1);
-
-            adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-            if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
-            {
-                transform.localScale = adjustableScale;
-            }   
-        }
-
-        if (deltaTouch < 0)
-        {
-            swipeTimer += Time.deltaTime;
-            adjustableScale = transform.localScale;
-
-            adjustableScale.x *= (delta + 1);
-            adjustableScale.y *= (delta + 1);
-
-            adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-            if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
-            {
-                transform.localScale = adjustableScale;
-            }
-        }
+        SwipeMethod();     
 #endif
 
         if (!bananaEnabled)
@@ -513,6 +488,95 @@ public class PlayerMovement : MonoBehaviour
 				_rb2D.velocity = new Vector2 (_rb2D.velocity.x, -_maxJumpVelocity);
 			}
 		}
+    }
+
+    //Disables the swipe functionality
+    private void SwipeLimit()
+    {
+        if (swipeOnce)
+        {
+            StartCoroutine(SwipeEnabled(swipeTimeLimit));
+        }
+    }
+
+    IEnumerator SwipeEnabled(int swipeTimeLimit)
+    {
+        Debug.Log("Swipe Disabled as you just swiped!");
+        swipeEnabler = false;
+        swipeOnce = false;
+        Debug.Log(troubleshootCounter);
+        yield return new WaitForSeconds(swipeTimeLimit);
+        swipeEnabler = true;
+        swipeOnce = true;
+        adjustableScale = new Vector3(1, 1, 1);
+        transform.localScale = adjustableScale;
+        Debug.Log("Swipe Enabled");
+    }
+
+    public void SwipeMethod()
+    {
+        //make gassy larger on swipe up!
+        if (swipeEnabler)
+        {
+            if (deltaTouch >= 10)
+            {
+                Debug.Log("You just made a swipe that was worthy!");
+                adjustableScale = transform.localScale;
+
+                adjustableScale.x *= (delta + 1);
+                adjustableScale.y *= (delta + 1);
+
+                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                //if (swipeEnabler)
+                //{
+                /*if (adjustableScale.x > 3.0f || adjustableScale.y > 3.0f)
+                {
+                    return;
+                }*/
+                if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
+                {
+                    transform.localScale = adjustableScale;
+                }
+                swipeTimer += Time.deltaTime;
+                if (swipeTimer >= 0.05f)
+                {
+                    troubleshootCounter++;
+                    SwipeLimit();
+                    swipeTimer = 0f;
+                }
+                //}
+            }
+        }
+
+        //make gassy smaller on swipe down
+        if (swipeEnabler)
+        {
+            if (deltaTouch <= 10)
+            {
+                adjustableScale = transform.localScale;
+
+                adjustableScale.x *= (delta + 1);
+                adjustableScale.y *= (delta + 1);
+
+                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                //if (swipeEnabler)
+                //{
+                if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
+                {
+                    transform.localScale = adjustableScale;
+                }
+                swipeTimer += Time.deltaTime;
+                if (swipeTimer >= 0.05f)
+                {
+                    SwipeLimit();
+                    swipeTimer = 0f;
+                }
+
+                //}
+            }
+        }
     }
 
     //unused at the moment

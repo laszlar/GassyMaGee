@@ -58,13 +58,14 @@ public class PlayerMovement : MonoBehaviour
     //scale. 
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
-    public static float deltaTouch;
+    private float deltaTouch = 0f;
     private float delta;
     private float maxSize;
     private float minSize;
     private bool beanAbility;
     public static bool swiped = false;
     public static bool swipeEnabler = true;
+    private bool startTimer = false;
     private bool swipeOnce;
     private int swipeTimeLimit = 4;
     private float swipeTimer = 0f;
@@ -87,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        swipeTimer = 0f;
         swipeEnabler = true;
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
         camEffect.enabled = true;
@@ -188,7 +190,10 @@ public class PlayerMovement : MonoBehaviour
 
         deltaTouch = endTouchPosition.y - startTouchPosition.y;
         delta = (endTouchPosition.y - startTouchPosition.y) / Mathf.Abs(startTouchPosition.y);
-        SwipeMethod();     
+        //SwipeMethod();
+        NewSwipeMethod();
+        ResetSwipeTimer();
+        Debug.Log("This is the swipe Timer: " + swipeTimer);
 #endif
 
         if (!bananaEnabled)
@@ -578,6 +583,101 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    public void NewSwipeMethod()
+    {
+        if (!startTimer)
+        {
+            if (swipeEnabler)
+            {
+                //make gassy larger on swipe up!
+                //if (swipeEnabler)
+                //{
+                if (deltaTouch >= 10)
+                {
+
+
+                    Debug.Log("You just made a swipe that was worthy!");
+                    adjustableScale = transform.localScale;
+
+                    adjustableScale.x *= (delta + 1);
+                    adjustableScale.y *= (delta + 1);
+
+                    adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                    //if (swipeEnabler)
+                    //{
+                    /*if (adjustableScale.x > 3.0f || adjustableScale.y > 3.0f)
+                    {
+                        return;
+                    }*/
+                    if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
+                    {
+                        transform.localScale = adjustableScale;
+                        Debug.Log("Adjusted the scale!");
+                        startTimer = true;
+                    }
+                    
+
+
+                    //}
+                }
+                //}
+            }
+        }
+
+        if (!startTimer)
+        {
+            if (swipeEnabler)
+            {
+                //make gassy smaller on swipe down
+                //if (swipeEnabler)
+                //{
+                if (deltaTouch <= 10)
+                {
+                    adjustableScale = transform.localScale;
+
+                    adjustableScale.x *= (delta + 1);
+                    adjustableScale.y *= (delta + 1);
+
+                    adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                    //if (swipeEnabler)
+                    //{
+                    if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
+                    {
+                        transform.localScale = adjustableScale;
+                        Debug.Log("Adjusted the scale!");
+                        startTimer = true;
+                    }
+                    
+                    //}
+                }
+                //}
+            }
+        }
+    }
+
+    public void ResetSwipeTimer()
+    {
+        if (startTimer)
+        {
+            swipeTimer += Time.deltaTime;
+        }
+
+        if (swipeTimer > 0f && swipeTimer < 4.0f)
+        {
+            swipeEnabler = false;
+        }
+
+        if (swipeTimer >= 4.0f)
+        {
+            swipeEnabler = true;
+            swipeTimer = 0f;
+            startTimer = false;
+        }
+    }
+
 
     //unused at the moment
     /*

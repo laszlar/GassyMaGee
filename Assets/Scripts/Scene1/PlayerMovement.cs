@@ -63,12 +63,15 @@ public class PlayerMovement : MonoBehaviour
     private float maxSize;
     private float minSize;
     private bool beanAbility;
+    //timer and bools for swiping
     public static bool swiped = false;
     public static bool swipeEnabler = true;
     private bool startTimer = false;
+    private bool resetTimer = true;
     private bool swipeOnce;
     private int swipeTimeLimit = 4;
     private float swipeTimer = 0f;
+
     private float touchCounter = 0f;
     private int troubleshootCounter = 0;
     //setting the sclae
@@ -662,6 +665,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (startTimer)
         {
+            if (resetTimer)
             swipeTimer += Time.deltaTime;
         }
 
@@ -672,9 +676,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (swipeTimer >= 4.0f)
         {
+            resetTimer = false;
             swipeEnabler = true;
             swipeTimer = 0f;
             startTimer = false;
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 

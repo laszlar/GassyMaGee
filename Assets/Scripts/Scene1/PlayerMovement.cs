@@ -66,11 +66,11 @@ public class PlayerMovement : MonoBehaviour
     //timer and bools for swiping
     public static bool swiped = false;
     public static bool swipeEnabler = true;
-    private bool startTimer = false;
-    private bool resetTimer = true;
+    public static bool startTimer = false;
     private bool swipeOnce;
     private int swipeTimeLimit = 4;
     private float swipeTimer = 0f;
+    public bool fingerMoved = false;
 
     private float touchCounter = 0f;
     private int troubleshootCounter = 0;
@@ -196,7 +196,6 @@ public class PlayerMovement : MonoBehaviour
         //SwipeMethod();
         NewSwipeMethod();
         ResetSwipeTimer();
-        Debug.Log("This is the swipe Timer: " + swipeTimer);
 #endif
 
         if (!bananaEnabled)
@@ -230,12 +229,35 @@ public class PlayerMovement : MonoBehaviour
                         break;
 
                     case TouchPhase.Moved:
-                        endTouchPosition = touch.position;
+                        fingerMoved = true;
                         break;
 
                     case TouchPhase.Ended:
-                        swiped = true;
-                        
+                        //check to see if player swiped with this boolean
+                        if (fingerMoved)
+                        {
+                            endTouchPosition = touch.position;
+                            swiped = true;
+
+                            //calculate the change in touch positions with the swipe
+                            deltaTouch = endTouchPosition.y - startTouchPosition.y;
+                            delta = (endTouchPosition.y - startTouchPosition.y) / Mathf.Abs(startTouchPosition.y);
+
+                            //execute the change in scale for Gassy 
+                            NewSwipeMethod();
+                            ResetSwipeTimer();
+
+                            //reset the boolean for swiping
+                            fingerMoved = false;
+                        }
+                        //if user didn't swipe, just jump!  
+                        else if (_canJump)
+                        {
+                            _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
+                            anim.SetTrigger("IsGroundedJump");
+                        }
+                                 
+                        /*    
                         if (touch.deltaTime < 0.20f)  //if the user "taps" make him jump
                         {
                             if (_canJump)
@@ -245,12 +267,13 @@ public class PlayerMovement : MonoBehaviour
                                 anim.SetTrigger("IsGroundedJump");
                             }
                         }
+                        */
                         break;
                 }
             }
         }
 
-
+        /*
         if (swiped)
         {
             if (deltaTouch > 0)
@@ -283,6 +306,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+        */
 
         //Disables player jump after set amount of time
         if (transform.position.y > 0)
@@ -497,7 +521,7 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
     }
-
+/*
     //Disables the swipe functionality
     private void SwipeLimit()
     {
@@ -538,10 +562,10 @@ public class PlayerMovement : MonoBehaviour
 
                 //if (swipeEnabler)
                 //{
-                /*if (adjustableScale.x > 3.0f || adjustableScale.y > 3.0f)
+                if (adjustableScale.x > 3.0f || adjustableScale.y > 3.0f)
                 {
                     return;
-                }*/
+                }
                 if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
                 {
                     transform.localScale = adjustableScale;
@@ -587,45 +611,32 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    */
+
     public void NewSwipeMethod()
     {
         if (!startTimer)
         {
             if (swipeEnabler)
             {
-                //make gassy larger on swipe up!
-                //if (swipeEnabler)
-                //{
-                if (deltaTouch >= 10)
+                if (swipeOnce)
                 {
-
-
-                    Debug.Log("You just made a swipe that was worthy!");
-                    adjustableScale = transform.localScale;
-
-                    adjustableScale.x *= (delta + 1);
-                    adjustableScale.y *= (delta + 1);
-
-                    adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-                    //if (swipeEnabler)
-                    //{
-                    /*if (adjustableScale.x > 3.0f || adjustableScale.y > 3.0f)
+                    if (deltaTouch >= 10)
                     {
-                        return;
-                    }*/
-                    if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
-                    {
-                        transform.localScale = adjustableScale;
-                        Debug.Log("Adjusted the scale!");
-                        startTimer = true;
+                        adjustableScale = transform.localScale;
+
+                        adjustableScale.x *= (delta + 1);
+                        adjustableScale.y *= (delta + 1);
+
+                        adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                        if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
+                        {
+                            transform.localScale = adjustableScale;
+                            startTimer = true;
+                        }
                     }
-                    
-
-
-                    //}
                 }
-                //}
             }
         }
 
@@ -633,30 +644,24 @@ public class PlayerMovement : MonoBehaviour
         {
             if (swipeEnabler)
             {
-                //make gassy smaller on swipe down
-                //if (swipeEnabler)
-                //{
-                if (deltaTouch <= 10)
+                if (swipeOnce)
                 {
-                    adjustableScale = transform.localScale;
-
-                    adjustableScale.x *= (delta + 1);
-                    adjustableScale.y *= (delta + 1);
-
-                    adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-                    //if (swipeEnabler)
-                    //{
-                    if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
+                    if (deltaTouch <= 10)
                     {
-                        transform.localScale = adjustableScale;
-                        Debug.Log("Adjusted the scale!");
-                        startTimer = true;
+                        adjustableScale = transform.localScale;
+
+                        adjustableScale.x *= (delta + 1);
+                        adjustableScale.y *= (delta + 1);
+
+                        adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
+
+                        if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
+                        {
+                            transform.localScale = adjustableScale;
+                            startTimer = true;
+                        }
                     }
-                    
-                    //}
                 }
-                //}
             }
         }
     }
@@ -665,7 +670,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (startTimer)
         {
-            if (resetTimer)
             swipeTimer += Time.deltaTime;
         }
 
@@ -676,7 +680,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (swipeTimer >= 4.0f)
         {
-            resetTimer = false;
+            swipeOnce = false;
             swipeEnabler = true;
             swipeTimer = 0f;
             startTimer = false;

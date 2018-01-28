@@ -17,7 +17,7 @@ public class PeasCounter : MonoBehaviour {
 
     //special variables for this script (swipe reset and stuff)
     private bool reset = true;
-
+    private float timer = 0f;
 
     #endregion
 
@@ -28,28 +28,33 @@ public class PeasCounter : MonoBehaviour {
         SetCutOff(0);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-
-
         //Debug.Log("has swiped: " + ...
-        if (PlayerMovement.swiped)
+        if (PlayerMovement.startTimer)
         {
             if (reset)
             {
                 SetCutOff(1);
-                reset = false;
+                reset = false;       
             }
 
             getFloat = mat.GetFloat(C);
-            SetCutOff(getFloat -= Speed * Time.deltaTime);    
+            SetCutOff(getFloat -= Speed * Time.deltaTime);
         }
-
-        if (getFloat <= 0 && !reset)
+        
+        if (getFloat <= 0.01f)
         {
-            reset = true;
+            timer += Time.deltaTime;
+            if (timer >= 0.1f)
+            {
+                reset = true;
+                SetCutOff(0);
+                timer = 0f;
+            }
+            
         }
-
+       
         /*if (PlayerMovement.deltaTouch == 0)
         {
             SetCutOff(1);

@@ -9,12 +9,6 @@ public class SceneManagement : MonoBehaviour {
     private string _scene = "Scene1";
     [SerializeField] private Text _loadingText;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
 	void Update ()
     {
 	    if (!_loadScene)
@@ -36,14 +30,11 @@ public class SceneManagement : MonoBehaviour {
         // This might be a bit much? seems fine for now.
         yield return new WaitForSeconds(5);
 
-        AsyncOperation async = SceneManager.LoadSceneAsync(_scene, LoadSceneMode.Additive);
-        async.allowSceneActivation = false;
+        AsyncOperation async = SceneManager.LoadSceneAsync(_scene, LoadSceneMode.Single);
         
-        while (async.progress < 0.9f)
+        while (!async.isDone)
         {
             yield return null;
         }
-
-        async.allowSceneActivation = true;
     }
 }

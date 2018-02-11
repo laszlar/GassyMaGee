@@ -14,6 +14,7 @@ public class PeasCounter : MonoBehaviour {
     private const float Speed = 0.25f;
     private const string C = "_Cutoff";
     private static float getFloat;
+    private static float calcFloat;
 
     //special variables for this script (swipe reset and stuff)
     private bool reset = true;
@@ -28,8 +29,23 @@ public class PeasCounter : MonoBehaviour {
         SetCutOff(0);
     }
 
-    private void LateUpdate()
+    private void Update()
     {
+
+        if (PlayerMovement.fingerMoved)
+        {
+            if (reset)
+            {
+                SetCutOff(1);
+                reset = false;
+            }
+            getFloat = mat.GetFloat(C);
+            getFloat -= Speed * Time.deltaTime;
+            SetCutOff(getFloat);
+        }
+        Debug.Log(getFloat); 
+
+        /*
         //Debug.Log("has swiped: " + ...
         if (PlayerMovement.startTimer)
         {
@@ -43,6 +59,7 @@ public class PeasCounter : MonoBehaviour {
             SetCutOff(getFloat -= Speed * Time.deltaTime);
         }
         
+        //fall back setting to 
         if (getFloat <= 0.01f)
         {
             timer += Time.deltaTime;
@@ -53,7 +70,7 @@ public class PeasCounter : MonoBehaviour {
                 timer = 0f;
             }
             
-        }
+        }*/
        
         /*if (PlayerMovement.deltaTouch == 0)
         {

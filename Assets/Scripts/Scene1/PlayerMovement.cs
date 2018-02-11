@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     private bool swipeOnce;
     private int swipeTimeLimit = 4;
     private float swipeTimer = 0f;
-    public bool fingerMoved = false;
+    public static bool fingerMoved = false;
 
     private float touchCounter = 0f;
     private int troubleshootCounter = 0;
@@ -217,11 +217,13 @@ public class PlayerMovement : MonoBehaviour
             //Android Touch Controls//
             //////////////////////////
 
-        if (!bananaEnabled)
-        { 
-            if (Input.touchCount > 0)
+        int numbOfTouches = Input.touchCount;
+
+        if (numbOfTouches > 0)
+        {
+            for (int i = 0; i < numbOfTouches; i++)
             {
-                Touch touch = Input.GetTouch(0);
+                Touch touch = Input.GetTouch(i);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
@@ -236,6 +238,7 @@ public class PlayerMovement : MonoBehaviour
                         //check to see if player swiped with this boolean
                         if (fingerMoved)
                         {
+                            _canJump = false;
                             endTouchPosition = touch.position;
                             swiped = true;
 
@@ -251,23 +254,17 @@ public class PlayerMovement : MonoBehaviour
                             fingerMoved = false;
                         }
                         //if user didn't swipe, just jump!  
-                        else if (_canJump)
+                        else if (!fingerMoved)
                         {
-                            _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
-                            anim.SetTrigger("IsGroundedJump");
-                        }
-                                 
-                        /*    
-                        if (touch.deltaTime < 0.20f)  //if the user "taps" make him jump
-                        {
-                            if (_canJump)
+                            if (!bananaEnabled)
                             {
-                                if (Mathf.Abs(deltaTouch) < 0.05f) //making sure there wasn't any negligible finger movement.
-                                _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
-                                anim.SetTrigger("IsGroundedJump");
+                                if (_canJump)
+                                {
+                                    _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
+                                    anim.SetTrigger("IsGroundedJump");
+                                }
                             }
                         }
-                        */
                         break;
                 }
             }

@@ -11,9 +11,14 @@ public class FloorManager : MonoBehaviour
     private Vector2 originalPOS;
     private Vector2 nextPOS;
 
+    //player variables
+    private GameObject player;
+    PlayerMovement playerScript;
+
     // Use this for initialization
     void Start ()
     {
+
         originalPOS = new Vector2(0f, -0.608f);
         nextPOS = new Vector2(2.2504f, -0.608f);
         //Instantiate game objects in array at start up
@@ -36,7 +41,8 @@ public class FloorManager : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+	    	
 	}
 }

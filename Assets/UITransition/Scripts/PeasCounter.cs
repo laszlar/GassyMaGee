@@ -43,7 +43,6 @@ public class PeasCounter : MonoBehaviour {
             getFloat -= Speed * Time.deltaTime;
             SetCutOff(getFloat);
         }
-        Debug.Log(getFloat); 
 
         /*
         //Debug.Log("has swiped: " + ...

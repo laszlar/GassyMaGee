@@ -18,9 +18,14 @@ public class FloorManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //find player object/shwimps... i mean scripts
+        player = GameObject.Find("Player");
+        playerScript = player.GetComponent<PlayerMovement>();
 
+        //get the vector positions for the inital flooring set
         originalPOS = new Vector2(0f, -0.608f);
         nextPOS = new Vector2(2.2504f, -0.608f);
+
         //Instantiate game objects in array at start up
         for(int i = 0; i < 4; i++)
         {
@@ -43,6 +48,6 @@ public class FloorManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    	
+        //if(playerscript.points)
 	}
 }

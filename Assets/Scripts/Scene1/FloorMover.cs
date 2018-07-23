@@ -14,9 +14,6 @@ public class FloorMover : MonoBehaviour
     //Player's variables
     private GameObject player;
     PlayerMovement playerScript;
-
-    //looper variable
-    //private GameObject looper;
 	
     // Use this for initialization
 	void Start ()
@@ -25,18 +22,14 @@ public class FloorMover : MonoBehaviour
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerMovement>();
 
-        //find looper object
-        //looper = GameObject.Find("FloorLooper");
-
         //this object's width
-        box = gameObject.GetComponent<BoxCollider2D>();
+        box = GetComponent<BoxCollider2D>();
         boxWidth = box.size.x;
 	}
 
     // Update is called once per frame
     private void Update()
     {
-        Debug.Log("This is the floors width " + boxWidth);
         //If neither banana or parachute is active BG moves at regular speed.
         if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
             playerScript.parachuteEnabled && playerScript.bananaEnabled)
@@ -65,9 +58,9 @@ public class FloorMover : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "FloorLooper")
+        if (collision.name == "FloorBoundaryMover")
         {
-
+            transform.Translate(boxWidth * 4, 0f, 0f);
         }
     }
 }

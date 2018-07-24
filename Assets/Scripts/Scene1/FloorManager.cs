@@ -64,6 +64,7 @@ public class FloorManager : MonoBehaviour
 	//need to check and see if this solves stuff.
 	void Update ()
     {
+        //adding this in to test git!
         if (playerScript.points > 19)
         {
             if (!spawnedEasy)

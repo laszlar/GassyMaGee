@@ -58,7 +58,7 @@ public class FloorMover : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "FloorBoundaryMover")
+        if (collision.name == "FloorBoundaryDestroyer")
         {
             transform.Translate(boxWidth * 4, 0f, 0f);
         }

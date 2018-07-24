@@ -25,6 +25,10 @@ public class FloorManager : MonoBehaviour
     private GameObject player;
     PlayerMovement playerScript;
 
+    //Floor destoryer access
+    private GameObject floorDestroyer;
+    FloorBoundaryDestroyer floorDestroyerScript;
+
     void Start ()
     {
         //set all other bools to false, so that they can spawn
@@ -35,6 +39,10 @@ public class FloorManager : MonoBehaviour
         //find player object/shwimps... i mean scripts
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerMovement>();
+
+        //Find the floor destroyer for the logic
+        floorDestroyer = GameObject.Find("FloorBoundaryDestroyer");
+        floorDestroyerScript = floorDestroyer.GetComponent<FloorBoundaryDestroyer>();
 
         //get the vector positions for the inital flooring set
         originalPOS = new Vector2(0f, -0.608f);
@@ -65,7 +73,7 @@ public class FloorManager : MonoBehaviour
 	void Update ()
     {
         //adding this in to test git!
-        if (playerScript.points > 19)
+        if (floorDestroyerScript.standardIsGone)
         {
             if (!spawnedEasy)
             {
@@ -83,14 +91,10 @@ public class FloorManager : MonoBehaviour
                         //add to the X value of the new positions
                         addtlFloorSetPOS.x += 2.2504f;
                     }
-
-                    if (a == 3)
-                    {
-                        //disable more of the easy set from spawning and reset Vector2 position for next batch.
-                        spawnedEasy = true;
-                        addtlFloorSetPOS.x = 9.0016f;
-                    }
                 }
+                //disable more of the easy set from spawning and reset Vector2 position for next batch.
+                addtlFloorSetPOS.x = 9.0016f;
+                spawnedEasy = true;
             }
         }
 	}

@@ -53,14 +53,12 @@ public class FloorBoundaryDestroyer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Destroyer just collided with " + collision.gameObject.name);
         if (destroyStandard)
         {
-            if (collision.gameObject.name == "PlankSet_Standard(Clone)")
+            if (collision.gameObject.transform.parent.name == "PlankSet_Standard(Clone)")
             {
-                Debug.Log("I collided with standard floor set");
                 standardIsGone = true;
-                Destroy(collision.gameObject);
+                Destroy(collision.transform.parent.gameObject); 
             }
         }
     }

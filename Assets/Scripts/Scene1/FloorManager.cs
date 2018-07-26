@@ -72,14 +72,14 @@ public class FloorManager : MonoBehaviour
 	//need to check and see if this solves stuff.
 	void Update ()
     {
-        //adding this in to test git!
+        //Spawn that easy set of flooring
         if (floorDestroyerScript.standardIsGone)
         {
             if (!spawnedEasy)
             {
                 for (int a = 0; a < 4; a++)
                 {
-                    //spawn initial easy flooring set when points are 20 or greater
+                    //spawn initial easy flooring set when alloted by FloorBoundaryDestroyer script
                     if (a == 0)
                     {
                         Instantiate(easySet[Random.Range(0, 3)], newFloorSetPOS, Quaternion.identity);
@@ -95,6 +95,58 @@ public class FloorManager : MonoBehaviour
                 //disable more of the easy set from spawning and reset Vector2 position for next batch.
                 addtlFloorSetPOS.x = 9.0016f;
                 spawnedEasy = true;
+            }
+        }
+
+        //Sapwn the medium set of flooring
+        if (floorDestroyerScript.easyIsGone)
+        {
+            if (!spawnedMedium)
+            {
+                for (int b = 0; b < 4; b++)
+                {
+                    //spawn intial medium flooring set when alloted by FloorBoundaryDestroyer script
+                    if (b == 0)
+                    {
+                        Instantiate(mediumSet[Random.Range(0, 3)], newFloorSetPOS, Quaternion.identity);
+                    }
+
+                    if (b > 0)
+                    {
+                        Instantiate(mediumSet[Random.Range(0, 3)], addtlFloorSetPOS, Quaternion.identity);
+                        //add to the 'X" value of the new addtlFloorSetPOS position
+                        addtlFloorSetPOS.x += 2.2504f;
+                    }
+                }
+                //reset the addtlFloorSetPOS (X value) for the next (hard) set
+                addtlFloorSetPOS.x = 9.0016f;
+                spawnedMedium = true;
+            }
+        }
+
+        //Spawn the hard set of flooring
+        if (floorDestroyerScript.mediumIsGone)
+        {
+            if (!spawnedHard)
+            {
+                for (int c = 0; c < 4; c++)
+                {
+                    //spawn intial HARD flooring set when alloted by FloorBoundaryDestroyer script
+                    if (c == 0)
+                    {
+                        Instantiate(hardSet[Random.Range(0, 3)], newFloorSetPOS, Quaternion.identity);
+                    }
+
+                    if (c > 0)
+                    {
+                        Instantiate(hardSet[Random.Range(0, 3)], addtlFloorSetPOS, Quaternion.identity);
+                        //add to the 'X" value of the new addtlFloorSetPOS position
+                        addtlFloorSetPOS.x += 2.2504f;
+                    }
+                }
+                //reset the addtlFloorSetPOS (X value) in case we want an EXTREME floor set! :)
+                addtlFloorSetPOS.x = 9.0016f;
+                spawnedHard = false;
             }
         }
 	}

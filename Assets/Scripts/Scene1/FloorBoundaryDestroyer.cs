@@ -35,17 +35,17 @@ public class FloorBoundaryDestroyer : MonoBehaviour
 	void Update ()
     {
         //Depending on the points, set true to destroy the flooring specific flooring sets
-        if (playerScript.points > 19)
+        if (playerScript.points > 25)
         {
             destroyStandard = true;
         }
 
-        if (playerScript.points > 39)
+        if (playerScript.points > 55)
         {
             destroyEasy = true;
         }
 
-        if (playerScript.points > 79)
+        if (playerScript.points > 85)
         {
             destroyMedium = true;
         }
@@ -59,6 +59,30 @@ public class FloorBoundaryDestroyer : MonoBehaviour
             {
                 standardIsGone = true;
                 Destroy(collision.transform.parent.gameObject); 
+            }
+        }
+
+        if (destroyEasy)
+        {
+            if (collision.gameObject.transform.parent.name == "PlankSet_Easy1(Clone)" ||
+                collision.gameObject.transform.parent.name == "PlankSet_Easy2(Clone)" ||
+                collision.gameObject.transform.parent.name == "PlankSet_Easy3(Clone)" ||
+                collision.gameObject.transform.parent.name == "PlankSet_Easy4(Clone)")
+            {
+                easyIsGone = true;
+                Destroy(collision.transform.parent.gameObject);
+            }
+        }
+
+        if (destroyMedium)
+        {
+            if (collision.gameObject.transform.parent.name == "PlankSet_Medium1(Clone)" ||
+                collision.gameObject.transform.parent.name == "PlankSet_Medium2(Clone)" ||
+                collision.gameObject.transform.parent.name == "PlankSet_Medium3(Clone)" ||
+                collision.gameObject.transform.parent.name == "PlankSet_Medium4(Clone)" ||)
+            {
+                mediumIsGone = true;
+                Destroy(collision.transform.parent.gameObject);
             }
         }
     }

@@ -51,21 +51,28 @@ public class FloorManager : MonoBehaviour
         addtlFloorSetPOS = new Vector2(9.0016f, -0.608f);
 
         //Instantiate game objects in array at start up
-        for(int i = 0; i < 4; i++)
+        if (playerScript.points < 25)
         {
-            //Spawn the first set of planks at the original position
-            if (i == 0)
+            for (int i = 0; i < 4; i++)
             {
-                Instantiate(standardSet[i], originalPOS, Quaternion.identity);
-            }
+                //Spawn the first set of planks at the original position
+                if (i == 0)
+                {
+                    Instantiate(standardSet[i], originalPOS, Quaternion.identity);
+                }
 
-            //spawn the remaining sets at their new positions!
-            if (i > 0)
-            {
-                Instantiate(standardSet[i], nextPOS, Quaternion.identity);
-                //add to the X value of the new positions
-                nextPOS.x += 2.2504f;
+                //spawn the remaining sets at their new positions!
+                if (i > 0)
+                {
+                    Instantiate(standardSet[i], nextPOS, Quaternion.identity);
+                    //add to the X value of the new positions
+                    nextPOS.x += 2.2504f;
+                }
             }
+        }
+        else
+        {
+            TestScore();
         }
 	}
 	
@@ -150,4 +157,81 @@ public class FloorManager : MonoBehaviour
             }
         }
 	}
+
+    #region TestingPurposes
+    void TestScore()
+    {
+        if (playerScript.points > 25 && playerScript.points < 55)
+        {
+            if (!spawnedEasy)
+            {
+                for (int a = 0; a < 4; a++)
+                {
+                    //spawn initial easy flooring set when alloted by FloorBoundaryDestroyer script
+                    if (a == 0)
+                    {
+                        Instantiate(easySet[Random.Range(0, 3)], originalPOS, Quaternion.identity);
+                    }
+
+                    if (a > 0)
+                    {
+                        Instantiate(easySet[Random.Range(0, 3)], nextPOS, Quaternion.identity);
+                        //add to the X value of the new positions
+                        nextPOS.x += 2.2504f;
+                    }
+                }
+                //disable more of the easy set from spawning and reset Vector2 position for next batch.
+                spawnedEasy = true;
+            }
+        }
+
+        if (playerScript.points > 55 && playerScript.points < 85)
+        {
+            if (!spawnedMedium)
+            {
+                for (int b = 0; b < 4; b++)
+                {
+                    //spawn intial medium flooring set when alloted by FloorBoundaryDestroyer script
+                    if (b == 0)
+                    {
+                        Instantiate(mediumSet[Random.Range(0, 3)], originalPOS, Quaternion.identity);
+                    }
+
+                    if (b > 0)
+                    {
+                        Instantiate(mediumSet[Random.Range(0, 3)], nextPOS, Quaternion.identity);
+                        //add to the 'X" value of the new addtlFloorSetPOS position
+                        nextPOS.x += 2.2504f;
+                    }
+                }
+                //reset the addtlFloorSetPOS (X value) for the next (hard) set
+                spawnedMedium = true;
+            }
+        }
+
+        if (playerScript.points > 85)
+        {
+            if (!spawnedHard)
+            {
+                for (int c = 0; c < 4; c++)
+                {
+                    //spawn intial HARD flooring set when alloted by FloorBoundaryDestroyer script
+                    if (c == 0)
+                    {
+                        Instantiate(hardSet[Random.Range(0, 3)], originalPOS, Quaternion.identity);
+                    }
+
+                    if (c > 0)
+                    {
+                        Instantiate(hardSet[Random.Range(0, 3)], nextPOS, Quaternion.identity);
+                        //add to the 'X" value of the new addtlFloorSetPOS position
+                        nextPOS.x += 2.2504f;
+                    }
+                }
+                //reset the addtlFloorSetPOS (X value) in case we want an EXTREME floor set! :)
+                spawnedHard = false;
+            }
+        }
+    }
+    #endregion
 }

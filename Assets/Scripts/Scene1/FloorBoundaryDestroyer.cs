@@ -79,7 +79,7 @@ public class FloorBoundaryDestroyer : MonoBehaviour
             if (collision.gameObject.transform.parent.name == "PlankSet_Medium1(Clone)" ||
                 collision.gameObject.transform.parent.name == "PlankSet_Medium2(Clone)" ||
                 collision.gameObject.transform.parent.name == "PlankSet_Medium3(Clone)" ||
-                collision.gameObject.transform.parent.name == "PlankSet_Medium4(Clone)" ||)
+                collision.gameObject.transform.parent.name == "PlankSet_Medium4(Clone)")
             {
                 mediumIsGone = true;
                 Destroy(collision.transform.parent.gameObject);

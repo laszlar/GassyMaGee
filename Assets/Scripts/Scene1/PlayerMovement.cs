@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb2D;
     private RigidbodyConstraints2D rigidConstraints;
 	private Transform _child;
-	private bool _isEnemy;
+	public static bool _isEnemy;
 	private Collider2D _collider;
 
     //Here I will put the variables in for the touch 
@@ -132,6 +132,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (_isEnemy)
+        {
+            _elapsedTime -= 0.4f;
+        }
+
         //Moves Player to the left as he gets hit/dies
         if (dead && !_isEnemy)
         {

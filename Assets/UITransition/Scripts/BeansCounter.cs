@@ -31,6 +31,10 @@ public class BeansCounter : MonoBehaviour
         {
             _getFloat = _mat.GetFloat(C);
             SetCutOff(_getFloat += Speed * Time.deltaTime);
+            if (PlayerMovement._isEnemy)
+            {
+                SetCutOff(0.4f);
+            }
         }
         if (!PlayerMovement.IsJumping)
         {

@@ -8,7 +8,9 @@ using System.Collections;
 
 public class MoveKettle : MonoBehaviour {
 
-    private float kettleSpeed;
+    private float normalSpeed = -1.0f;
+    private float fastSpeed = -1.5f;
+    private float slowSpeed = -0.5f;
     PlayerMovement playerScript;
     
     // Use this for initialization
@@ -24,7 +26,7 @@ public class MoveKettle : MonoBehaviour {
         if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
             playerScript.parachuteEnabled && playerScript.bananaEnabled)
         {
-            transform.Translate((kettleSpeed * Time.deltaTime), 0f, 0f);
+            transform.Translate((normalSpeed * Time.deltaTime), 0f, 0f);
         }
 
         //check for powerups
@@ -54,11 +56,11 @@ public class MoveKettle : MonoBehaviour {
 
     void SpeedUp()
     {
-        transform.Translate(((kettleSpeed * 1.5f) * Time.deltaTime), 0f, 0f);
+        transform.Translate(((fastSpeed * 1.5f) * Time.deltaTime), 0f, 0f);
     }
 
     void SlowDown()
     {
-        transform.Translate(((kettleSpeed * 0.5f) * Time.deltaTime), 0f, 0f);
+        transform.Translate(((slowSpeed * 0.5f) * Time.deltaTime), 0f, 0f);
     }
 }

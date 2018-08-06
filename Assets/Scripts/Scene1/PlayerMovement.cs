@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed = 2f;
     public Vector2 jumpHeight;
     public int points = 0;
-    private int addPointsPerSecond = 1;
     private  Animator anim;
     public bool dead = false;
     public bool explDeath = false;
@@ -109,9 +108,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         player = GameObject.Find("Player");
-
-        //Repeat the AddPoints function to add to score
-        InvokeRepeating("AddPoints", 3, 3);
 
         //for the parachute animation
         parachuteScript = GetComponent<ParachuteFollowPlayer>();
@@ -425,11 +421,6 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Methods
-    //add to points function correlates with InvokeRepeating in Start Method
-    private void AddPoints()
-    {
-        points += addPointsPerSecond;
-    }
 
     //the following below invokes that makes him invincible for x amount of time
     public void SetInvincible()

@@ -376,7 +376,7 @@ public class PlayerMovement : MonoBehaviour
         if (_isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
-            points += 5;
+            points += 1;
         }
     }
 
@@ -402,7 +402,7 @@ public class PlayerMovement : MonoBehaviour
             Vector2 direction = 14 * (target - bomb);
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
-            points += 3;
+            points += 1;
         }
         else if(col.gameObject.tag == "Parachute")
         {

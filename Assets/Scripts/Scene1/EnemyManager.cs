@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
     //booleans
     private bool spawnNow;
     private bool spawnedMidTier;
+    private bool spawnedMidTierException;
 
     //Vector2 Positions
     private Vector2 bottomTier;
@@ -47,6 +48,7 @@ public class EnemyManager : MonoBehaviour
         //initialize booleans
         spawnNow = false;
         spawnedMidTier = false;
+        spawnedMidTierException = false;
 
         //launch the initial set of enemies
         //this is left in for testing!!!
@@ -84,28 +86,99 @@ public class EnemyManager : MonoBehaviour
             spawnTimer = 0f;
         }
 
-        //launch the continual set of enemies, points 1-50
-        if (playerScript.points < 50 && spawnNow)
+        NoviceEnemies();
+        DifficultEnemies();
+    }
+
+    #region StartNoviceEnemies
+    private void NoviceEnemies()
+    {
+        //launch the continual set of enemies, points 1-25
+        if (playerScript.points < 25 && spawnNow)
         {
             for (int a = 0; a < 3; a++)
             {
+                //launch the bottom enemy
                 if (a == 0)
                     Instantiate(enemyArray[Random.Range(0, 2)], bottomTier, Quaternion.identity);
 
+                //launch second enemy 50% of time, make an exception 10% of times to not spawn
                 if (a == 1 && randomPercent >= 5)
                 {
-                    Instantiate(enemyArray[Random.Range(0, 2)], midTier, Quaternion.identity);
-                    spawnedMidTier = true;
+                    if (randomPercent == 7)
+                    {
+                        spawnedMidTierException = true;
+                    }
+                    else
+                    {
+                        Instantiate(enemyArray[Random.Range(0, 2)], midTier, Quaternion.identity);
+                        spawnedMidTier = true;
+                    }
                 }
 
+                //spawn the top enemy 20% of the time
                 if (a == 2 && spawnedMidTier && randomPercent >= 7)
                 {
                     Instantiate(enemyArray[Random.Range(0, 2)], topTier, Quaternion.identity);
                     spawnedMidTier = false;
+                }
+
+                //spawn the top enemy 10% of the time without the second enemy below him
+                if (a == 2 && spawnedMidTierException)
+                {
+                    Instantiate(enemyArray[Random.Range(0, 2)], topTier, Quaternion.identity);
+                    spawnedMidTierException = false;
                 }
             }
             //reset this boolean to stop instantiating gameObjects
             spawnNow = false;
         }
     }
+    #endregion
+
+    #region DifficultEnemies
+    private void DifficultEnemies()
+    {
+        //launch the continual set of enemies, points 1-25
+        if (playerScript.points >= 25 && spawnNow)
+        {
+            for (int a = 0; a < 3; a++)
+            {
+                //launch the bottom enemy
+                if (a == 0)
+                    Instantiate(enemyArray[Random.Range(0, 4)], bottomTier, Quaternion.identity);
+
+                //launch second enemy 50% of time, make an exception 10% of times to not spawn
+                if (a == 1 && randomPercent >= 5)
+                {
+                    if (randomPercent == 7)
+                    {
+                        spawnedMidTierException = true;
+                    }
+                    else
+                    {
+                        Instantiate(enemyArray[Random.Range(0, 4)], midTier, Quaternion.identity);
+                        spawnedMidTier = true;
+                    }
+                }
+
+                //spawn the top enemy 20% of the time
+                if (a == 2 && spawnedMidTier && randomPercent >= 7)
+                {
+                    Instantiate(enemyArray[Random.Range(0, 4)], topTier, Quaternion.identity);
+                    spawnedMidTier = false;
+                }
+
+                //spawn the top enemy 10% of the time without the second enemy below him
+                if (a == 2 && spawnedMidTierException)
+                {
+                    Instantiate(enemyArray[Random.Range(0, 4)], topTier, Quaternion.identity);
+                    spawnedMidTierException = false;
+                }
+            }
+            //reset this boolean to stop instantiating gameObjects
+            spawnNow = false;
+        }
+    }
+    #endregion
 }

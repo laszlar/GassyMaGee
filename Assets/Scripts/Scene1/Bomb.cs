@@ -11,7 +11,6 @@ public class Bomb : MonoBehaviour
     float timeToDisappear = 0f;
     float travelSpeed = -1.0f;
 
-    int chanceOfSpin;
     float spinSpeed = -2.0f;
 
     void Start()
@@ -51,8 +50,6 @@ public class Bomb : MonoBehaviour
         else
         {
             transform.Translate(travelSpeed * Time.deltaTime, 0f, 0f);
-            ChangeBombSpeed();
-            Spin();
 
             //check for powerups and adjust speed accordingly!
             if (!playerScript.parachuteEnabled && !playerScript.bananaEnabled ||
@@ -69,34 +66,6 @@ public class Bomb : MonoBehaviour
                 SlowDown();
             }
         }
-    }
-
-    void ChangeBombSpeed()
-    {
-        switch (ScoreTracker.score)
-        {
-            case 25:
-                travelSpeed = -1.25f;
-                break;
-
-            case 50:
-                travelSpeed = -1.5f;
-                break;
-
-            case 75:
-                travelSpeed = -1.75f;
-                break;
-
-            case 100:
-                travelSpeed = 2.0f;
-                break;
-        }
-    }
-
-    void Spin()
-    {
-        if ((Random.Range(0, 100)) <= 65)
-            transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
     }
 
     void SpeedUp()

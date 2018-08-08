@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public bool bananaEnabled;
     int parachuteTime = 5;
     int bananaTime = 2;
+    private bool jumpedOnBouncyWoman;
 
     float timeCounter;
 
@@ -90,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        jumpedOnBouncyWoman = false;
         swipeTimer = 0f;
         swipeEnabler = true;
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
@@ -361,6 +363,11 @@ public class PlayerMovement : MonoBehaviour
         {
            _isEnemy = true;
         }
+
+        if (col.gameObject.tag == "Enemy" && col.gameObject.name == "HeftyWoman(Clone)" || col.gameObject.name == "HeftyWoman")
+        {
+            jumpedOnBouncyWoman = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -369,13 +376,23 @@ public class PlayerMovement : MonoBehaviour
         {
             _isEnemy = false;
         }
+
+        if (jumpedOnBouncyWoman)
+        {
+            jumpedOnBouncyWoman = false;
+        }
     }
 
     void FixedUpdate()
     {
-        if (_isEnemy)
+        if (!jumpedOnBouncyWoman && _isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
+            points += 1;
+        }
+        else if (jumpedOnBouncyWoman && _isEnemy)
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 4.0f));
             points += 1;
         }
     }

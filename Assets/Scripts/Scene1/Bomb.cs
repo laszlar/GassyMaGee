@@ -9,7 +9,7 @@ public class Bomb : MonoBehaviour
     private PlayerMovement playerScript;
     public bool playerHitBomb;
     float timeToDisappear = 0f;
-    float travelSpeed = -1.0f;
+    float travelSpeed = 180.0f;
 
     float spinSpeed = -2.0f;
 
@@ -47,6 +47,7 @@ public class Bomb : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        /*
         else
         {
             transform.Translate(travelSpeed * Time.deltaTime, 0f, 0f);
@@ -66,6 +67,9 @@ public class Bomb : MonoBehaviour
                 SlowDown();
             }
         }
+        */
+        else
+            transform.Rotate(0f, 0f, travelSpeed * Time.deltaTime);
     }
 
     void SpeedUp()

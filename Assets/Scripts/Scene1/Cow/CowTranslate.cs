@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogBehaviour : MonoBehaviour
+public class CowTranslate : MonoBehaviour
 {
-    //Player info
+    //find player
     PlayerMovement playerScript;
 
-    //float
+    //floats
     private float travelSpeed = -0.5f;
 
 	// Use this for initialization
 	void Start ()
     {
-        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();	
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
+
         transform.Translate(travelSpeed * Time.deltaTime, 0f, 0f);
 
         //check for powerups and adjust speed accordingly!

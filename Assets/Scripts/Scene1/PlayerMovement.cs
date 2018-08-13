@@ -81,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
     private float minScale = 0.40f;
     private float maxScale = 3.0f;
 
+    //collission for enemies
+    private bool jumpedOnDog;
+    private bool jumpedOnCow;
+
     /*//audio
     public AudioSource bananaSource;
     public AudioSource parachuteSource;
@@ -92,6 +96,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         jumpedOnBouncyWoman = false;
+        jumpedOnCow = false;
+        jumpedOnDog = false;
         swipeTimer = 0f;
         swipeEnabler = true;
         camEffect = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
@@ -368,6 +374,11 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpedOnBouncyWoman = true;
         }
+
+        if (col.gameObject.tag == "Enemy" && col.gameObject.name == "Dog(Clone)" || col.gameObject.name == "Dog")
+        {
+            jumpedOnDog = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -381,6 +392,11 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpedOnBouncyWoman = false;
         }
+
+        if (jumpedOnDog)
+        {
+            jumpedOnDog = false;
+        }
     }
 
     void FixedUpdate()
@@ -390,9 +406,16 @@ public class PlayerMovement : MonoBehaviour
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
             points += 1;
         }
-        else if (jumpedOnBouncyWoman && _isEnemy)
+
+        if (jumpedOnBouncyWoman && _isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 4.0f));
+            points += 1;
+        }
+
+        if (jumpedOnDog && _isEnemy)
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (_rb2D.velocity.y * 0.41f));
             points += 1;
         }
     }

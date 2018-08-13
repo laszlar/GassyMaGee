@@ -38,7 +38,7 @@ public class FollowPlayerCam : MonoBehaviour
 
         targetPos = transform.position + (targetDirection.normalized * interVelocity * Time.deltaTime); //the actual moving of the camera
 
-        lerpidyLerpLerpDerp = Vector3.Lerp(transform.position, targetPos + offset, 0.25f);
+        lerpidyLerpLerpDerp = Vector3.Lerp(transform.position, targetPos + offset, 0.03f);
         lerpidyLerpLerpDerp.y = Mathf.Clamp(lerpidyLerpLerpDerp.y, -0.05f, 10.0f);
         transform.position = lerpidyLerpLerpDerp;
     }

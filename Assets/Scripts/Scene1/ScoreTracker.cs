@@ -9,7 +9,6 @@ using System.Collections;
 
 public class ScoreTracker : MonoBehaviour
 {
-
     PlayerMovement player;
     Text text;
     public static int score;
@@ -17,12 +16,10 @@ public class ScoreTracker : MonoBehaviour
     public bool levelOne;
 
     //Game Object Variables
-    GameObject kettle;
-    GameObject fatty;
-    GameObject bomb;
+    //GameObject kettle;
+    //GameObject fatty;
+    //GameObject bomb;
 
-    //timer for debug
-    float timer = 0f;
     void Awake ()
     {
         highScore = PlayerPrefs.GetInt("High Score");
@@ -34,6 +31,8 @@ public class ScoreTracker : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         text = gameObject.GetComponent<Text>();
 
+        /*
+         * Deactive for now
         kettle = GameObject.Find("KettleLaunching");
         fatty = GameObject.Find("FattyCannon");
         bomb = GameObject.Find("BombCannon");
@@ -41,6 +40,7 @@ public class ScoreTracker : MonoBehaviour
         kettle.SetActive(false);
         fatty.SetActive(false);
         bomb.SetActive(false);
+        */
     }
 	
 	// Update is called once per frame
@@ -54,14 +54,11 @@ public class ScoreTracker : MonoBehaviour
            PlayerPrefs.SetInt("High Score", highScore);
            PlayerPrefs.Save();
        }
-
-       //if the score is greater than 25 start limiting the number of planks that spawn
-       ChangePlankPercent();
-
-      //Launch game objects depending on the score
-      GameObjectLogicLauncher();
 	}
 
+    /*
+     * Deactive for now! 
+     * 
     public static void ChangePlankPercent()
     {
         switch (score)
@@ -96,4 +93,5 @@ public class ScoreTracker : MonoBehaviour
                 break;
         }
     }
+    */
 }

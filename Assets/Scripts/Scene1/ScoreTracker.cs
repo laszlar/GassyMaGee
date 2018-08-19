@@ -13,12 +13,8 @@ public class ScoreTracker : MonoBehaviour
     Text text;
     public static int score;
     public int highScore;
-    public bool levelOne;
-
-    //Game Object Variables
-    //GameObject kettle;
-    //GameObject fatty;
-    //GameObject bomb;
+    private int testSize;
+    private float testSizeFloat;
 
     void Awake ()
     {
@@ -30,17 +26,6 @@ public class ScoreTracker : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         text = gameObject.GetComponent<Text>();
-
-        /*
-         * Deactive for now
-        kettle = GameObject.Find("KettleLaunching");
-        fatty = GameObject.Find("FattyCannon");
-        bomb = GameObject.Find("BombCannon");
-
-        kettle.SetActive(false);
-        fatty.SetActive(false);
-        bomb.SetActive(false);
-        */
     }
 	
 	// Update is called once per frame
@@ -48,7 +33,11 @@ public class ScoreTracker : MonoBehaviour
     {
        score = player.points;
        text.text = "" + score;
-       if (score > highScore)
+
+       //Make the score look awesome on enemy hit!
+       IncreaseTextSize();
+
+       if (player.dead && score > highScore)
        {
            highScore = score;
            PlayerPrefs.SetInt("High Score", highScore);
@@ -56,42 +45,37 @@ public class ScoreTracker : MonoBehaviour
        }
 	}
 
-    /*
-     * Deactive for now! 
-     * 
-    public static void ChangePlankPercent()
+    //make the score text size large on Enemy hit and then decrease rapidly! Also vibrate device.
+    private void IncreaseTextSize()
     {
-        switch (score)
+        if (PlayerMovement._isEnemy)
         {
-            case 250:
-                PlankSpawner.plankPercent = 75;
-                break;
-            case 150:
-                PlankSpawner.plankPercent = 80;
-                break;
-            case 75:
-                PlankSpawner.plankPercent = 90;
-                break;
-            case 25:
-                PlankSpawner.plankPercent = 95;
-                break;
+            Handheld.Vibrate();
+            text.fontSize = 150;
+            testSize = 150;
         }
+
+        /*if (text.fontSize > 72)
+        {
+            text.fontSize -= (int)Time.deltaTime * 4;
+        }*/
+
+        if (testSize > 72)
+        {   
+            {
+                StartCoroutine(SlowDownDecrease(1));
+                
+            }
+        }
+        Debug.Log("This is my size: " + testSize);
     }
 
-    private void GameObjectLogicLauncher()
+    IEnumerator SlowDownDecrease(int time)
     {
-        switch (score)
+        while (testSize > 72)
         {
-            case 50:
-                fatty.SetActive(true);
-                break;
-            case 25:
-                bomb.SetActive(true);
-                break;
-            case 10:
-                kettle.SetActive(true);
-                break;
+            testSize -= 1;
+            yield return new WaitForSeconds(time);
         }
     }
-    */
 }

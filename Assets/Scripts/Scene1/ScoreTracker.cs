@@ -15,6 +15,7 @@ public class ScoreTracker : MonoBehaviour
     public int highScore;
     private int testSize;
     private float testSizeFloat;
+    private float decreaseSize = 2.0f;
 
     void Awake ()
     {
@@ -51,30 +52,24 @@ public class ScoreTracker : MonoBehaviour
         if (PlayerMovement._isEnemy)
         {
             Handheld.Vibrate();
-            text.fontSize = 150;
-            testSize = 150;
+            text.fontSize = 250;
         }
 
-        /*if (text.fontSize > 72)
-        {
-            text.fontSize -= (int)Time.deltaTime * 4;
-        }*/
 
-        if (testSize > 72)
+        if (text.fontSize > 72)
         {   
             {
                 StartCoroutine(SlowDownDecrease(1));
-                
             }
         }
-        Debug.Log("This is my size: " + testSize);
     }
+    
 
     IEnumerator SlowDownDecrease(int time)
     {
-        while (testSize > 72)
+        while (text.fontSize > 72)
         {
-            testSize -= 1;
+            text.fontSize -= 2;
             yield return new WaitForSeconds(time);
         }
     }

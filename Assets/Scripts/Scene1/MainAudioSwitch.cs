@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MainAudioSwitch : MonoBehaviour
 {
-    public AudioSource regularMusic, colorMusic;
+    public AudioSource regularMusic, colorMusic, sadTrombone;
     PlayerMovement player;
+
+    //bool
+    private bool checkIfPlayed = false;
 
     public static MainAudioSwitch instance = null;
 
@@ -39,6 +42,14 @@ public class MainAudioSwitch : MonoBehaviour
         PlayColor(colorMusic);
 
         DecreaseThatPitchYo(regularMusic, colorMusic);
+
+        if (player.dead && !checkIfPlayed)
+        {
+            regularMusic.Stop();
+            colorMusic.Stop();
+            sadTrombone.Play();
+            checkIfPlayed = true;
+        }
 	}
 
     //if paint powerup, switch to color music.
@@ -49,7 +60,7 @@ public class MainAudioSwitch : MonoBehaviour
     //switch/loop does, yippee!
     private void PlayMain(AudioSource regMusic)
     {
-        if (player.godMode)
+        if (player.godMode && !player.dead)
         {
             for (int x = 0; x < 10; x++)
             {
@@ -57,7 +68,7 @@ public class MainAudioSwitch : MonoBehaviour
                 Fade();
             }
         }
-        else if (!player.godMode)
+        else if (!player.godMode && !player.dead)
         {
             if (regMusic.volume == 0)
             {
@@ -72,7 +83,7 @@ public class MainAudioSwitch : MonoBehaviour
 
     private void PlayColor(AudioSource colMusic)
     {
-        if (player.godMode)
+        if (player.godMode && !player.dead)
         {
             for (int x = 0; x < 10; x++)
             {
@@ -81,7 +92,7 @@ public class MainAudioSwitch : MonoBehaviour
             }
             
         }
-        else if (!player.godMode)
+        else if (!player.godMode && !player.dead)
         {
             if (colMusic.volume == 1.0f)
             {

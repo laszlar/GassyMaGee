@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public float windSpeed;
     public bool godMode = false;
     public float invTime = 7f;
-    public int timeAfterDeath = 2;
+    public int timeAfterDeath = 4;
     private CameraFilterPack_TV_Old_Movie_2 camEffect;
     public int camEffectTime = 7;
     public bool parachuteEnabled;
@@ -37,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
     int parachuteTime = 5;
     int bananaTime = 2;
     private bool jumpedOnBouncyWoman;
+
+    //Audio Source 
+    public AudioSource parachuteSound;
 
     float timeCounter;
 
@@ -447,6 +450,7 @@ public class PlayerMovement : MonoBehaviour
         else if(col.gameObject.tag == "Parachute")
         {
             ParachuteMethod();
+            parachuteSound.Play();
         }
         else if (col.gameObject.tag == "Banana")
         {

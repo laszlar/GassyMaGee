@@ -48,17 +48,17 @@ public class EnemyManager : MonoBehaviour
 
         //launch the initial set of enemies
         //this is left in for testing!!!
-        for (int x = 0; x < 3; x++)
-        {
-            if (x == 0)
-                Instantiate(enemyArray[Random.Range(0, 2)], bottomTier, Quaternion.identity);
+        //for (int x = 0; x < 3; x++)
+        //{
+            //if (x == 0)
+                //Instantiate(enemyArray[Random.Range(0, 2)], bottomTier, Quaternion.identity);
 
-            if (x == 1)
-                Instantiate(enemyArray[Random.Range(0, 2)], midTier, Quaternion.identity);
+            //if (x == 1)
+                //Instantiate(enemyArray[Random.Range(0, 2)], midTier, Quaternion.identity);
 
-            if (x == 2)
-                Instantiate(enemyArray[Random.Range(0, 2)], topTier, Quaternion.identity);
-        }
+            //if (x == 2)
+                //Instantiate(enemyArray[Random.Range(0, 2)], topTier, Quaternion.identity);
+        //}
         
     }
 

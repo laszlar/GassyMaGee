@@ -43,7 +43,7 @@ public class MainAudioSwitch : MonoBehaviour
 
         DecreaseThatPitchYo(regularMusic, colorMusic);
 
-        if (player.dead && !checkIfPlayed)
+        if (player.dead && !checkIfPlayed || player.explDeath && !checkIfPlayed)
         {
             regularMusic.Stop();
             colorMusic.Stop();

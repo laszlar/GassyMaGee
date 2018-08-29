@@ -11,10 +11,14 @@ public class Bomb : MonoBehaviour
     float timeToDisappear = 0f;
     float travelSpeed = 180.0f;
 
+    //Get audio component
+    private AudioSource source;
+
     float spinSpeed = -2.0f;
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerMovement>();
         playerHitBomb = false;
@@ -25,6 +29,9 @@ public class Bomb : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            //play that sound!
+            source.Play();
+
             //reset timer
             if (timeToDisappear != 0f)
             {

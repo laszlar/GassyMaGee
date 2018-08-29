@@ -8,10 +8,16 @@ public class MoveThatBus : MonoBehaviour
 
     PlayerMovement playerScript;
 
+    //audio
+    private AudioSource source;
+
 	// Use this for initialization
 	void Start ()
     {
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        //retrieve audio source
+        source = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -44,5 +50,11 @@ public class MoveThatBus : MonoBehaviour
     void SlowDown()
     {
         transform.Translate(((speed * 0.5f) * Time.deltaTime), 0f, 0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && playerScript.godMode)
+            source.Play();
     }
 }

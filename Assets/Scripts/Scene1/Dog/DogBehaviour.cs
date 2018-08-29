@@ -10,10 +10,15 @@ public class DogBehaviour : MonoBehaviour
     //float
     private float travelSpeed = -0.5f;
 
-	// Use this for initialization
+    //Audio Source!
+    private AudioSource source;
+
 	void Start ()
     {
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        //retrieve audio component
+        source = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -45,5 +50,11 @@ public class DogBehaviour : MonoBehaviour
     void SlowDown()
     {
         transform.Translate(((travelSpeed * 0.5f) * Time.deltaTime), 0f, 0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && playerScript.godMode)
+            source.Play();
     }
 }

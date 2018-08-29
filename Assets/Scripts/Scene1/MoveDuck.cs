@@ -14,10 +14,16 @@ public class MoveDuck : MonoBehaviour
 
     PlayerMovement playerScript;
 
+    //audio
+    private AudioSource source;
+
     // Use this for initialization
     void Start()
     {
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        //retrieve audio compnonent
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -51,6 +57,9 @@ public class MoveDuck : MonoBehaviour
 
                 coll.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);  
         }
+
+        if (coll.gameObject.tag == "Player" && playerScript.godMode)
+            source.Play();
     }
 
     void SpeedUp()

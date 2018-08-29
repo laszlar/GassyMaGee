@@ -12,11 +12,17 @@ public class MoveKettle : MonoBehaviour {
     private float fastSpeed = -1.5f;
     private float slowSpeed = -0.5f;
     PlayerMovement playerScript;
+
+    //audio
+    private AudioSource source;
     
     // Use this for initialization
 	void Start ()
     {
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        //retrieve audio source
+        source = GetComponent<AudioSource>();
 	}
 
     // Update is called once per frame
@@ -43,7 +49,7 @@ public class MoveKettle : MonoBehaviour {
 
 
     void OnCollisionEnter2D(Collision2D coll)                       //if player hits paint canister, turn player into god mode,
-    {                                                               //and object goes flying when player hits them.
+    {                                                               //and object goes flying when player hits them. And other objects also richochet off each other.
         if (playerScript.godMode && coll.gameObject.tag == "Enemy") 
         {
             Vector2 target = coll.gameObject.transform.position;
@@ -52,6 +58,10 @@ public class MoveKettle : MonoBehaviour {
 
             coll.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
         }
+
+        //play that whistle
+        if (coll.gameObject.tag == "Player" && playerScript.godMode)
+            source.Play();
     }
 
     void SpeedUp()

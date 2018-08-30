@@ -2,21 +2,34 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class RestartButton : MonoBehaviour {
+public class RestartButton : MonoBehaviour
+{
+    //Async
+    AsyncOperation load;
 
-#if UNITY_EDITOR
+    //boolean
+    private bool haveTapped = false;
 
-    private void Update()
+    private void Start()
     {
-        gameObject.SetActive(true);
+        StartCoroutine(LoadSceneNow());
     }
 
-#endif
-
-    // Update is called once per frame
     public void LoadScene()
     {
-        SceneManager.LoadScene("Scene1");
+        haveTapped = true;
+        //SceneManager.LoadScene("Scene1");
     }
-        
+
+    IEnumerator LoadSceneNow()
+    {
+        load = SceneManager.LoadSceneAsync("Scene1");
+        load.allowSceneActivation = false;
+        while (!load.isDone)
+        {
+            if (haveTapped)
+                load.allowSceneActivation = true;
+            yield return null;
+        }
+    }
 }

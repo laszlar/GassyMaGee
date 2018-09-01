@@ -7,7 +7,7 @@ public class ParachuteFollowPlayer : MonoBehaviour
     private GameObject player;
     private PlayerMovement playerScript;
     private float offsetX = 0.30f;
-    private float offsetY = 0.05f;
+    private float offsetY = 0.12f;
     public Vector2 position;
 
 

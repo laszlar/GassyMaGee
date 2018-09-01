@@ -19,10 +19,15 @@ public class PowerUpManager : MonoBehaviour
     //float 
     private float basicTimer;
     private float paintTimer;
+    private float checkPlayerScriptTimer;
+
 
     //bool
     private bool spawnBasics;
     private bool spawnPaint;
+    private bool elongateStartTime;
+    private bool doOnlyOnce;
+    private bool doTimerOnce;
 
     private void Start()
     {
@@ -32,6 +37,9 @@ public class PowerUpManager : MonoBehaviour
         //initialize the boolean
         spawnBasics = false;
         spawnPaint = false;
+        elongateStartTime = false;
+        doOnlyOnce = false;
+        doTimerOnce = true;
 
         //initialize floats
         basicTimer = 0f;
@@ -40,16 +48,34 @@ public class PowerUpManager : MonoBehaviour
 
     private void Update()
     {
+        //run the timer to check player Script
+        if (doTimerOnce)
+            checkPlayerScriptTimer += Time.deltaTime;
+
         //run those timers!
         basicTimer += Time.deltaTime;
         paintTimer += Time.deltaTime;
+
+        if (checkPlayerScriptTimer >= 1.0f && playerScript.godMode && !doOnlyOnce)
+            elongateStartTime = true;
+
+        if (elongateStartTime)
+        {
+            basicTimer -= 5.0f;
+            elongateStartTime = false;
+            doOnlyOnce = true;
+        }
 
         if (basicTimer >= 10.0f)
             spawnBasics = true;
         
 
         if (paintTimer >= 20.0f)
+        {
             spawnPaint = true;
+            doTimerOnce = false;
+        }
+            
 
         if (spawnBasics)
         {

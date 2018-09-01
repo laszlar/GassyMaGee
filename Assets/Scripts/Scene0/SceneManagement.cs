@@ -21,7 +21,7 @@ public class SceneManagement : MonoBehaviour {
         if (_loadScene)
         {
             _loadingText.color = new Color(_loadingText.color.r, _loadingText.color.g, 
-                _loadingText.color.b, Mathf.PingPong(Time.time, 1));
+                _loadingText.color.b, Mathf.PingPong(Time.time * 1.5f, 1));
         }
 	}
 

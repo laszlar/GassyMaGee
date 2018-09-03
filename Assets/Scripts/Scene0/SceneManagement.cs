@@ -31,9 +31,19 @@ public class SceneManagement : MonoBehaviour {
         yield return new WaitForSeconds(5);
 
         AsyncOperation async = SceneManager.LoadSceneAsync(_scene, LoadSceneMode.Single);
+        async.allowSceneActivation = false;
         
         while (!async.isDone)
         {
+            if (async.progress >= 0.90f)
+            {
+                _loadingText.text = "Tap to continue...";
+            }
+            
+            if (Input.GetMouseButton(0))
+            {
+                async.allowSceneActivation = true;
+            }
             yield return null;
         }
     }

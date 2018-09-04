@@ -9,13 +9,17 @@ public class SceneManagement : MonoBehaviour {
     private string _scene = "Scene1";
     [SerializeField] private Text _loadingText;
 
+    //GassyImageLoading
+    [SerializeField] private GameObject gassyLoading;
+
 	void Update ()
     {
 	    if (!_loadScene)
         {
             _loadScene = true;
-            _loadingText.text = "Loading...";
+            //_loadingText.text = "Loading...";
             StartCoroutine(LoadNewScene());
+            gassyLoading.SetActive(true);
         }
 
         if (_loadScene)
@@ -38,6 +42,7 @@ public class SceneManagement : MonoBehaviour {
             if (async.progress >= 0.90f)
             {
                 _loadingText.text = "Tap to continue...";
+                gassyLoading.SetActive(false);
             }
             
             if (Input.GetMouseButton(0))

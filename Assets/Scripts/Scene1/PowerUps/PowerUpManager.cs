@@ -7,8 +7,9 @@ public class PowerUpManager : MonoBehaviour
     //GameObjects
     public GameObject paintCan, parachute, banana;
 
-    //player script
+    //Scripts
     PlayerMovement playerScript;
+    AdsButton adsScript;
 
     //Array
     private GameObject[] powerUpHolder;
@@ -20,7 +21,7 @@ public class PowerUpManager : MonoBehaviour
     private float basicTimer;
     private float paintTimer;
     private float checkPlayerScriptTimer;
-
+    private float adsTimer;
 
     //bool
     private bool spawnBasics;
@@ -31,8 +32,11 @@ public class PowerUpManager : MonoBehaviour
 
     private void Start()
     {
+        //find the player script
+        playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
         //Initiate the array
-        powerUpHolder = new GameObject[] { parachute, banana, paintCan };
+        powerUpHolder = new GameObject[] { parachute, paintCan };
 
         //initialize the boolean
         spawnBasics = false;
@@ -48,6 +52,18 @@ public class PowerUpManager : MonoBehaviour
 
     private void Update()
     {
+        //if watched ad, launch a random power up!
+        if (AdsButton.watchedVideo)
+        {
+            adsTimer += Time.deltaTime;
+            if (adsTimer >= 4.0)
+            {
+                spawnBasics = true;
+                adsTimer = 0f;
+                AdsButton.watchedVideo = false;
+            }
+        }
+
         //run the timer to check player Script
         if (doTimerOnce)
             checkPlayerScriptTimer += Time.deltaTime;
@@ -56,12 +72,13 @@ public class PowerUpManager : MonoBehaviour
         basicTimer += Time.deltaTime;
         paintTimer += Time.deltaTime;
 
-        if (checkPlayerScriptTimer >= 1.0f && playerScript.godMode && !doOnlyOnce)
+        //if player receives paint can on start (watched ad) extend the timer once to prevent cheating
+        if (checkPlayerScriptTimer <= 8.0f && playerScript.godMode && !doOnlyOnce)
             elongateStartTime = true;
 
         if (elongateStartTime)
         {
-            basicTimer -= 5.0f;
+            paintTimer -= 10.0f;
             elongateStartTime = false;
             doOnlyOnce = true;
         }
@@ -74,8 +91,7 @@ public class PowerUpManager : MonoBehaviour
         {
             spawnPaint = true;
             doTimerOnce = false;
-        }
-            
+        }  
 
         if (spawnBasics)
         {
@@ -86,7 +102,7 @@ public class PowerUpManager : MonoBehaviour
 
         if (spawnPaint)
         {
-            Instantiate(powerUpHolder[2], new Vector2(5.0f, Random.Range(-0.4f, 1.0f)), Quaternion.identity);
+            Instantiate(powerUpHolder[1], new Vector2(5.0f, Random.Range(-0.4f, 1.0f)), Quaternion.identity);
             spawnPaint = false;
             paintTimer = 0f;
         }

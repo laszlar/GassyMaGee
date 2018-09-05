@@ -17,12 +17,14 @@ public class AdsButton : MonoBehaviour
     //-------------------------------------------------------------------//
 
     Button m_Button;
+    public static bool watchedVideo;
 
     public string placementId = "rewardedVideo";
 
     void Start()
     {
         m_Button = GetComponent<Button>();
+        watchedVideo = false;
         if (m_Button) m_Button.onClick.AddListener(ShowAd);
 
         //---------- ONLY NECESSARY FOR ASSET PACKAGE INTEGRATION: ----------//
@@ -51,7 +53,7 @@ public class AdsButton : MonoBehaviour
         if (result == ShowResult.Finished)
         {
             Debug.Log("Video completed - Offer a reward to the player");
-
+            watchedVideo = true;
         }
         else if (result == ShowResult.Skipped)
         {

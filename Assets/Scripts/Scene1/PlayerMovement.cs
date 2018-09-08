@@ -130,11 +130,6 @@ public class PlayerMovement : MonoBehaviour
         adjustableScale = new Vector3(setScaleX, setScaleY, 1);
         transform.localScale = adjustableScale;
         //=============================//
-
-        /*//Audio
-        bananaSource = GetComponent<AudioSource>();
-        parachuteSource = GetComponent<AudioSource>();
-        */
     }
 
     void Update()
@@ -282,41 +277,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        /*
-        if (swiped)
-        {
-            if (deltaTouch > 0)
-            {
-                adjustableScale = transform.localScale;
-
-                adjustableScale.x *= (delta + 1);
-                adjustableScale.y *= (delta + 1);
-
-                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-                if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
-                {
-                    transform.localScale = adjustableScale;
-                }
-            }
-
-            if (deltaTouch < 0)
-            {
-                adjustableScale = transform.localScale;
-
-                adjustableScale.x *= (delta + 1);
-                adjustableScale.y *= (delta + 1);
-
-                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-                if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
-                {
-                    transform.localScale = adjustableScale;
-                }
-            }
-        }
-        */
-
         //Disables player jump after set amount of time
         if (transform.position.y > 0)
         {
@@ -341,29 +301,6 @@ public class PlayerMovement : MonoBehaviour
             dead = true;
         }
         LimitJumpVelocity();
-
-        /*
-        //==================================================//
-        //Inserting addditional touch response here for Gassy's scaling!
-        if (Input.GetMouseButtonUp(0))
-        {
-            endTouchPosition = Input.mousePosition;
-            deltaTouch = endTouchPosition.y - startTouchPosition.y;
-        }
-
-        if (deltaTouch < 0)
-        {
-            Debug.Log("Swipe down complete!");
-            //do shit here (just don't shart.)
-        }
-
-        if (deltaTouch > 0)
-        {
-            Debug.Log("Swipe up complete!");
-            //do shit here (just don't shart.)
-        }
-        */
-        
     }
     
     void OnTriggerEnter2D(Collider2D col)
@@ -558,97 +495,6 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
     }
-/*
-    //Disables the swipe functionality
-    private void SwipeLimit()
-    {
-        if (swipeOnce)
-        {
-            StartCoroutine(SwipeEnabled(swipeTimeLimit));
-        }
-    }
-
-    IEnumerator SwipeEnabled(int swipeTimeLimit)
-    {
-        Debug.Log("Swipe Disabled as you just swiped!");
-        swipeEnabler = false;
-        swipeOnce = false;
-        Debug.Log(troubleshootCounter);
-        yield return new WaitForSeconds(swipeTimeLimit);
-        swipeEnabler = true;
-        swipeOnce = true;
-        adjustableScale = new Vector3(1, 1, 1);
-        transform.localScale = adjustableScale;
-        Debug.Log("Swipe Enabled");
-    }
-
-    public void SwipeMethod()
-    {
-        //make gassy larger on swipe up!
-        if (swipeEnabler)
-        {
-            if (deltaTouch >= 10)
-            {
-                Debug.Log("You just made a swipe that was worthy!");
-                adjustableScale = transform.localScale;
-
-                adjustableScale.x *= (delta + 1);
-                adjustableScale.y *= (delta + 1);
-
-                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-                //if (swipeEnabler)
-                //{
-                if (adjustableScale.x > 3.0f || adjustableScale.y > 3.0f)
-                {
-                    return;
-                }
-                if (adjustableScale.x <= 3.0f || adjustableScale.y <= 3.0f)
-                {
-                    transform.localScale = adjustableScale;
-                }
-                swipeTimer += Time.deltaTime;
-                if (swipeTimer >= 0.05f)
-                {
-                    troubleshootCounter++;
-                    SwipeLimit();
-                    swipeTimer = 0f;
-                }
-                //}
-            }
-        }
-
-        //make gassy smaller on swipe down
-        if (swipeEnabler)
-        {
-            if (deltaTouch <= 10)
-            {
-                adjustableScale = transform.localScale;
-
-                adjustableScale.x *= (delta + 1);
-                adjustableScale.y *= (delta + 1);
-
-                adjustableScale = new Vector3(adjustableScale.x, adjustableScale.y, 1);
-
-                //if (swipeEnabler)
-                //{
-                if (adjustableScale.x >= 0.5f || adjustableScale.y >= 0.5f)
-                {
-                    transform.localScale = adjustableScale;
-                }
-                swipeTimer += Time.deltaTime;
-                if (swipeTimer >= 0.05f)
-                {
-                    SwipeLimit();
-                    swipeTimer = 0f;
-                }
-
-                //}
-            }
-        }
-    }
-
-    */
 
     public void NewSwipeMethod()
     {
@@ -724,71 +570,5 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
     }
-
-
-    //unused at the moment
-    /*
-    public void IsEnemy(Collider2D col)
-    {
-
-        if (col != null)
-        {
-            if (col.gameObject.tag == "Enemy")
-            {
-                _isEnemy = true;
-                _collider = col;
-                counter = 0.05f;
-            }
-            if (col == null || col != null || col.gameObject.tag != "Enemy")
-            {
-                counter -= Time.deltaTime;
-                if (counter < 0)
-                {
-                    _isEnemy = false;
-                }
-            }
-        }
-    }
-    */
     #endregion
-
-    /* 
-    //Discontinued for now!!
-    #region Interface Setup
-    public void BananaPowerAllTheThings(float fastSpeed)
-    {
-        List<GameObject> shitFlyingAround = new List<GameObject>();
-        Scene scene = SceneManager.GetActiveScene();
-        scene.GetRootGameObjects(shitFlyingAround);
-        bananaReset = false;
-        bananaActiveI = true;
-
-        foreach(var obj in shitFlyingAround)
-        {
-            var powerObj = obj.GetComponent<IPowerUp>();
-            if (powerObj != null)
-            {
-                powerObj.BananaPower(fastSpeed);
-            }
-        }
-    }
-
-    public void ParachutePowerAllTheThings(float slowSpeed)
-    {
-        List<GameObject> allTheShitFlyingAroundToMakeGoSlow = new List<GameObject>();
-        Scene scene = SceneManager.GetActiveScene();
-        scene.GetRootGameObjects(allTheShitFlyingAroundToMakeGoSlow);
-
-        foreach(var obj in allTheShitFlyingAroundToMakeGoSlow)
-        {
-            var toBeParachutedPowerObj = obj.GetComponent<IPowerUp>();
-            if (toBeParachutedPowerObj != null)
-            {
-                toBeParachutedPowerObj.ParachutePower(slowSpeed);
-            }
-        }
-    }
-
-    #endregion
-    */
 }

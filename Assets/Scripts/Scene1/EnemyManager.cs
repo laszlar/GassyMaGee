@@ -84,7 +84,7 @@ public class EnemyManager : MonoBehaviour
     private void NoviceEnemies()
     {
         //launch the continual set of enemies, points 1-25
-        if (playerScript.points < 25 && spawnNow)
+        if (playerScript.points < 15 && spawnNow)
         {
             for (int a = 0; a < 3; a++)
             {
@@ -130,7 +130,7 @@ public class EnemyManager : MonoBehaviour
     private void DifficultEnemies()
     {
         //launch the harder set of enemies between points 25 & 85
-        if (playerScript.points >= 25 && playerScript.points < 85 && spawnNow)
+        if (playerScript.points >= 15 && playerScript.points < 40 && spawnNow)
         {
             for (int a = 0; a < 3; a++)
             {
@@ -176,7 +176,7 @@ public class EnemyManager : MonoBehaviour
     private void ExtremeEnemies()
     {
         //launch the continual set of enemies, points 1-25
-        if (playerScript.points >= 85 && spawnNow)
+        if (playerScript.points >= 40 && spawnNow)
         {
             for (int a = 0; a < 3; a++)
             {

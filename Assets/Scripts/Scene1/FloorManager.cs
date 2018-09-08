@@ -72,7 +72,8 @@ public class FloorManager : MonoBehaviour
         }
         else
         {
-            TestScore();
+            //TestScore();
+            return;
         }
 	}
 	
@@ -159,9 +160,10 @@ public class FloorManager : MonoBehaviour
 	}
 
     #region TestingPurposes
+    /*
     void TestScore()
     {
-        if (playerScript.points > 25 && playerScript.points < 55)
+        if (playerScript.points >= 15 && playerScript.points < 55)
         {
             if (!spawnedEasy)
             {
@@ -232,6 +234,6 @@ public class FloorManager : MonoBehaviour
                 spawnedHard = false;
             }
         }
-    }
+    }*/
     #endregion
 }

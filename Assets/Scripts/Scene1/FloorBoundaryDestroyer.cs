@@ -35,17 +35,17 @@ public class FloorBoundaryDestroyer : MonoBehaviour
 	void Update ()
     {
         //Depending on the points, set true to destroy the flooring specific flooring sets
-        if (playerScript.points > 25)
+        if (playerScript.points >= 15 && playerScript.points < 35)
         {
             destroyStandard = true;
         }
 
-        if (playerScript.points > 55)
+        if (playerScript.points >= 35 && playerScript.points < 50)
         {
             destroyEasy = true;
         }
 
-        if (playerScript.points > 85)
+        if (playerScript.points >= 50)
         {
             destroyMedium = true;
         }

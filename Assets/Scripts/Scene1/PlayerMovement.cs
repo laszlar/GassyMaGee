@@ -387,7 +387,8 @@ public class PlayerMovement : MonoBehaviour
         else if(col.gameObject.tag == "Parachute")
         {
             ParachuteMethod();
-            parachuteSound.Play();
+            if (!dead)
+                parachuteSound.Play();
         }
         else if (col.gameObject.tag == "Banana")
         {

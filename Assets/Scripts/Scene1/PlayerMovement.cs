@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_isEnemy)
         {
-            _elapsedTime -= 0.4f;
+            _elapsedTime -= 0.5f;
         }
 
         //Moves Player to the left as he gets hit/dies

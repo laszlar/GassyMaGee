@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed = 2f;
     public Vector2 jumpHeight;
     public int points = 0;
+    private bool pointsEnabled = true;
     private  Animator anim;
     public bool dead = false;
     public bool explDeath = false;
@@ -140,8 +141,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Moves Player to the left as he gets hit/dies
-        if (dead && !_isEnemy)
+        //Adding the OR statement for testing purposes. This fixes a bug where gassy
+        //traps an enemy between the trigger collider and box collider and player can rack up 
+        //some serious points. Also added a flag to disable points if player is dead. 
+        if (dead && !_isEnemy || dead && _isEnemy)
         {
+            pointsEnabled = false;
             godMode = false;
             parachuteEnabled = false;
             bananaEnabled = false;
@@ -344,19 +349,22 @@ public class PlayerMovement : MonoBehaviour
         if (!jumpedOnBouncyWoman && _isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
-            points += 1;
+            if (pointsEnabled)
+                points += 1;
         }
 
         if (jumpedOnBouncyWoman && _isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 4.0f));
-            points += 1;
+            if (pointsEnabled)
+                points += 1;
         }
 
         if (jumpedOnDog && _isEnemy)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, (_rb2D.velocity.y * 0.41f));
-            points += 1;
+            if (pointsEnabled)
+                points += 1;
         }
     }
 
@@ -382,7 +390,8 @@ public class PlayerMovement : MonoBehaviour
             Vector2 direction = 14 * (target - bomb);
 
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(direction, ForceMode2D.Impulse);
-            points += 1;
+            if (pointsEnabled)
+                points += 1;
         }
         else if(col.gameObject.tag == "Parachute")
         {

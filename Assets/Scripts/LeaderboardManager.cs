@@ -17,9 +17,13 @@ public class LeaderboardManager : MonoBehaviour {
 
     private DatabaseReference dbReference;
 
+    //score variable
+    private int actualScore;
+
     private void Awake ()
     {
         instance = this;
+        actualScore = PlayerPrefs.GetInt("HighScore");
     }
 
     void Start ()
@@ -30,9 +34,9 @@ public class LeaderboardManager : MonoBehaviour {
         GetLeaderboard();
     }
 
-    public void SaveScoreToLeaderboard (string _name, int _score) //use this method to save user's score
+    public void SaveScoreToLeaderboard (string _name, int actualScore) //use this method to save user's score
     {
-        User m_user = new User(_name, _score);
+        User m_user = new User(_name, actualScore);
         string m_json = JsonUtility.ToJson(m_user);
 
         dbReference.Child("leaderboard").Child(_name).SetRawJsonValueAsync(m_json);

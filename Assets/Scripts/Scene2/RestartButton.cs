@@ -45,8 +45,6 @@ public class RestartButton : MonoBehaviour
 
     IEnumerator LoadSceneNow()
     {
-        yield return new WaitForSeconds(2);
-
         load = SceneManager.LoadSceneAsync("Scene1");
         load.allowSceneActivation = false;
         while (!load.isDone)
@@ -56,6 +54,7 @@ public class RestartButton : MonoBehaviour
 
             if (haveTapped)
                 load.allowSceneActivation = true;
+
             yield return null;
         }
     }

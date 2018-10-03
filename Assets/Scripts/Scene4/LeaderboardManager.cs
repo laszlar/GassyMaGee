@@ -51,7 +51,7 @@ public class LeaderboardManager : MonoBehaviour {
         .GetValueAsync().ContinueWith(task => {
         if (task.IsFaulted)
         {
-
+            Debug.Log("Having trouble getting leaderboard");
         }
         else if (task.IsCompleted)
         {

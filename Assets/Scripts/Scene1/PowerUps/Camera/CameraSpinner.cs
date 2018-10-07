@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraSpinner : MonoBehaviour
 {
 
-    private float spinSpeed = 50.0f;
+    private float spinSpeed = 180.0f;
 	
 	void Update ()
     {

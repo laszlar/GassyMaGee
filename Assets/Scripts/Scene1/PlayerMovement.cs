@@ -93,6 +93,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource bananaSource;
     public AudioSource parachuteSource;
     */
+
+    //new Camera powerup stuff!
+    public bool cameraPowerUpFlag;
+    private int effectTime;
     #endregion
 
     #region MonoBehaviors
@@ -131,6 +135,11 @@ public class PlayerMovement : MonoBehaviour
         adjustableScale = new Vector3(setScaleX, setScaleY, 1);
         transform.localScale = adjustableScale;
         //=============================//
+
+        //Initialize camera power up!
+        cameraPowerUpFlag = false;
+        effectTime = 5;
+
     }
 
     void Update()
@@ -407,6 +416,10 @@ public class PlayerMovement : MonoBehaviour
         {
             explDeath = true;
         }
+        else if(col.gameObject.tag == "CameraPowerUp")
+        {
+            CameraSpinEffect();
+        }
     }
 
     #endregion
@@ -504,6 +517,19 @@ public class PlayerMovement : MonoBehaviour
 				_rb2D.velocity = new Vector2 (_rb2D.velocity.x, -_maxJumpVelocity);
 			}
 		}
+    }
+
+    //Camera Powerup! 
+    public void CameraSpinEffect()
+    {
+        StartCoroutine(CameraPowerUp(effectTime));
+    }
+
+    IEnumerator CameraPowerUp(int effectTime)
+    {
+        cameraPowerUpFlag = true;
+        yield return new WaitForSeconds(effectTime);
+        cameraPowerUpFlag = false;
     }
 
     public void NewSwipeMethod()

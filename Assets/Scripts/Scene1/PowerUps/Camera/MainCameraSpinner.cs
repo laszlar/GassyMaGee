@@ -8,12 +8,15 @@ public class MainCameraSpinner : MonoBehaviour
     private PlayerMovement playerScript;
 
     //float variables for this powerup
-    private float cameraSpinSpeed = -120.0f;
+    private float cameraSpinSpeed = -220.0f;
     private float currentZvalue;
-    private float maxValue = -1.0f;
+    private float maxValue = -180.0f;
 
     //bool variables
     private bool resetCameraPowerUp;
+
+    //Quaternion variable (for Euler angles)
+    //private Quaternion zValueEuler;
 
     //Main Methods
 	void Start ()
@@ -22,26 +25,22 @@ public class MainCameraSpinner : MonoBehaviour
 
         //Initially set the camera to has not spun yet!
         resetCameraPowerUp = false;
+
+        //zValueEuler = Quaternion.Euler(0, currentZvalue, 0);
 	}
 	
 	void Update ()
     {
-        //acquire the camera rotation at all times
-        currentZvalue = transform.rotation.z;
-        Debug.Log("This is the camera z value " + currentZvalue);
-        if (playerScript.cameraPowerUpFlag)
+        if (playerScript.cameraPowerUpFlag && !resetCameraPowerUp)
         {
-            //set this up to spin the camera back to start
-            resetCameraPowerUp = true;
-
             //spin the camera
             if (currentZvalue >= maxValue)
             {
-                transform.Rotate(0f, 0f, cameraSpinSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(0, 0, maxValue);
             }
-            //else
-                //transform.Rotate(0f, 0f, maxValue);
 
+            //set this up to spin the camera back to start
+            resetCameraPowerUp = true;
         }	
 
         //reset the camera to origin rotation
@@ -49,8 +48,12 @@ public class MainCameraSpinner : MonoBehaviour
         {
             if (currentZvalue <= 0f)
             {
-                transform.Rotate(0f, 0f, -cameraSpinSpeed * Time.deltaTime);
+                currentZvalue = 0f;
+                transform.rotation = Quaternion.Euler(0, 0, currentZvalue);
             }
+
+            //reset the camera!
+            resetCameraPowerUp = false;
         }
 	}
 }

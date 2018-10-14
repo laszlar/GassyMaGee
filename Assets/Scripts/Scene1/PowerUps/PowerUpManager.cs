@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpManager : MonoBehaviour
 {
     //GameObjects
-    public GameObject paintCan, parachute, banana;
+    public GameObject paintCan, parachute, banana, cameraPowerUp;
 
     //Scripts
     PlayerMovement playerScript;
@@ -36,7 +36,7 @@ public class PowerUpManager : MonoBehaviour
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
         //Initiate the array
-        powerUpHolder = new GameObject[] { parachute, paintCan };
+        powerUpHolder = new GameObject[] { parachute, paintCan, cameraPowerUp };
 
         //initialize the boolean
         spawnBasics = false;
@@ -95,7 +95,7 @@ public class PowerUpManager : MonoBehaviour
 
         if (spawnBasics)
         {
-            Instantiate(powerUpHolder[Random.Range(0, 1)], new Vector2(5.0f, Random.Range(-0.4f, 1.2f)), Quaternion.identity);
+            Instantiate(powerUpHolder[Random.Range(0, 2)], new Vector2(5.0f, Random.Range(-0.4f, 1.2f)), Quaternion.identity);
             spawnBasics = false;
             basicTimer = 0f;
         }

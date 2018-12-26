@@ -10,6 +10,7 @@ public class CreditsManager : MonoBehaviour
 
     //GameObject
     private Text gOText;
+    ImageChange swap;
 
     //bool
     private bool hasLoaded;
@@ -26,10 +27,15 @@ public class CreditsManager : MonoBehaviour
     {
         //initialize the string with our credits! 
         creditsList = new string[] {"Designer/Programmer\n Laszlo Kecskes", "Art/Animation Director\n Ludmila Sosa",
-                                    "Senior Programmer\n Anthony Michelizzi", "Composer\n Cale Reneau"};
+                                    "Senior Programmer\n Anthony Michelizzi", "Composer\n Cale Reneau", "Sounds", "vyzkov\n Duck 'Quack'",
+                                    "thanvannispen\n 'Woman Sceaming'", "noctaro\n 'Small Dog Bark 01'", "CGEffex\n 'Ship artillery blast classic'",
+                                    "InspectorJ\n Wind Chimes", "Benboncan\n Cow 'Moo'", "Special Thanks to everyone!"};
 
         //find the text game object
         gOText = GameObject.Find("Text").GetComponent<Text>();
+
+        //find the image swap for the credits
+        swap = GameObject.Find("FinalCredits").GetComponent<ImageChange>();
 
         //set text load to false on start
         hasLoaded = false;
@@ -56,11 +62,12 @@ public class CreditsManager : MonoBehaviour
             }
 
             //turn off the credits after it reaches its final credit
-            if (timer >= 2.0f && orderOfCredits == 3)
+            if (timer >= 2.0f && orderOfCredits == 11)
             {
                 gOText.text = "";
                 timer = 0f;
                 startStopTimer = false;
+                swap.swapImage = true;
             }
 
             //change to the next credit after 2 seconds
@@ -68,7 +75,7 @@ public class CreditsManager : MonoBehaviour
             {
                 gOText.text = "";
 
-                if (orderOfCredits < 3)
+                if (orderOfCredits < 11)
                 {
                     orderOfCredits++;
                 }

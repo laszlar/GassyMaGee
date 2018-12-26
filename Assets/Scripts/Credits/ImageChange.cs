@@ -19,17 +19,24 @@ public class ImageChange : MonoBehaviour
         //access the final image script
         finalImage = GetComponent<Image>();
 
-        alphaValue = finalImage.color;
-
         //make sure that the alpha of the image is 0
         if (alphaValue.a > 0f)
-            alphaValue.a = 0f;
-
-        finalImage.color = alphaValue;
+            alphaValue.a = 0f;    
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        //set that the float value is recognized as the color for the image
+        alphaValue = finalImage.color;
+
+        //boolean that changes the alpha value for the image (shows the image)
+        if (swapImage)
+        {
+            alphaValue.a = 255.0f;
+
+            //Implements the a value to the color, so that it switches images.
+            finalImage.color = alphaValue;
+        }
+    }
 }

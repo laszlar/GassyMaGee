@@ -314,7 +314,10 @@ public class PlayerMovement : MonoBehaviour
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, 0f);
             dead = true;
         }
-        LimitJumpVelocity();
+        //IMPORTANT//
+        //Going to comment out and give it a try!
+        //LimitJumpVelocity();
+        //Turn this back on if it works weird!!!!!!!
     }
     
     void OnTriggerEnter2D(Collider2D col)
@@ -357,21 +360,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!jumpedOnBouncyWoman && _isEnemy)
         {
-            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 2f));
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 1.15f));
             if (pointsEnabled)
                 points += 1;
         }
 
         if (jumpedOnBouncyWoman && _isEnemy)
         {
-            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 4.0f));
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (-_rb2D.velocity.y * 1.75f));
             if (pointsEnabled)
                 points += 1;
         }
 
         if (jumpedOnDog && _isEnemy)
         {
-            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (_rb2D.velocity.y * 0.41f));
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, (_rb2D.velocity.y * 0.5f));
             if (pointsEnabled)
                 points += 1;
         }

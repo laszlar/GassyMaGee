@@ -13,6 +13,8 @@ public class CreditsManager : MonoBehaviour
     ImageChange swap;
     private GameObject finalText;
 
+    //scripts
+    CameraFilterPack_TV_Old_Movie_2 camFilter;
     //bool
     private bool hasLoaded;
     private bool startStopTimer = true;
@@ -33,7 +35,7 @@ public class CreditsManager : MonoBehaviour
                                     "InspectorJ\n Wind Chimes", "Benboncan\n Cow 'Moo'"};
 
         //find the text game object
-        gOText = GameObject.Find("Text").GetComponent<Text>();
+        gOText = GameObject.Find("CreditsText").GetComponent<Text>();
 
         //find the image swap for the credits
         swap = GameObject.Find("FinalCredits").GetComponent<ImageChange>();
@@ -41,6 +43,9 @@ public class CreditsManager : MonoBehaviour
         //find the special thank you text and disable it
         finalText = GameObject.Find("FinalText");
         finalText.SetActive(false);
+
+        //find the Camera effect 
+        camFilter = GameObject.Find("Main Camera").GetComponent<CameraFilterPack_TV_Old_Movie_2>();
 
         //set text load to false on start
         hasLoaded = false;
@@ -74,6 +79,7 @@ public class CreditsManager : MonoBehaviour
                 startStopTimer = false;
                 swap.swapImage = true;
                 finalText.SetActive(true);
+                camFilter.enabled = false;
             }
 
             //change to the next credit after 2 seconds

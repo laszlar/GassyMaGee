@@ -87,7 +87,7 @@ public class PowerUpManager : MonoBehaviour
             spawnBasics = true;
         
 
-        if (paintTimer >= 25.0f)
+        if (paintTimer >= 45.0f)
         {
             spawnPaint = true;
             doTimerOnce = false;

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* recently added the bomb power up, why that was missing from the game 
+ * is entirely beyond me */
+
 public class PowerUpManager : MonoBehaviour
 {
     //GameObjects
-    public GameObject paintCan, parachute, banana, cameraPowerUp;
+    public GameObject paintCan, parachute, banana, cameraPowerUp, bombMaster;
 
     //Scripts
     PlayerMovement playerScript;
@@ -36,7 +39,7 @@ public class PowerUpManager : MonoBehaviour
         playerScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
         //Initiate the array
-        powerUpHolder = new GameObject[] { parachute, paintCan, cameraPowerUp };
+        powerUpHolder = new GameObject[] { parachute, cameraPowerUp, bombMaster, paintCan };
 
         //initialize the boolean
         spawnBasics = false;
@@ -78,7 +81,7 @@ public class PowerUpManager : MonoBehaviour
 
         if (elongateStartTime)
         {
-            paintTimer -= 10.0f;
+            paintTimer += 10.0f;
             elongateStartTime = false;
             doOnlyOnce = true;
         }
@@ -102,8 +105,9 @@ public class PowerUpManager : MonoBehaviour
 
         if (spawnPaint)
         {
-            Instantiate(powerUpHolder[1], new Vector2(5.0f, Random.Range(-0.4f, 1.0f)), Quaternion.identity);
+            Instantiate(powerUpHolder[3], new Vector2(5.0f, Random.Range(-0.4f, 1.0f)), Quaternion.identity);
             spawnPaint = false;
+            //reset the paint timer
             paintTimer = 0f;
         }
     }

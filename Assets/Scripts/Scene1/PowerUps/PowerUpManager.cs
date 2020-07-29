@@ -12,7 +12,7 @@ public class PowerUpManager : MonoBehaviour
 
     //Scripts
     PlayerMovement playerScript;
-    AdsButton adsScript;
+    //AdsButton adsScript;
 
     //Array
     private GameObject[] powerUpHolder;
@@ -55,7 +55,7 @@ public class PowerUpManager : MonoBehaviour
 
     private void Update()
     {
-        //if watched ad, launch a random power up!
+        /*if watched ad, launch a random power up!
         if (AdsButton.watchedVideo)
         {
             adsTimer += Time.deltaTime;
@@ -66,7 +66,8 @@ public class PowerUpManager : MonoBehaviour
                 AdsButton.watchedVideo = false;
             }
         }
-
+        */
+        
         //run the timer to check player Script
         if (doTimerOnce)
             checkPlayerScriptTimer += Time.deltaTime;

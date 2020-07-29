@@ -9,7 +9,9 @@ The Grunt of all scripts.
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
+//using System.Security.Cryptography;
+//using System.Diagnostics;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -46,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _isEffectRunning;
     public static bool IsJumping;
+    public bool falling;
     private bool _canJump;
     private float _jumpTime = 1.0f;
     private float _elapsedTime;
@@ -422,6 +425,12 @@ public class PlayerMovement : MonoBehaviour
         else if(col.gameObject.tag == "CameraPowerUp")
         {
             CameraSpinEffect();
+        }
+
+        if (col.gameObject.tag == "Plank")
+        {
+            anim.SetTrigger("IsGrounded");
+            //need to finish fixing this! But it is working...
         }
     }
 

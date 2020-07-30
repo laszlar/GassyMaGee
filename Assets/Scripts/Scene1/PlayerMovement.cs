@@ -297,14 +297,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Disables player jump after set amount of time
-        if (transform.position.y > 0)
+        //testing for right now
+        if (transform.position.y > -0.36f)
         {
             IsJumping = true;
             _elapsedTime += Time.deltaTime;
             if (_elapsedTime >= _jumpTime)
             {
                 _canJump = false;
-
+                anim.SetTrigger("IsFalling");
             }
         }
         else
@@ -332,6 +333,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //Gassy left the plank
             isTouchingPlank = false;
         }
 
@@ -346,6 +348,8 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("IsGrounded");
         }
+
+
 
     }
     

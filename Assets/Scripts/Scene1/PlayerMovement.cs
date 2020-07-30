@@ -9,6 +9,7 @@ The Grunt of all scripts.
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+//using System.Diagnostics;
 //using System.Collections.Generic;
 //using System.Security.Cryptography;
 //using System.Diagnostics;
@@ -48,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _isEffectRunning;
     public static bool IsJumping;
+    public bool isTouchingPlank = false;
     public bool falling;
     private bool _canJump;
     private float _jumpTime = 1.0f;
@@ -231,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
                     if (_canJump)
                     {
                         _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
-                        anim.SetTrigger("IsGroundedJump");
+                        //anim.SetTrigger("IsGroundedJump");
                     }
                 }
             }
@@ -285,7 +287,7 @@ public class PlayerMovement : MonoBehaviour
                                 if (_canJump)
                                 {
                                     _rb2D.AddForce(jumpHeight, ForceMode2D.Impulse);
-                                    anim.SetTrigger("IsGroundedJump");
+                                    //anim.SetTrigger("IsGroundedJump");
                                 }
                             }
                         }
@@ -321,6 +323,30 @@ public class PlayerMovement : MonoBehaviour
         //Going to comment out and give it a try!
         //LimitJumpVelocity();
         //Turn this back on if it works weird!!!!!!!
+
+        //testing if Y location will work for changing animations
+        if (transform.position.y <= -0.36f && transform.position.y >= -0.37f)
+        {
+            //Gassy is roughly touching the plank
+            isTouchingPlank = true;
+        }
+        else
+        {
+            isTouchingPlank = false;
+        }
+
+        //test debug
+        Debug.Log("Gassy is touching the plank: " + isTouchingPlank);
+
+        if (!isTouchingPlank)
+        {
+            anim.SetTrigger("IsGroundedJump");
+        }
+        else
+        {
+            anim.SetTrigger("IsGrounded");
+        }
+
     }
     
     void OnTriggerEnter2D(Collider2D col)
@@ -427,12 +453,26 @@ public class PlayerMovement : MonoBehaviour
             CameraSpinEffect();
         }
 
+        //Deactivating this for now, used for detecting if Gassy is touching the plank and
+        //enabling him to jump
+        /*
         if (col.gameObject.tag == "Plank")
         {
+            isTouchingPlank = true;
             anim.SetTrigger("IsGrounded");
             //need to finish fixing this! But it is working...
         }
+        */
     }
+
+    //Same here for detecting whether or not he's left the plank
+    /*
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Plank")
+            isTouchingPlank = false;
+    }
+    */
 
     #endregion
 
